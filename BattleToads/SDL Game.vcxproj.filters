@@ -14,9 +14,6 @@
     <Filter Include="Utils">
       <UniqueIdentifier>{ad89cf24-f35e-4d0c-90e5-820c054c274d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MathGeoLib">
-      <UniqueIdentifier>{a5041ccb-4a91-4ad9-b028-7071bdc01758}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModuleRender.h">
@@ -64,6 +61,7 @@
     <ClInclude Include="Observer.h">
       <Filter>Utils</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="MathGeoLib\include\Time\Clock.h">
       <Filter>MathGeoLib</Filter>
     </ClInclude>
@@ -254,6 +252,8 @@
       <Filter>Utils</Filter>
     </ClInclude>
 >>>>>>> c4bb9b7811b8547447d117edd59381129e392d60
+=======
+>>>>>>> parent of 4465efc... MathLib Done
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -286,6 +286,7 @@
     <ClCompile Include="ModuleStageOne.cpp">
       <Filter>Game Modules</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="MathGeoLib\include\Time\Clock.cpp">
       <Filter>MathGeoLib</Filter>
     </ClCompile>
@@ -420,5 +421,7 @@
     <None Include="MathGeoLib\include\Math\Matrix.inl">
       <Filter>MathGeoLib</Filter>
     </None>
+=======
+>>>>>>> parent of 4465efc... MathLib Done
   </ItemGroup>
 </Project>

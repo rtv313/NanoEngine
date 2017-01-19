@@ -1,13 +1,10 @@
 #include <stdlib.h>
 #include "Application.h"
 #include "Globals.h"
-#include "SDL/include/SDL.h"
-#include "MathGeoLib/include/MathGeoLib.h"
 
+#include "SDL/include/SDL.h"
 #pragma comment( lib, "SDL/libx86/SDL2.lib" )
 #pragma comment( lib, "SDL/libx86/SDL2main.lib" )
-
-
 
 enum main_states
 {
@@ -23,17 +20,7 @@ Application* App = nullptr;
 int main(int argc, char ** argv)
 {
 	ReportMemoryLeaks();
-	float4 vector;
-	vector.x = 0;
-	vector.y = 0;
-	vector.z = 0;
-	vector.w = 0;
-	float4 vector2 = vector.Abs();
-	
 
-
-	
-	
 	int main_return = EXIT_FAILURE;
 	main_states state = MAIN_CREATION;
 
@@ -42,24 +29,24 @@ int main(int argc, char ** argv)
 		switch (state)
 		{
 		case MAIN_CREATION:
-		
-			LOG_GLO("Application Creation --------------");
+
+			LOG("Application Creation --------------");
 			App = new Application();
 			state = MAIN_START;
 			break;
 
 		case MAIN_START:
 
-			LOG_GLO("Application Init --------------");
+			LOG("Application Init --------------");
 			if (App->Init() == false)
 			{
-				LOG_GLO("Application Init exits with error -----");
+				LOG("Application Init exits with error -----");
 				state = MAIN_EXIT;
 			}
 			else
 			{
 				state = MAIN_UPDATE;
-				LOG_GLO("Application Update --------------");
+				LOG("Application Update --------------");
 			}
 
 			break;
@@ -70,7 +57,7 @@ int main(int argc, char ** argv)
 
 			if (update_return == UPDATE_ERROR)
 			{
-				LOG_GLO("Application Update exits with error -----");
+				LOG("Application Update exits with error -----");
 				state = MAIN_EXIT;
 			}
 
@@ -81,10 +68,10 @@ int main(int argc, char ** argv)
 
 		case MAIN_FINISH:
 
-			LOG_GLO("Application CleanUp --------------");
+			LOG("Application CleanUp --------------");
 			if (App->CleanUp() == false)
 			{
-				LOG_GLO("Application CleanUp exits with error -----");
+				LOG("Application CleanUp exits with error -----");
 			}
 			else
 				main_return = EXIT_SUCCESS;
@@ -97,6 +84,6 @@ int main(int argc, char ** argv)
 	}
 
 	RELEASE( App);
-	LOG_GLO("Bye :)\n");
+	LOG("Bye :)\n");
 	return main_return;
 }
