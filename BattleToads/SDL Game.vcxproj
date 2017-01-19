@@ -147,8 +147,12 @@
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Point.h" />
+<<<<<<< HEAD
     <ClInclude Include="TempMicro.h" />
     <ClInclude Include="Temporizer.h" />
+=======
+    <ClInclude Include="TempMili.h" />
+>>>>>>> c4bb9b7811b8547447d117edd59381129e392d60
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />

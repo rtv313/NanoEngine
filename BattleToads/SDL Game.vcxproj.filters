@@ -58,9 +58,6 @@
     <ClInclude Include="ModuleStageOne.h">
       <Filter>Game Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Temporizer.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="AnimationRender.h">
       <Filter>Utils</Filter>
     </ClInclude>
@@ -250,7 +247,13 @@
     <ClInclude Include="MathGeoLib\include\Math\TransformOps.h">
       <Filter>MathGeoLib</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="TempMicro.h" />
+=======
+    <ClInclude Include="TempMili.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+>>>>>>> c4bb9b7811b8547447d117edd59381129e392d60
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
