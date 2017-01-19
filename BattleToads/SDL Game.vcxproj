@@ -85,7 +85,6 @@
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Temporizer.h" />
-
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
@@ -98,7 +97,6 @@
     <ClCompile Include="ModuleStageOne.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
-    <ClCompile Include="TempMicro.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
