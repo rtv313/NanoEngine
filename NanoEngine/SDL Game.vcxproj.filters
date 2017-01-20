@@ -396,9 +396,6 @@
     <ClCompile Include="MathGeoLib\include\Time\Clock.cpp">
       <Filter>MathGeoLib</Filter>
     </ClCompile>
-    <ClCompile Include="TempMicro.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
     <ClCompile Include="Parson\include\parson.c">
       <Filter>Parson</Filter>
     </ClCompile>

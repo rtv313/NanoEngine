@@ -1,30 +1,45 @@
+#ifndef __TEMP_MILI_H__
+#define __TEMP_MILI_H__
 #include "SDL/include/SDL.h" 
+
 
 class TempMili {
 
 private:
-	float  startTime;
-
+	double  startTime;
+	bool stopTime;
 public:
 
-	TempMili() :startTime(0.0f)
-	{}
+	TempMili() :startTime(0.0f),stopTime(false)
+	{
+	}
+
+	~TempMili() 
+	{
+	}
 
 	void start()
 	{
-
 		startTime = SDL_GetTicks();
+		stopTime = false;
 	}
 
-	float stop()
+	double read()
 	{
-		startTime = SDL_GetTicks();
-		return startTime;
-	}
+		if (stopTime == true)
+			return startTime;
 
-	float read()
-	{
 		return SDL_GetTicks() - startTime;
 	}
 
+	double stop()
+	{
+		if (stopTime == false) {
+			stopTime = true;
+			startTime = SDL_GetTicks() - startTime;
+		}
+		return startTime;
+	}
+
 };
+#endif
