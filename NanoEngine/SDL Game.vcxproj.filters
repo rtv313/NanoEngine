@@ -17,6 +17,9 @@
     <Filter Include="MathGeoLib">
       <UniqueIdentifier>{4e1a9379-d113-4902-86da-6ef52693bbef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Parson">
+      <UniqueIdentifier>{132b9d27-958a-48f6-becf-af3a76b0181d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModuleRender.h">
@@ -250,6 +253,9 @@
     <ClInclude Include="TempMicro.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Parson\include\parson.h">
+      <Filter>Parson</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -392,6 +398,9 @@
     </ClCompile>
     <ClCompile Include="TempMicro.cpp">
       <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Parson\include\parson.c">
+      <Filter>Parson</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
