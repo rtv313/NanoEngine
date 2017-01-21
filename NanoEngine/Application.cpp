@@ -6,30 +6,27 @@
 #include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleStageOne.h"
-
-
+#include "TempMicro.h"
+#include "Globals.h"
+ 
 using namespace std;
 
 Application::Application()
 {
+	TempMicro timer;
+	timer.start();
 	// Order matters: they will init/start/pre/update/post in this order
 	modules.push_back(input = new ModuleInput());
 	modules.push_back(window = new ModuleWindow());
-
 	modules.push_back(renderer = new ModuleRender());
 	modules.push_back(textures = new ModuleTextures());
 	modules.push_back(audio = new ModuleAudio());
 
 	// Game Modules
-	
 	modules.push_back(stageOne = new ModuleStageOne(false));
-
-
-
 	// Modules to draw on top of game logic
-	
-
 	modules.push_back(fade = new ModuleFadeToBlack());
+	LOG_GLOBALS("Time for constructor: %lf", timer.stop());
 }
 
 Application::~Application()
@@ -41,16 +38,21 @@ Application::~Application()
 bool Application::Init()
 {
 	bool ret = true;
+	TempMicro timer;
+	timer.start();
 
 	for(list<Module*>::iterator it = modules.begin(); it != modules.end() && ret; ++it)
 		ret = (*it)->Init(); // we init everything, even if not anabled
 
+	LOG_GLOBALS("Time for Init() in modules: %lf", timer.stop());
+
+	timer.start();
 	for(list<Module*>::iterator it = modules.begin(); it != modules.end() && ret; ++it)
 	{
 		if((*it)->IsEnabled() == true)
 			ret = (*it)->Start();
 	}
-
+	LOG_GLOBALS("Time for Start() in modules: %lf", timer.stop());
 	// Start the first scene --
 
 
@@ -79,11 +81,12 @@ update_status Application::Update()
 bool Application::CleanUp()
 {
 	bool ret = true;
-
+	TempMicro timer;
 	for(list<Module*>::reverse_iterator it = modules.rbegin(); it != modules.rend() && ret; ++it)
 		if((*it)->IsEnabled() == true) 
 			ret = (*it)->CleanUp();
 
+	LOG_GLOBALS("Time for CleanUp() in modules: %lf", timer.stop());
 	return ret;
 }
 
