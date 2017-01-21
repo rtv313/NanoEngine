@@ -26,6 +26,7 @@ Application::Application()
 	modules.push_back(stageOne = new ModuleStageOne(false));
 	// Modules to draw on top of game logic
 	modules.push_back(fade = new ModuleFadeToBlack());
+
 	LOG_GLOBALS("Time for constructor: %lf", timer.stop());
 }
 
@@ -54,7 +55,7 @@ bool Application::Init()
 	}
 	LOG_GLOBALS("Time for Start() in modules: %lf", timer.stop());
 	// Start the first scene --
-
+	fade->FadeToBlack(stageOne, nullptr, 1.0f);
 
 	return ret;
 }

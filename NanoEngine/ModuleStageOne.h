@@ -3,7 +3,7 @@
 #define  _MODULESCENESTAGEONE_H_
 
 #include "Module.h"
-
+#include "Animation.h"
 struct SDL_Texture;
 
 class ModuleStageOne :public Module
@@ -18,6 +18,7 @@ public:
 	
 public :
 	SDL_Texture* levelOne = nullptr;
+	Animation background;
 
 private:
 
