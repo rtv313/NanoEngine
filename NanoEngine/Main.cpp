@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "Globals.h"
 #include "SDL/include/SDL.h"
+#include "TempMicro.h"
 #pragma comment( lib, "SDL/libx86/SDL2.lib" )
 #pragma comment( lib, "SDL/libx86/SDL2main.lib" )
 
@@ -23,6 +24,8 @@ int main(int argc, char ** argv)
 	int main_return = EXIT_FAILURE;
 	main_states state = MAIN_CREATION;
 
+	TempMicro timer;
+	timer.start();
 	while (state != MAIN_EXIT)
 	{
 		switch (state)
@@ -81,7 +84,7 @@ int main(int argc, char ** argv)
 
 		}
 	}
-
+	LOG_GLOBALS("Total Execution time:%lf",timer.stop());
 	RELEASE( App);
 	LOG_GLOBALS("Bye :)\n");
 	return main_return;

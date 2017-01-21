@@ -196,6 +196,7 @@
     <ClCompile Include="ModuleTextures.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="Parson\include\parson.c" />
+    <ClCompile Include="TempMicro.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MathGeoLib\include\Geometry\KDTree.inl" />

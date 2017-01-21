@@ -10,40 +10,10 @@ private:
 
 public:
 	 static double  frequency;
-
-	TempMicro():startTime(0.0f),stopTime(false)
-	{
-	}
-
-	~TempMicro()
-	{
-	}
-
-	void start()
-	{
-		startTime = SDL_GetPerformanceCounter();
-		stopTime = false;
-	}
-
-	double read()
-	{
-		if (stopTime == true)
-			return startTime;
-
-		return  (SDL_GetPerformanceCounter() - startTime) / frequency;
-	
-	}
-
-	double stop()
-	{
-		if (stopTime == false) {
-			stopTime = true;
-			startTime = (SDL_GetPerformanceCounter() - startTime)  / frequency;
-		}
-		return startTime;
-	}
+	 TempMicro();
+	 ~TempMicro();
+	 void start();
+	 double stop();
+	 double read();
 };
-
-double TempMicro::frequency = SDL_GetPerformanceFrequency();
-
 #endif
