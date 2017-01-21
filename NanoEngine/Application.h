@@ -4,7 +4,7 @@
 #include<list>
 #include "Globals.h"
 #include "Module.h"
-
+#include "TempMili.h"
 class ModuleRender;
 class ModuleWindow;
 class ModuleTextures;
@@ -28,11 +28,10 @@ public:
 
 	Application();
 	~Application();
-
 	bool Init();
 	update_status Update();
 	bool CleanUp();
-
+	
 public:
 	ModuleRender* renderer;
 	ModuleWindow* window;
@@ -50,7 +49,14 @@ public:
 	ModuleSceneIntro* scene_intro;
 	ModuleLevelIntro * levelIntro;
 	ModuleStageOne * stageOne;
-	
+	TempMili timerSinceStart;
+	TempMili timerMsLastUpdate;
+	TempMili timerFPScounter;
+	long int framesSinceStartup;
+	int averageFPS;
+	double msLastUpdate;
+	int actualFPScounter;
+	bool resetFPScounter;
 
 private:
 

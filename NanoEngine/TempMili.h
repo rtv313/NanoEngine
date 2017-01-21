@@ -6,7 +6,7 @@
 class TempMili {
 
 private:
-	double  startTime;
+	Uint64  startTime;
 	bool stopTime;
 public:
 
