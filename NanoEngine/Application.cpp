@@ -35,6 +35,7 @@ Application::Application()
 	msLastUpdate = 0;
 	resetFPScounter = true;
 	actualFPScounter = 0;
+	second = 1000.0f;
 	LOG_GLOBALS("Time for constructor: %lf", timer.stop());
 }
 
@@ -94,8 +95,16 @@ update_status Application::Update()
 	++framesSinceStartup;
 	msLastUpdate = timerMsLastUpdate.stop();
 	++actualFPScounter;
-
-	if (timerFPScounter.read() / 1000 >= 1.0) {
+	
+	if (actualFPScounter >= FPS_CAP) {
+		measureDelayTimer.start();
+		double delayTime = second - msLastUpdate;
+		SDL_Delay(delayTime);
+		double time = measureDelayTimer.stop();
+		LOG_GLOBALS("We waited for %lf ms, and got back in %lf ms", delayTime, time);
+	}
+	
+	if (timerFPScounter.read() / second >= 1.0) {
 		char fps[7];
 		sprintf(fps, "FPS:%d", actualFPScounter);
 		SDL_SetWindowTitle(window->window,fps);

@@ -57,6 +57,8 @@ public:
 	double msLastUpdate;
 	int actualFPScounter;
 	bool resetFPScounter;
+	TempMili measureDelayTimer;
+	double second;
 
 private:
 

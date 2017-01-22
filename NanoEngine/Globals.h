@@ -53,5 +53,6 @@ typedef unsigned int uint;
 #define FULLSCREEN false
 #define VSYNC true
 #define TITLE "Nano Engine"
+#define FPS_CAP 30
 
 #endif //__GLOBALS_H__
