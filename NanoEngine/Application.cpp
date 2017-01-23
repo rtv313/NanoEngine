@@ -6,6 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleStageOne.h"
+#include "ModulePlayer.h"
 #include "TempMicro.h"
 #include "Globals.h"
 #include <math.h>   
@@ -26,7 +27,8 @@ Application::Application()
 	modules.push_back(audio = new ModuleAudio());
 
 	// Game Modules
-	modules.push_back(stageOne = new ModuleStageOne(false));
+	modules.push_back(stageOne = new ModuleStageOne(true));
+	modules.push_back(player = new ModulePlayer(true));
 	// Modules to draw on top of game logic
 	modules.push_back(fade = new ModuleFadeToBlack());
 
@@ -54,6 +56,7 @@ bool Application::Init()
 	TempMicro timer;
 	timer.start();
 	timerSinceStart.start();
+
 	for(list<Module*>::iterator it = modules.begin(); it != modules.end() && ret; ++it)
 		ret = (*it)->Init(); // we init everything, even if not anabled
 
@@ -81,7 +84,7 @@ update_status Application::Update()
 
 	timerMsLastUpdate.start();
     newTime = SDL_GetTicks();
-	dt = (float)(newTime - oldTime);
+	dt =(newTime - oldTime)/second;
 	oldTime = newTime;
 
 	LOG_GLOBALS("Delta Time:%f", dt);
