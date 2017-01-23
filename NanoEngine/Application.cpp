@@ -36,6 +36,9 @@ Application::Application()
 	resetFPScounter = true;
 	actualFPScounter = 0;
 	second = 1000.0f;
+	dt = 0.0f;
+	oldTime = 0.0f;
+	newTime = 0.0f;
 	LOG_GLOBALS("Time for constructor: %lf", timer.stop());
 }
 
@@ -77,12 +80,21 @@ update_status Application::Update()
 	}
 
 	timerMsLastUpdate.start();
+    newTime = SDL_GetTicks();
+	dt = (float)(newTime - oldTime);
+	oldTime = newTime;
+
+	LOG_GLOBALS("Delta Time:%f", dt);
+
 	update_status ret = UPDATE_CONTINUE;
 	
-
-	for(list<Module*>::iterator it = modules.begin(); it != modules.end() && ret == UPDATE_CONTINUE; ++it)
-		if((*it)->IsEnabled() == true) 
+	for (list<Module*>::iterator it = modules.begin(); it != modules.end() && ret == UPDATE_CONTINUE; ++it)
+	{
+		if ((*it)->IsEnabled() == true) {
+			(*it)->dt = dt; // update deltatime
 			ret = (*it)->PreUpdate();
+		}
+	}
 
 	for(list<Module*>::iterator it = modules.begin(); it != modules.end() && ret == UPDATE_CONTINUE; ++it)
 		if((*it)->IsEnabled() == true) 
@@ -91,18 +103,15 @@ update_status Application::Update()
 	for(list<Module*>::iterator it = modules.begin(); it != modules.end() && ret == UPDATE_CONTINUE; ++it)
 		if((*it)->IsEnabled() == true) 
 			ret = (*it)->PostUpdate();
-
+	 
 	++framesSinceStartup;
-	msLastUpdate = timerMsLastUpdate.stop();
 	++actualFPScounter;
 	
-	if (actualFPScounter >= FPS_CAP) {
-		measureDelayTimer.start();
-		double delayTime = second - msLastUpdate;
-		SDL_Delay(delayTime);
-		double time = measureDelayTimer.stop();
-		LOG_GLOBALS("We waited for %lf ms, and got back in %lf ms", delayTime, time);
-	}
+	measureDelayTimer.start();
+	Uint32 delayTime = abs((second/FPS_CAP) - msLastUpdate);
+	SDL_Delay(delayTime);
+	double time = measureDelayTimer.stop();
+	LOG_GLOBALS("We waited for %lf ms, and got back in %lf ms", (double)delayTime, time);
 	
 	if (timerFPScounter.read() / second >= 1.0) {
 		char fps[7];

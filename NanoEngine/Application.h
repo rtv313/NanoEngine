@@ -59,6 +59,9 @@ public:
 	bool resetFPScounter;
 	TempMili measureDelayTimer;
 	double second;
+	float dt;
+	Uint32 newTime;
+	Uint32 oldTime;
 
 private:
 

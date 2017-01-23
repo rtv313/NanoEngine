@@ -6,6 +6,7 @@ class Application;
 class Module
 {
 public:
+	float dt = 0.0f;
 
 	Module(bool active = true) : active(active)
 	{}
@@ -68,6 +69,7 @@ public:
 
 private:
 	bool active = true;
+	
 };
 
 #endif // __MODULE_H__
