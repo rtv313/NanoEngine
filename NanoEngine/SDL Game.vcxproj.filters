@@ -20,6 +20,9 @@
     <Filter Include="Parson">
       <UniqueIdentifier>{132b9d27-958a-48f6-becf-af3a76b0181d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Glew">
+      <UniqueIdentifier>{c4b9d594-f03a-4688-b394-ebc82f4d8176}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModuleRender.h">
@@ -258,6 +261,9 @@
     </ClInclude>
     <ClInclude Include="ModulePlayer.h">
       <Filter>Game Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Glew\include\GL\glew.h">
+      <Filter>Glew</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
