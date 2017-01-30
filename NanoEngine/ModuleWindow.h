@@ -1,6 +1,7 @@
 #ifndef __MODULEWINDOW_H__
 #define __MODULEWINDOW_H__
 
+
 #include "Module.h"
 
 struct SDL_Window;

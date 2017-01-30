@@ -7,10 +7,9 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
-#define GLEW_STATIC
-#pragma comment( lib, "Glew/lib/Release/Win32/glew32s.lib" )
-
-
+#pragma comment( lib, "opengl32.lib")
+#pragma comment( lib, "glu32.lib")
+#pragma comment( lib, "Glew/lib/Release/Win32/glew32.lib" )
 
 ModuleWindow::ModuleWindow()
 {
