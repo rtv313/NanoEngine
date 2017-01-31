@@ -4,6 +4,14 @@
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "SDL/include/SDL.h"
+#include "Glew/include/GL/glew.h"
+#include "SDL/include/SDL_opengl.h"
+#include <gl/GL.h>
+#include <gl/GLU.h>
+
+#pragma comment( lib, "opengl32.lib")
+#pragma comment( lib, "glu32.lib")
+#pragma comment( lib, "Glew/lib/Release/Win32/glew32.lib" )
 
 ModuleRender::ModuleRender()
 {
@@ -29,7 +37,7 @@ bool ModuleRender::Init()
 		flags |= SDL_RENDERER_PRESENTVSYNC;
 	}
 
-	renderer = SDL_CreateRenderer(App->window->window, -1, flags);
+  renderer = SDL_CreateRenderer(App->window->window, -1, flags);
 	
 	if(renderer == nullptr)
 	{
@@ -42,8 +50,18 @@ bool ModuleRender::Init()
 
 update_status ModuleRender::PreUpdate()
 {
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-	SDL_RenderClear(renderer);
+	//SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+	//SDL_RenderClear(renderer);
+  
+  //glColor3f c = cam->background;
+  glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity;
+  glFrustum(-1, 1, -1, 1, 1, 100);
+  glMatrixMode(GL_MODELVIEW);
+  glClearColor(0.0, 0.0, 0.0, 1.0);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  //glLoadMatrixf(cam->GetOpenGLViewMatrix());
 	return UPDATE_CONTINUE;
 }
 
@@ -51,7 +69,7 @@ update_status ModuleRender::PreUpdate()
 update_status ModuleRender::Update()
 {
 	// debug camera
-	int speed = 200 * dt;
+	int speed = 0 * dt;
 
 	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		App->renderer->camera.y += speed;
@@ -70,7 +88,15 @@ update_status ModuleRender::Update()
 
 update_status ModuleRender::PostUpdate()
 {
-	SDL_RenderPresent(renderer);
+	//SDL_RenderPresent(renderer);
+  glColor3f(1.0, 0.0, 0.0);
+  glBegin(GL_TRIANGLES);
+  glVertex3f(-1.0f, -0.5f, -4.0f); // lower left vertex
+  glVertex3f(1.0f, -0.5f, -4.0f); // lower right vertex
+  glVertex3f(0.0f, 0.5f, -4.0f); // upper vertex
+  glEnd();
+
+  SDL_GL_SwapWindow(App->window->window);
 	return UPDATE_CONTINUE;
 }
 
