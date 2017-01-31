@@ -136,19 +136,7 @@ update_status ModuleRender::PostUpdate()
 	  0.5f, 0.5f, -0.5f, // H
   };
 
-  uint indices[] = {
-    0,1,2,
-    1,3,2,
-    5,7,3,
-    3,1,5,
-    4,6,7,
-    4,7,5,
-    2,6,4,
-    4,0,2,
-    6,2,3,
-    7,6,3,
-    0,4,1,
-    4,5,1};
+
 
   /*GLfloat cubecolors[] = {
 	  0.5f, 0.5f, 0.5f, // A
@@ -172,6 +160,7 @@ update_status ModuleRender::PostUpdate()
 					7,6,3,
 					0,4,1,
 					4,5,1};
+
   glGenBuffers(1, (GLuint*) &(my_id));
   glBindBuffer(GL_ARRAY_BUFFER, my_id);
   glBufferData(GL_ARRAY_BUFFER, sizeof(float)*36* 3, vertices, GL_STATIC_DRAW);
