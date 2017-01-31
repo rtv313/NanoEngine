@@ -91,14 +91,14 @@ update_status ModuleRender::Update()
 update_status ModuleRender::PostUpdate()
 {
 	//SDL_RenderPresent(renderer);
-  glVertex3f(-0.5f, -0.5f, 0.5f); //A
-  glVertex3f(0.5f, -0.5f, 0.5f); //B
-  glVertex3f(-0.5f, 0.5f, 0.5f); //C
-  glVertex3f(0.5f, 0.5f, 0.5f); //D
-  glVertex3f(-0.5f, -0.5f, -0.5f); //E
-  glVertex3f(0.5f, -0.5f, -0.5f); //F
-  glVertex3f(-0.5f, 0.5f, -0.5f); //G
-  glVertex3f(0.5f, 0.5f, -0.5f); //H
+  //glVertex3f(-0.5f, -0.5f, 0.5f); //A
+  //glVertex3f(0.5f, -0.5f, 0.5f); //B
+  //glVertex3f(-0.5f, 0.5f, 0.5f); //C
+  //glVertex3f(0.5f, 0.5f, 0.5f); //D
+  //glVertex3f(-0.5f, -0.5f, -0.5f); //E
+  //glVertex3f(0.5f, -0.5f, -0.5f); //F
+  //glVertex3f(-0.5f, 0.5f, -0.5f); //G
+  //glVertex3f(0.5f, 0.5f, -0.5f); //H
 
   glColor3f(255.0, 0.0, 0.0);
 
@@ -107,15 +107,15 @@ update_status ModuleRender::PostUpdate()
 
   //TODO: Declarar solo una vez (init/start) en vez de declarar en el loop
   uint my_id = 0;
-  /*
-  A1
-  B2
-  C3
-  D4
-  E5
-  F6
-  G7
-  H8
+  /* Presentacion
+  A0
+  B1
+  C2
+  D3
+  E4
+  F5
+  G6
+  H7
   */
   GLfloat vertices[] = { 
 	  -0.5f, -0.5f, 0.5f, // A
@@ -137,7 +137,18 @@ update_status ModuleRender::PostUpdate()
 	  255.0f, 255.0f, 0.0f,//G
 	  255.0f, 255.0f, 255.0f, // H
   };*/
-  uint indices[] = {0,1,2,1,3,2,5,7,3,3,1,5,4,6,7,4,7,5,2,6,4,4,0,2,6,2,3,7,6,3,0,4,1,4,5,1};
+  uint indices[] = {0,1,2,
+					1,3,2,
+					5,7,3,
+					3,1,5,
+					4,6,7,
+					4,7,5,
+					2,6,4,
+					4,0,2,
+					6,2,3,
+					7,6,3,
+					0,4,1,
+					4,5,1};
   glGenBuffers(1, (GLuint*) &(my_id));
   glBindBuffer(GL_ARRAY_BUFFER, my_id);
   glBufferData(GL_ARRAY_BUFFER, sizeof(float)*36* 3, vertices, GL_STATIC_DRAW);
@@ -198,7 +209,7 @@ update_status ModuleRender::PostUpdate()
 
   glEnd();*/
 
-
+  // start draw dentro de la funcion draw
   glEnableClientState(GL_VERTEX_ARRAY);
   
   glBindBuffer(GL_ARRAY_BUFFER, my_id);
@@ -210,9 +221,9 @@ update_status ModuleRender::PostUpdate()
   glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
   //glDrawArrays(GL_TRIANGLES, 0, 36 * 3);
 
-  glDisableClientState(GL_VERTEX_ARRAY);
+  glDisableClientState(GL_VERTEX_ARRAY); //end draw
 
-  SDL_GL_SwapWindow(App->window->window);
+  SDL_GL_SwapWindow(App->window->window); // stay here not inside any class
 	return UPDATE_CONTINUE;
 }
 
