@@ -53,13 +53,15 @@ update_status ModuleRender::PreUpdate()
 	//SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 	//SDL_RenderClear(renderer);
   
-  //glColor3f c = cam->background;
-  glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
   glMatrixMode(GL_PROJECTION);
-  glLoadIdentity;
-  glFrustum(-1, 1, -1, 1, 1, 100);
+  glLoadIdentity();
   glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+
+  //glColor3f c = cam->background;
+  //glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
   glClearColor(0.0, 0.0, 0.0, 1.0);
+  glFrustum(-1, 1, -1, 1, 1, 100);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   //glLoadMatrixf(cam->GetOpenGLViewMatrix());
 	return UPDATE_CONTINUE;
@@ -89,11 +91,69 @@ update_status ModuleRender::Update()
 update_status ModuleRender::PostUpdate()
 {
 	//SDL_RenderPresent(renderer);
-  glColor3f(1.0, 0.0, 0.0);
+  glVertex3f(-0.5f, -0.5f, 0.5f); //A
+  glVertex3f(0.5f, -0.5f, 0.5f); //B
+  glVertex3f(-0.5f, 0.5f, 0.5f); //C
+  glVertex3f(0.5f, 0.5f, 0.5f); //D
+  glVertex3f(-0.5f, -0.5f, -0.5f); //E
+  glVertex3f(0.5f, -0.5f, -0.5f); //F
+  glVertex3f(-0.5f, 0.5f, -0.5f); //G
+  glVertex3f(0.5f, 0.5f, -0.5f); //H
+
+  glColor3f(255.0, 0.0, 0.0);
+
+  glTranslatef(0.0f, 0.0f, -5.0f);
+  glRotatef(45.0f, 1.0f, 1.0f, 0.0f);
+  
   glBegin(GL_TRIANGLES);
-  glVertex3f(-1.0f, -0.5f, -4.0f); // lower left vertex
-  glVertex3f(1.0f, -0.5f, -4.0f); // lower right vertex
-  glVertex3f(0.0f, 0.5f, -4.0f); // upper vertex
+    glVertex3f(-0.5f, -0.5f, 0.5f); //A
+    glVertex3f(0.5f, -0.5f, 0.5f); //B
+    glVertex3f(-0.5f, 0.5f, 0.5f); //C
+
+    glVertex3f(0.5f, -0.5f, 0.5f); //B
+    glVertex3f(0.5f, 0.5f, 0.5f); //D
+    glVertex3f(-0.5f, 0.5f, 0.5f); //C
+
+    glVertex3f(0.5f, -0.5f, -0.5f); //F
+    glVertex3f(0.5f, 0.5f, -0.5f); //H
+    glVertex3f(0.5f, 0.5f, 0.5f); //D
+
+    glVertex3f(0.5f, 0.5f, 0.5f); //D
+    glVertex3f(0.5f, -0.5f, 0.5f); //B
+    glVertex3f(0.5f, -0.5f, -0.5f); //F
+
+    glVertex3f(-0.5f, -0.5f, -0.5f); //E
+    glVertex3f(-0.5f, 0.5f, -0.5f); //G
+    glVertex3f(0.5f, 0.5f, -0.5f); //H
+
+    glVertex3f(-0.5f, -0.5f, -0.5f); //E
+    glVertex3f(0.5f, 0.5f, -0.5f); //H
+    glVertex3f(0.5f, -0.5f, -0.5f); //F
+
+    glVertex3f(-0.5f, 0.5f, 0.5f); //C
+    glVertex3f(-0.5f, 0.5f, -0.5f); //G
+    glVertex3f(-0.5f, -0.5f, -0.5f); //E
+
+    glVertex3f(-0.5f, -0.5f, -0.5f); //E
+    glVertex3f(-0.5f, -0.5f, 0.5f); //A
+    glVertex3f(-0.5f, 0.5f, 0.5f); //C
+
+    glVertex3f(-0.5f, 0.5f, -0.5f); //G
+    glVertex3f(-0.5f, 0.5f, 0.5f); //C
+    glVertex3f(0.5f, 0.5f, 0.5f); //D
+
+    glVertex3f(0.5f, 0.5f, -0.5f); //H
+    glVertex3f(-0.5f, 0.5f, -0.5f); //G
+    glVertex3f(0.5f, 0.5f, 0.5f); //D
+
+    glVertex3f(-0.5f, -0.5f, 0.5f); //A
+    glVertex3f(-0.5f, -0.5f, -0.5f); //E
+    glVertex3f(0.5f, -0.5f, 0.5f); //B
+
+    glVertex3f(-0.5f, -0.5f, -0.5f); //E
+    glVertex3f(0.5f, -0.5f, -0.5f); //F
+    glVertex3f(0.5f, -0.5f, 0.5f); //B
+
   glEnd();
 
   SDL_GL_SwapWindow(App->window->window);

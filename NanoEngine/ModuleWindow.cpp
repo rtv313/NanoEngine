@@ -71,6 +71,7 @@ bool ModuleWindow::Init()
     glLoadIdentity();
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
+
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
     glClearDepth(1.0f);
     glClearColor(0.f, 0.f, 0.f, 1.f);
