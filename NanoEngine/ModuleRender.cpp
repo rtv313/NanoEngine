@@ -127,6 +127,16 @@ update_status ModuleRender::PostUpdate()
 	  -0.5f, 0.5f, -0.5f,//G
 	  0.5f, 0.5f, -0.5f, // H
   };
+  /*GLfloat cubecolors[] = {
+	  0.5f, 0.5f, 0.5f, // A
+	  0.0f, 0.0f, 255.0f, // B
+	  0.0f, 255.0f, 0.0f, // C
+	  0.0f, 255.0f, 255.0f, // D
+	  255.0f, 0.0f, 0.0f,//E
+	  255.0f, 0.0f, 255.0f, // F
+	  255.0f, 255.0f, 0.0f,//G
+	  255.0f, 255.0f, 255.0f, // H
+  };*/
   uint indices[] = {0,1,2,1,3,2,5,7,3,3,1,5,4,6,7,4,7,5,2,6,4,4,0,2,6,2,3,7,6,3,0,4,1,4,5,1};
   glGenBuffers(1, (GLuint*) &(my_id));
   glBindBuffer(GL_ARRAY_BUFFER, my_id);
