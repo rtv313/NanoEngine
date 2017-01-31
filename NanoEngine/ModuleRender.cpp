@@ -99,6 +99,14 @@ update_status ModuleRender::PostUpdate()
   //glVertex3f(0.5f, -0.5f, -0.5f); //F
   //glVertex3f(-0.5f, 0.5f, -0.5f); //G
   //glVertex3f(0.5f, 0.5f, -0.5f); //H
+  //glVertex3f(-0.5f, -0.5f, 0.5f); //A
+  //glVertex3f(0.5f, -0.5f, 0.5f); //B
+  //glVertex3f(-0.5f, 0.5f, 0.5f); //C
+  //glVertex3f(0.5f, 0.5f, 0.5f); //D
+  //glVertex3f(-0.5f, -0.5f, -0.5f); //E
+  //glVertex3f(0.5f, -0.5f, -0.5f); //F
+  //glVertex3f(-0.5f, 0.5f, -0.5f); //G
+  //glVertex3f(0.5f, 0.5f, -0.5f); //H
 
   glColor3f(255.0, 0.0, 0.0);
 
@@ -127,6 +135,21 @@ update_status ModuleRender::PostUpdate()
 	  -0.5f, 0.5f, -0.5f,//G
 	  0.5f, 0.5f, -0.5f, // H
   };
+
+  uint indices[] = {
+    0,1,2,
+    1,3,2,
+    5,7,3,
+    3,1,5,
+    4,6,7,
+    4,7,5,
+    2,6,4,
+    4,0,2,
+    6,2,3,
+    7,6,3,
+    0,4,1,
+    4,5,1};
+
   /*GLfloat cubecolors[] = {
 	  0.5f, 0.5f, 0.5f, // A
 	  0.0f, 0.0f, 255.0f, // B
