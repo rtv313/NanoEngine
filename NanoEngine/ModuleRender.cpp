@@ -107,14 +107,36 @@ update_status ModuleRender::PostUpdate()
 
   //TODO: Declarar solo una vez (init/start) en vez de declarar en el loop
   uint my_id = 0;
-  GLfloat vertices[] = { -0.5f, -0.5f, 0.5f,0.5f, -0.5f, 0.5f,-0.5f, 0.5f, 0.5f,0.5f, -0.5f, 0.5f,0.5f, 0.5f, 0.5f,-0.5f, 0.5f, 0.5f,0.5f, -0.5f, -0.5f,0.5f, 0.5f, -0.5f,0.5f, 0.5f, 0.5f,0.5f, 0.5f, 0.5f,0.5f, -0.5f, 0.5f,0.5f, -0.5f, -0.5f,-0.5f, -0.5f, -0.5f,-0.5f, 0.5f, -0.5f,0.5f, 0.5f, -0.5f,-0.5f, -0.5f, -0.5f,0.5f, 0.5f, -0.5f,0.5f, -0.5f, -0.5f,-0.5f, 0.5f, 0.5f,-0.5f, 0.5f, -0.5f,-0.5f, -0.5f, -0.5f,-0.5f, -0.5f, -0.5f,-0.5f, -0.5f, 0.5f,-0.5f, 0.5f, 0.5f,-0.5f, 0.5f, -0.5f,-0.5f, 0.5f, 0.5f,0.5f, 0.5f, 0.5f,0.5f, 0.5f, -0.5f,-0.5f, 0.5f, -0.5f,0.5f, 0.5f, 0.5f,-0.5f, -0.5f, 0.5f,-0.5f, -0.5f, -0.5f,0.5f, -0.5f, 0.5f,-0.5f, -0.5f, -0.5f,0.5f, -0.5f, -0.5f,0.5f, -0.5f, 0.5f
+  /*
+  A1
+  B2
+  C3
+  D4
+  E5
+  F6
+  G7
+  H8
+  */
+  GLfloat vertices[] = { 
+	  -0.5f, -0.5f, 0.5f, // A
+	  0.5f, -0.5f, 0.5f, // B
+	  -0.5f, 0.5f, 0.5f, // C
+	  0.5f, 0.5f, 0.5f, // D
+	  -0.5f, -0.5f, -0.5f,//E
+	  0.5f, -0.5f, -0.5f, // F
+	  -0.5f, 0.5f, -0.5f,//G
+	  0.5f, 0.5f, -0.5f, // H
   };
+  uint indices[] = {0,1,2,1,3,2,5,7,3,3,1,5,4,6,7,4,7,5,2,6,4,4,0,2,6,2,3,7,6,3,0,4,1,4,5,1};
   glGenBuffers(1, (GLuint*) &(my_id));
-
   glBindBuffer(GL_ARRAY_BUFFER, my_id);
-
   glBufferData(GL_ARRAY_BUFFER, sizeof(float)*36* 3, vertices, GL_STATIC_DRAW);
 
+  uint my_indices = 0;
+  glGenBuffers(1, (GLuint*) &(my_indices));
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint)*36, indices, GL_STATIC_DRAW);
+  // End TODO
   /*glBegin(GL_TRIANGLES);
     glVertex3f(-0.5f, -0.5f, 0.5f); //A
     glVertex3f(0.5f, -0.5f, 0.5f); //B
@@ -165,15 +187,18 @@ update_status ModuleRender::PostUpdate()
     glVertex3f(0.5f, -0.5f, 0.5f); //B
 
   glEnd();*/
+
+
   glEnableClientState(GL_VERTEX_ARRAY);
-
+  
   glBindBuffer(GL_ARRAY_BUFFER, my_id);
-
   glVertexPointer(3, GL_FLOAT, 0, NULL);
 
   // ... draw other buffers
-
-  glDrawArrays(GL_TRIANGLES, 0, 36 * 3);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices);
+  
+  glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
+  //glDrawArrays(GL_TRIANGLES, 0, 36 * 3);
 
   glDisableClientState(GL_VERTEX_ARRAY);
 
