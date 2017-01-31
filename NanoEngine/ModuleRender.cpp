@@ -104,8 +104,18 @@ update_status ModuleRender::PostUpdate()
 
   glTranslatef(0.0f, 0.0f, -5.0f);
   glRotatef(45.0f, 1.0f, 1.0f, 0.0f);
-  
-  glBegin(GL_TRIANGLES);
+
+  //TODO: Declarar solo una vez (init/start) en vez de declarar en el loop
+  uint my_id = 0;
+  GLfloat vertices[] = { -0.5f, -0.5f, 0.5f,0.5f, -0.5f, 0.5f,-0.5f, 0.5f, 0.5f,0.5f, -0.5f, 0.5f,0.5f, 0.5f, 0.5f,-0.5f, 0.5f, 0.5f,0.5f, -0.5f, -0.5f,0.5f, 0.5f, -0.5f,0.5f, 0.5f, 0.5f,0.5f, 0.5f, 0.5f,0.5f, -0.5f, 0.5f,0.5f, -0.5f, -0.5f,-0.5f, -0.5f, -0.5f,-0.5f, 0.5f, -0.5f,0.5f, 0.5f, -0.5f,-0.5f, -0.5f, -0.5f,0.5f, 0.5f, -0.5f,0.5f, -0.5f, -0.5f,-0.5f, 0.5f, 0.5f,-0.5f, 0.5f, -0.5f,-0.5f, -0.5f, -0.5f,-0.5f, -0.5f, -0.5f,-0.5f, -0.5f, 0.5f,-0.5f, 0.5f, 0.5f,-0.5f, 0.5f, -0.5f,-0.5f, 0.5f, 0.5f,0.5f, 0.5f, 0.5f,0.5f, 0.5f, -0.5f,-0.5f, 0.5f, -0.5f,0.5f, 0.5f, 0.5f,-0.5f, -0.5f, 0.5f,-0.5f, -0.5f, -0.5f,0.5f, -0.5f, 0.5f,-0.5f, -0.5f, -0.5f,0.5f, -0.5f, -0.5f,0.5f, -0.5f, 0.5f
+  };
+  glGenBuffers(1, (GLuint*) &(my_id));
+
+  glBindBuffer(GL_ARRAY_BUFFER, my_id);
+
+  glBufferData(GL_ARRAY_BUFFER, sizeof(float)*36* 3, vertices, GL_STATIC_DRAW);
+
+  /*glBegin(GL_TRIANGLES);
     glVertex3f(-0.5f, -0.5f, 0.5f); //A
     glVertex3f(0.5f, -0.5f, 0.5f); //B
     glVertex3f(-0.5f, 0.5f, 0.5f); //C
@@ -154,7 +164,18 @@ update_status ModuleRender::PostUpdate()
     glVertex3f(0.5f, -0.5f, -0.5f); //F
     glVertex3f(0.5f, -0.5f, 0.5f); //B
 
-  glEnd();
+  glEnd();*/
+  glEnableClientState(GL_VERTEX_ARRAY);
+
+  glBindBuffer(GL_ARRAY_BUFFER, my_id);
+
+  glVertexPointer(3, GL_FLOAT, 0, NULL);
+
+  // ... draw other buffers
+
+  glDrawArrays(GL_TRIANGLES, 0, 36 * 3);
+
+  glDisableClientState(GL_VERTEX_ARRAY);
 
   SDL_GL_SwapWindow(App->window->window);
 	return UPDATE_CONTINUE;
