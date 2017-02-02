@@ -18,7 +18,7 @@ ModuleCameraEditor();
 	~ModuleCameraEditor();
 	void setFOV();
 	void setAspectRatio();
-	void setPlaneDistances(GLfloat zNear, GLFloat zFar);
+	void setPlaneDistances(GLfloat zNear, GLfloat zFar);
 	void getProjectionMatrix();
 	void getViewMatrix();
 	update_status PreUpdate();
