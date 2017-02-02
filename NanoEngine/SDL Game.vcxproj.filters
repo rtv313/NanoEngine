@@ -277,6 +277,9 @@
     <ClInclude Include="Gizmo.h">
       <Filter>Core Modules\Primitivies</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleCameraEditor.h">
+      <Filter>Core Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -434,6 +437,9 @@
     </ClCompile>
     <ClCompile Include="Gizmo.cpp">
       <Filter>Core Modules\Primitivies</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleCameraEditor.cpp">
+      <Filter>Core Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

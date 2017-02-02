@@ -2,9 +2,9 @@
 
 Gizmo::Gizmo()
 {
-  posX = -3.0f;
-  posY = -3.0f;
-  posZ = -15.0f;
+  posX = 0.0f;
+  posY = 0.0f;
+  posZ = 0.0f;
 }
 
 Gizmo::~Gizmo()

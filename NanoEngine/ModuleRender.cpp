@@ -61,7 +61,7 @@ update_status ModuleRender::PreUpdate()
   //glColor3f c = cam->background;
   //glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
   glClearColor(0.0, 0.0, 0.0, 1.0);
-  glFrustum(-1, 1, -1, 1, 1, 100);
+  
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   //glLoadMatrixf(cam->GetOpenGLViewMatrix());
 	return UPDATE_CONTINUE;
@@ -95,7 +95,7 @@ update_status ModuleRender::PostUpdate()
 	/*glRotatef(40.0f, 1.0f, 1.0f, 0.0f);*/
 	//cube.draw();
 	grid.draw();
-  gizmo.draw();
+	gizmo.draw();
 	
 
 	SDL_GL_SwapWindow(App->window->window); // stay here not inside any class

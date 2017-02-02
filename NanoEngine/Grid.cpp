@@ -2,9 +2,9 @@
 
 Grid::Grid()
 {
-	posX = -5.0f;
-	posY = -5.0f;
-	posZ = -20.0f;
+	posX = 0.0f;
+	posY = 0.0f;
+	posZ = 0.0f;
 }
 
 Grid::~Grid()
@@ -33,15 +33,15 @@ void Grid::draw()
 
 
 	glBegin(GL_LINES);
-	for (int i = 0; i <= size; i++) {
+	for (int i = -size/2; i <= size/2; i++) {
 
 		glColor3f(0, 255, 0);
 
-		glVertex3f(i, 0, 0);
-		glVertex3f(i, 0, size);
+		glVertex3f(i, 0, -size/2);
+		glVertex3f(i, 0, size/2);
 
-		glVertex3f(0, 0, i);
-		glVertex3f(size, 0, i);
+		glVertex3f(size / 2, 0, i);
+		glVertex3f(-size / 2, 0, i);
 	};
 	glEnd();
   glPopMatrix();
