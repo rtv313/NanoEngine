@@ -55,8 +55,11 @@ update_status ModuleRender::PreUpdate()
   
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
+  gluPerspective(50.0, 1.0, 1.0, 100.0);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
+  gluLookAt(2.0f, 4.0f, 5.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+
 
   //glColor3f c = cam->background;
   //glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -94,6 +97,7 @@ update_status ModuleRender::PostUpdate()
 	//glTranslatef(0.0f, 0.0f, -10.0f);
 	/*glRotatef(40.0f, 1.0f, 1.0f, 0.0f);*/
 	//cube.draw();
+	grid.size = 100.0f;
 	grid.draw();
 	gizmo.draw();
 	
