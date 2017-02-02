@@ -50,23 +50,10 @@ bool ModuleRender::Init()
 
 update_status ModuleRender::PreUpdate()
 {
-	//SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-	//SDL_RenderClear(renderer);
-  
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-  gluPerspective(50.0, 1.0, 1.0, 100.0);
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
-  gluLookAt(2.0f, 4.0f, 5.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
-
-  //glColor3f c = cam->background;
-  //glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
   glClearColor(0.0, 0.0, 0.0, 1.0);
-  
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  //glLoadMatrixf(cam->GetOpenGLViewMatrix());
+
 	return UPDATE_CONTINUE;
 }
 
@@ -97,15 +84,7 @@ update_status ModuleRender::PostUpdate()
 	//glTranslatef(0.0f, 0.0f, -10.0f);
 	/*glRotatef(40.0f, 1.0f, 1.0f, 0.0f);*/
 	//cube.draw();
-	glViewport(0, 0, width, height);
-	GLint viewPort[4];
-	glGetIntegerv(GL_VIEWPORT,(GLint *)&viewPort);
-	GLfloat  screenWidth =(GLfloat)viewPort[2];
-	GLfloat  screenHeight = (GLfloat)viewPort[3];
-	LOG_GLOBALS("ScreenWidth:%f , ScreenHeight %f \n",screenWidth,screenHeight);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(50.0, screenWidth/screenHeight, 1.0, 100.0);
+
 	grid.size = 100.0f;
 	grid.draw();
 	gizmo.draw();

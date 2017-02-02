@@ -36,7 +36,7 @@ public:
 	Cube cube;
 	Grid grid;
 	Gizmo gizmo;
-	int width, height;
+
 };
 
 #endif // __MODULERENDER_H__

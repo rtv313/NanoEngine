@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
+#include "ModuleCameraEditor.h"
 #include "SDL/include/SDL.h"
 
 #define MAX_KEYS 300
@@ -92,8 +93,8 @@ update_status ModuleInput::PreUpdate()
 					// case for detect resize
 					case SDL_WINDOWEVENT_SIZE_CHANGED: 
 					    //App->renderer->Resize();
-						App->renderer->width = event.window.data1;
-						App->renderer->height = event.window.data2;
+						App->cameraEditor->screenWidth = event.window.data1;
+						App->cameraEditor->screenHeight = event.window.data2;
 						LOG_GLOBALS("RESIZING");
 						break;
 					
