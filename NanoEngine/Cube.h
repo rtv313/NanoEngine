@@ -2,10 +2,6 @@
 #define __CUBE_H__
 #include "Globals.h"
 #include "Glew/include/GL/glew.h"
-#include "SDL/include/SDL_opengl.h"
-#include <gl/GL.h>
-#include <gl/GLU.h>
-
 class Cube
 {
 public:
