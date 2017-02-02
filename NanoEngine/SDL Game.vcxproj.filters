@@ -23,6 +23,9 @@
     <Filter Include="Glew">
       <UniqueIdentifier>{c4b9d594-f03a-4688-b394-ebc82f4d8176}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core Modules\Primitivies">
+      <UniqueIdentifier>{c1bfa829-3b35-48b0-a0aa-6c4761b61af9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModuleRender.h">
@@ -265,6 +268,9 @@
     <ClInclude Include="Glew\include\GL\glew.h">
       <Filter>Glew</Filter>
     </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Core Modules\Primitivies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -413,6 +419,9 @@
     </ClCompile>
     <ClCompile Include="ModulePlayer.cpp">
       <Filter>Game Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Core Modules\Primitivies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
