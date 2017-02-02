@@ -8,13 +8,10 @@ class Gizmo
 public:
   int size = 10;
   Gizmo();
-  Gizmo();
+  ~Gizmo();
   GLfloat posX, posY, posZ;
-  void setColor(GLfloat red, GLfloat green, GLfloat blue);
   void setPosition(GLfloat posX, GLfloat posY, GLfloat posZ);
   void draw();
-private:
-  GLfloat red, green, blue;
 };
 
 #endif

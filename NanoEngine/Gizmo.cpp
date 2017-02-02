@@ -2,20 +2,13 @@
 
 Gizmo::Gizmo()
 {
-  posX = -5.0f;
-  posY = 0.0f;
-  posZ = -20.0f;
+  posX = -2.0f;
+  posY = -2.0f;
+  posZ = -15.0f;
 }
 
 Gizmo::~Gizmo()
 {
-}
-
-void Gizmo::setColor(GLfloat red, GLfloat green, GLfloat blue)
-{
-  this->red = red;
-  this->green = green;
-  this->blue = blue;
 }
 
 void Gizmo::setPosition(GLfloat posX, GLfloat posY, GLfloat posZ)
@@ -27,20 +20,60 @@ void Gizmo::setPosition(GLfloat posX, GLfloat posY, GLfloat posZ)
 
 void Gizmo::draw()
 {
-  glTranslatef(posX, posY, posZ);
-  glRotatef(30.0f, 1.0f, 0.0f, 0.0f);
+  glPushMatrix();
 
+  glTranslatef(posX, posY, posZ);
 
   glBegin(GL_LINES);
-  for (int i = 0; i <= size; i++) {
+    // X Axis
+    glColor3f(255.0f, 0.0f, 0.0f);
 
-    glColor3f(0, 255, 0);
+    glVertex3f(0.0f, 0.0f, 0.0f);
+    glVertex3f(1.0f, 0.0f, 0.0f);
 
-    glVertex3f(i, 0, 0);
-    glVertex3f(i, 0, size);
+    glVertex3f(1.0f, 0.0f, 0.0f);
+    glVertex3f(0.8f, 0.1f, 0.0f);
+    glVertex3f(1.0f, 0.0f, 0.0f);
+    glVertex3f(0.8f, -0.1f, 0.0f);
 
-    glVertex3f(0, 0, i);
-    glVertex3f(size, 0, i);
-  };
+    glVertex3f(1.0f, 0.0f, 0.0f);
+    glVertex3f(0.8f, 0.0f, 0.1f);
+    glVertex3f(1.0f, 0.0f, 0.0f);
+    glVertex3f(0.8f, 0.0f, -0.1f);
+
+    // Y Axis
+    glColor3f(0.0f, 255.0f, 0.0f);
+
+    glVertex3f(0.0f, 0.0f, 0.0f);
+    glVertex3f(0.0f, 1.0f, 0.0f);
+
+    glVertex3f(0.0f, 1.0f, 0.0f);
+    glVertex3f(0.1f, 0.8f, 0.0f);
+    glVertex3f(0.0f, 1.0f, 0.0f);
+    glVertex3f(-0.1f, 0.8f, 0.0f);
+
+    glVertex3f(0.0f, 1.0f, 0.0f);
+    glVertex3f(0.0f, 0.8f, 0.1f);
+    glVertex3f(0.0f, 1.0f, 0.0f);
+    glVertex3f(0.0f, 0.8f, -0.1f);
+
+    // Z Axis
+    glColor3f(0.0f, 0.0f, 255.0f);
+
+    glVertex3f(0.0f, 0.0f, 0.0f);
+    glVertex3f(0.0f, 0.0f, 1.0f);
+
+    glVertex3f(0.0f, 0.0f, 1.0f);
+    glVertex3f(0.0f, 0.1f, 0.8f);
+    glVertex3f(0.0f, 0.0f, 1.0f);
+    glVertex3f(0.0f, -0.1f, 0.8f);
+
+    glVertex3f(0.0f, 0.0f, 1.0f);
+    glVertex3f(0.1f, 0.0f, 0.8f);
+    glVertex3f(0.0f, 0.0f, 1.0f);
+    glVertex3f(-0.1f, 0.0f, 0.8f);
+
   glEnd();
+
+  glPopMatrix();
 }
