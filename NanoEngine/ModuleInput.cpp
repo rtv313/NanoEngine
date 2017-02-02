@@ -88,6 +88,11 @@ update_status ModuleInput::PreUpdate()
 			case SDL_WINDOWEVENT:
 				switch(event.window.event)
 				{
+					// case for detect resize
+					case SDL_WINDOWEVENT_SIZE_CHANGED: 
+					    //App->renderer->Resize();
+						break;
+					
 					//case SDL_WINDOWEVENT_LEAVE:
 					case SDL_WINDOWEVENT_HIDDEN:
 					case SDL_WINDOWEVENT_MINIMIZED:
