@@ -1,6 +1,6 @@
 #include "Globals.h"
 #include "ModuleCameraEditor.h"
-
+#include "MathGeoLib/include/MathGeoLib.h"
 
 
 ModuleCameraEditor::ModuleCameraEditor()
