@@ -25,6 +25,7 @@
 	 }
 	
 	 // start draw 
+	
 	glColor3f(red, green, blue);
 	glTranslatef(posX,posY,posZ);
 	glRotatef(45.0f, 1.0f, 1.0f, 0.0f);

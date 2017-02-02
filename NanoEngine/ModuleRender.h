@@ -8,6 +8,7 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 #include "Cube.h"
+#include "Grid.h"
 
 struct SDL_Texture;
 struct SDL_Renderer;
@@ -32,6 +33,7 @@ public:
 	SDL_Renderer* renderer = nullptr;
 	SDL_Rect camera;
 	Cube cube;
+	Grid grid;
 };
 
 #endif // __MODULERENDER_H__

@@ -89,8 +89,14 @@ update_status ModuleRender::Update()
 }
 
 update_status ModuleRender::PostUpdate()
-{
-	cube.draw();
+{	
+
+	//glTranslatef(0.0f, 0.0f, -10.0f);
+	/*glRotatef(40.0f, 1.0f, 1.0f, 0.0f);*/
+	//cube.draw();
+	grid.draw();
+	
+
 	SDL_GL_SwapWindow(App->window->window); // stay here not inside any class
 	return UPDATE_CONTINUE;
 }

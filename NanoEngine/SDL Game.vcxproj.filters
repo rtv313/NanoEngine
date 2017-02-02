@@ -271,6 +271,9 @@
     <ClInclude Include="Cube.h">
       <Filter>Core Modules\Primitivies</Filter>
     </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Core Modules\Primitivies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -421,6 +424,9 @@
       <Filter>Game Modules</Filter>
     </ClCompile>
     <ClCompile Include="Cube.cpp">
+      <Filter>Core Modules\Primitivies</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
       <Filter>Core Modules\Primitivies</Filter>
     </ClCompile>
   </ItemGroup>
