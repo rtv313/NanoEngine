@@ -10,9 +10,9 @@ ModuleCameraEditor::ModuleCameraEditor()
 	glGetIntegerv(GL_VIEWPORT, (GLint *)&viewPort);
 	screenWidth = (GLfloat)viewPort[2];
 	screenHeight = (GLfloat)viewPort[3];
-	position.x = 2;
-	position.y = 3;
-	position.z = 5;
+	position.x = 0;
+	position.y = 0.5;
+	position.z = 0;
 
 	up.x = 0;
 	up.y = 1;
@@ -22,7 +22,8 @@ ModuleCameraEditor::ModuleCameraEditor()
 	lookAt.y = 0;
 	lookAt.z = 0;
 
-
+	zNear = 1;
+	zFar = 100;
 }
 
 
@@ -38,7 +39,9 @@ void ModuleCameraEditor::setAspectRatio() {
 
 }
 
-void ModuleCameraEditor::setPlaneDistances() {
+void ModuleCameraEditor::setPlaneDistances(GLfloat zNear, GLfloat zFar) {
+	this->zNear = zNear;
+	this->zFar = zFar;
 }
 
 void ModuleCameraEditor::getProjectionMatrix() {
@@ -52,11 +55,13 @@ update_status ModuleCameraEditor::PreUpdate() {
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(60.0, screenWidth / screenHeight, 1.0, 100.0);
+	//gluPerspective(60.0, screenWidth / screenHeight, 1.0, 100.0);
+	glFrustum(position.x - 1, position.x + 1, position.y - 1, position.y + 1, zNear, zFar);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(position.x, position.y,position.z, lookAt.x,lookAt.y, lookAt.z, up.x, up.y, up.z);
 
+	//glFrustrum(position.x, position.y,position.z, lookAt.x,lookAt.y, lookAt.z, up.x, up.y, up.z);
+	
 	return UPDATE_CONTINUE;
 }
 
@@ -68,7 +73,6 @@ update_status ModuleCameraEditor::PostUpdate() {
 	glViewport(0, 0, screenWidth, screenHeight);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(60.0, screenWidth / screenHeight, 1.0, 100.0);
-
+	glFrustum(position.x - 1, position.x + 1, position.y - 1, position.y + 1, zNear, zFar);
 	return UPDATE_CONTINUE;
 }
