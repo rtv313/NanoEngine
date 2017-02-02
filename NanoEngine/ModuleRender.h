@@ -35,7 +35,8 @@ public:
 	SDL_Rect camera;
 	Cube cube;
 	Grid grid;
-  Gizmo gizmo;
+	Gizmo gizmo;
+	int width, height;
 };
 
 #endif // __MODULERENDER_H__

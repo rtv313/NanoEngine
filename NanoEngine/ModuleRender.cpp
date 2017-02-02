@@ -97,6 +97,15 @@ update_status ModuleRender::PostUpdate()
 	//glTranslatef(0.0f, 0.0f, -10.0f);
 	/*glRotatef(40.0f, 1.0f, 1.0f, 0.0f);*/
 	//cube.draw();
+	glViewport(0, 0, width, height);
+	GLint viewPort[4];
+	glGetIntegerv(GL_VIEWPORT,(GLint *)&viewPort);
+	GLfloat  screenWidth =(GLfloat)viewPort[2];
+	GLfloat  screenHeight = (GLfloat)viewPort[3];
+	LOG_GLOBALS("ScreenWidth:%f , ScreenHeight %f \n",screenWidth,screenHeight);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(50.0, screenWidth/screenHeight, 1.0, 100.0);
 	grid.size = 100.0f;
 	grid.draw();
 	gizmo.draw();

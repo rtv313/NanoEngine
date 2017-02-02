@@ -11,11 +11,7 @@ class ModuleTextures;
 class ModuleInput;
 class ModuleAudio;
 class ModuleFadeToBlack;
-class ModuleCollision;
-class ModuleSpawnTriggers;
-class ModuleSpawnZones;
-class ModuleParticles;
-class ModuleEnemies;
+class ModuleCameraEditor;
 // Game modules ---
 class ModulePlayer;
 class ModuleSceneIntro;
@@ -39,11 +35,8 @@ public:
 	ModuleInput* input;
 	ModuleAudio* audio;
 	ModuleFadeToBlack* fade;
-	ModuleCollision* collision;
-	ModuleSpawnTriggers* spawnTriggers;
-	ModuleSpawnZones* spawnZones;
-	ModuleParticles* particles;
-	ModuleEnemies * enemies;
+	ModuleCameraEditor* cameraEditor;
+
 	// Game modules ---
 	ModulePlayer* player;
 	ModuleSceneIntro* scene_intro;

@@ -54,7 +54,7 @@ bool ModuleWindow::Init()
 		}
 
 		flags |= SDL_WINDOW_OPENGL;
-
+		flags |= SDL_WINDOW_RESIZABLE;
 		window = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
 
 		SDL_GL_CreateContext(window);
