@@ -95,6 +95,7 @@ update_status ModuleRender::PostUpdate()
 	/*glRotatef(40.0f, 1.0f, 1.0f, 0.0f);*/
 	//cube.draw();
 	grid.draw();
+  gizmo.draw();
 	
 
 	SDL_GL_SwapWindow(App->window->window); // stay here not inside any class

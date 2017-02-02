@@ -9,6 +9,7 @@
 #include <gl/GLU.h>
 #include "Cube.h"
 #include "Grid.h"
+#include "Gizmo.h"
 
 struct SDL_Texture;
 struct SDL_Renderer;
@@ -34,6 +35,7 @@ public:
 	SDL_Rect camera;
 	Cube cube;
 	Grid grid;
+  Gizmo gizmo;
 };
 
 #endif // __MODULERENDER_H__

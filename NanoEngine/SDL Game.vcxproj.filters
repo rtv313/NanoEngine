@@ -274,6 +274,9 @@
     <ClInclude Include="Grid.h">
       <Filter>Core Modules\Primitivies</Filter>
     </ClInclude>
+    <ClInclude Include="Gizmo.h">
+      <Filter>Core Modules\Primitivies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -427,6 +430,9 @@
       <Filter>Core Modules\Primitivies</Filter>
     </ClCompile>
     <ClCompile Include="Grid.cpp">
+      <Filter>Core Modules\Primitivies</Filter>
+    </ClCompile>
+    <ClCompile Include="Gizmo.cpp">
       <Filter>Core Modules\Primitivies</Filter>
     </ClCompile>
   </ItemGroup>

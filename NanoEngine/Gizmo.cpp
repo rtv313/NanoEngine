@@ -2,8 +2,8 @@
 
 Gizmo::Gizmo()
 {
-  posX = -2.0f;
-  posY = -2.0f;
+  posX = -3.0f;
+  posY = -3.0f;
   posZ = -15.0f;
 }
 

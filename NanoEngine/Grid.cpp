@@ -3,7 +3,7 @@
 Grid::Grid()
 {
 	posX = -5.0f;
-	posY = 0.0f;
+	posY = -5.0f;
 	posZ = -20.0f;
 }
 
@@ -27,8 +27,9 @@ void Grid::setPosition(GLfloat posX, GLfloat posY, GLfloat posZ)
 
 void Grid::draw()
 {
+  glPushMatrix();
 	glTranslatef(posX,posY,posZ);
-	glRotatef(30.0f, 1.0f, 0.0f, 0.0f);
+	//glRotatef(30.0f, 1.0f, 0.0f, 0.0f);
 
 
 	glBegin(GL_LINES);
@@ -43,4 +44,5 @@ void Grid::draw()
 		glVertex3f(size, 0, i);
 	};
 	glEnd();
+  glPopMatrix();
 }

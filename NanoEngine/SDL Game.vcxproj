@@ -79,6 +79,7 @@
     <ClInclude Include="AnimationRender.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="Gizmo.h" />
     <ClInclude Include="Glew\include\GL\glew.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Grid.h" />
@@ -161,6 +162,7 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="Gizmo.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="Main.cpp" />
