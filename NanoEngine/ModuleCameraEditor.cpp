@@ -3,6 +3,7 @@
 
 
 
+
 ModuleCameraEditor::ModuleCameraEditor()
 {
 	
@@ -11,8 +12,8 @@ ModuleCameraEditor::ModuleCameraEditor()
 	screenWidth = (GLfloat)viewPort[2];
 	screenHeight = (GLfloat)viewPort[3];
 	position.x = 0;
-	position.y = 20;
-	position.z = 2;
+	position.y = 5;
+	position.z = 10;
 
 	up.x = 0;
 	up.y = 1;
@@ -26,6 +27,9 @@ ModuleCameraEditor::ModuleCameraEditor()
 
 	zNear = 10;
 	zFar = 1000;
+	moveSpeed = 0.1;
+	rotationSpeed = 0.002;
+	right = forward.Cross(up);
 }
 
 
@@ -63,6 +67,7 @@ update_status ModuleCameraEditor::PreUpdate() {
 	glLoadIdentity();
 	gluLookAt(position.x, position.y, position.z, lookAt.x, lookAt.y, lookAt.z, up.x, up.y, up.z);
 	forward = lookAt - position;
+	right = forward.Cross(up);
 	//float4x4 aux = float4x4::LookAt(position, lookAt, forward, up, up);
 	//aux.SetTranslatePart(position.x, position.y, position.z);
 	//aux.Transpose();
@@ -74,6 +79,18 @@ update_status ModuleCameraEditor::PreUpdate() {
 }
 
 update_status ModuleCameraEditor::Update() {
+	forward = forward.Normalized();
+	right = right.Normalized();
+	up = up.Normalized();
+	const Uint8* keys = SDL_GetKeyboardState(NULL);
+	if (keys[SDL_SCANCODE_LSHIFT]|| keys[SDL_SCANCODE_RSHIFT]) {
+		moveSpeed = 0.2;
+		rotationSpeed = 0.004;
+	}
+	else {
+		moveSpeed = 0.1;
+		rotationSpeed = 0.002;
+	}
 	return UPDATE_CONTINUE;
 }
 

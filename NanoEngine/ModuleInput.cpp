@@ -46,7 +46,7 @@ bool ModuleInput::Start()
 update_status ModuleInput::PreUpdate()
 {
 	static SDL_Event event;
-
+	float cameraSpeed, cameraRotSpeed;
 	mouse_motion = {0, 0};
 	memset(windowEvents, false, WE_COUNT * sizeof(bool));
 	
@@ -54,20 +54,78 @@ update_status ModuleInput::PreUpdate()
 
 	for(int i = 0; i < MAX_KEYS; ++i)
 	{
-		if (keys[SDL_SCANCODE_Q]) {
-			App->cameraEditor->position.y += 0.1*App->dt;
-		}
-		if (keys[SDL_SCANCODE_E]) {
-			App->cameraEditor->position.y -= 0.1*App->dt;
-		}
-		if (keys[SDL_SCANCODE_W]) {
-			App->cameraEditor->position +=App->cameraEditor->forward.Normalized()*0.1*App->dt;
-			App->cameraEditor->lookAt += App->cameraEditor->forward.Normalized()*0.1*App->dt;
-		}
-		if (keys[SDL_SCANCODE_S]) {
-			App->cameraEditor->position -= App->cameraEditor->forward.Normalized()*0.1*App->dt;
-			App->cameraEditor->lookAt -= App->cameraEditor->forward.Normalized()*0.1*App->dt;
-		}
+		// Camera Inputs
+		cameraSpeed = App->cameraEditor->moveSpeed;
+				// Elevate
+				if (keys[SDL_SCANCODE_Q]) {
+					App->cameraEditor->position.y += cameraSpeed*App->dt;
+					App->cameraEditor->lookAt.y += cameraSpeed*App->dt;
+				}
+				//Descend
+				if (keys[SDL_SCANCODE_E]) {
+					App->cameraEditor->position.y -= cameraSpeed*App->dt;
+					App->cameraEditor->lookAt.y -= cameraSpeed*App->dt;
+				}
+				//Forward
+				if (keys[SDL_SCANCODE_W]) {
+					App->cameraEditor->position +=App->cameraEditor->forward.Normalized()*cameraSpeed*App->dt;
+					App->cameraEditor->lookAt += App->cameraEditor->forward.Normalized()*cameraSpeed*App->dt;
+				}
+				//Backwards
+				if (keys[SDL_SCANCODE_S]) {
+					App->cameraEditor->position -= App->cameraEditor->forward.Normalized()*cameraSpeed*App->dt;
+					App->cameraEditor->lookAt -= App->cameraEditor->forward.Normalized()*cameraSpeed*App->dt;
+				}
+				//Strafe Left
+				if (keys[SDL_SCANCODE_A]) {
+					App->cameraEditor->position -= App->cameraEditor->right.Normalized()*cameraSpeed*App->dt;
+					App->cameraEditor->lookAt -= App->cameraEditor->right.Normalized()*cameraSpeed*App->dt;
+				}
+				//Strafe Right
+				if (keys[SDL_SCANCODE_D]) {
+					App->cameraEditor->position += App->cameraEditor->right.Normalized()*cameraSpeed*App->dt;
+					App->cameraEditor->lookAt += App->cameraEditor->right.Normalized()*cameraSpeed*App->dt;
+				}
+				cameraRotSpeed = App->cameraEditor->rotationSpeed;
+				//Rotate Left
+				if (keys[SDL_SCANCODE_Z]) {
+
+					App->cameraEditor->lookAt = App->cameraEditor->position + App->cameraEditor->forward;
+					App->cameraEditor->forward = App->cameraEditor->forward.Lerp(App->cameraEditor->right*-1, cameraRotSpeed*App->dt);
+					App->cameraEditor->right = App->cameraEditor->forward.Cross(App->cameraEditor->up);
+					App->cameraEditor->lookAt = App->cameraEditor->position + App->cameraEditor->forward;
+
+				}
+				//Rotate Right
+				if (keys[SDL_SCANCODE_X]) {
+					
+					App->cameraEditor->lookAt = App->cameraEditor->position + App->cameraEditor->forward;
+					App->cameraEditor->forward=App->cameraEditor->forward.Lerp(App->cameraEditor->right, cameraRotSpeed*App->dt);
+					App->cameraEditor->right = App->cameraEditor->forward.Cross(App->cameraEditor->up);
+					App->cameraEditor->lookAt = App->cameraEditor->position + App->cameraEditor->forward;
+
+				}
+				//Rotate Up
+				if (keys[SDL_SCANCODE_C]) {
+					App->cameraEditor->lookAt = App->cameraEditor->position + App->cameraEditor->forward;
+					float3 aux = App->cameraEditor->forward.Lerp(App->cameraEditor->up, 0.002*App->dt) - App->cameraEditor->forward;
+					App->cameraEditor->forward = App->cameraEditor->forward.Lerp(App->cameraEditor->up*-1, cameraRotSpeed*App->dt);
+					App->cameraEditor->up -= aux;
+					App->cameraEditor->lookAt = App->cameraEditor->position + App->cameraEditor->forward;
+					
+
+				}
+				//Rotate Down
+				if (keys[SDL_SCANCODE_V]) {
+
+					App->cameraEditor->lookAt = App->cameraEditor->position + App->cameraEditor->forward;
+					float3 aux = App->cameraEditor->forward.Lerp(App->cameraEditor->up, 0.002*App->dt) - App->cameraEditor->forward;
+					App->cameraEditor->forward = App->cameraEditor->forward.Lerp(App->cameraEditor->up, cameraRotSpeed*App->dt);
+					App->cameraEditor->up += aux;
+					App->cameraEditor->lookAt = App->cameraEditor->position + App->cameraEditor->forward;
+
+				}
+		// End Camera inputs
 		if(keys[i] == 1)
 		{
 			if(keyboard[i] == KEY_IDLE)
@@ -131,6 +189,7 @@ update_status ModuleInput::PreUpdate()
 
 			case SDL_MOUSEBUTTONDOWN:
 				mouse_buttons[event.button.button - 1] = KEY_DOWN;
+
 			break;
 
 			case SDL_MOUSEBUTTONUP:

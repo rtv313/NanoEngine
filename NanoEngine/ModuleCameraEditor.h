@@ -5,14 +5,16 @@
 #include "MathGeoLib/include/MathGeoLib.h"
 #include "Glew/include/GL/glew.h"
 #include <gl/GL.h>
+#include "SDL/include/SDL.h"
 
 class ModuleCameraEditor :
 	public Module
 {
 public:
-	float3 position,up,lookAt,forward;
+	float3 position,up,lookAt,forward,right;
 	GLfloat fieldOfView, screenWidth, screenHeight;
 	GLfloat zNear, zFar;
+	float moveSpeed, rotationSpeed;
 	
 ModuleCameraEditor();
 	~ModuleCameraEditor();
