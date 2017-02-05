@@ -11,8 +11,8 @@ ModuleCameraEditor::ModuleCameraEditor()
 	screenWidth = (GLfloat)viewPort[2];
 	screenHeight = (GLfloat)viewPort[3];
 	position.x = 0;
-	position.y = 0.5;
-	position.z = 0;
+	position.y = 20;
+	position.z = 2;
 
 	up.x = 0;
 	up.y = 1;
@@ -22,8 +22,10 @@ ModuleCameraEditor::ModuleCameraEditor()
 	lookAt.y = 0;
 	lookAt.z = 0;
 
-	zNear = 1;
-	zFar = 100;
+	forward = lookAt - position;
+
+	zNear = 10;
+	zFar = 1000;
 }
 
 
@@ -55,12 +57,18 @@ update_status ModuleCameraEditor::PreUpdate() {
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	//gluPerspective(60.0, screenWidth / screenHeight, 1.0, 100.0);
-	glFrustum(position.x - 1, position.x + 1, position.y - 1, position.y + 1, zNear, zFar);
+	gluPerspective(50, 1, 1, 100);
+	//glFrustum(position.x - 5, position.x + 5, position.y - 5, position.y + 5, zNear, zFar);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+	gluLookAt(position.x, position.y, position.z, lookAt.x, lookAt.y, lookAt.z, up.x, up.y, up.z);
+	forward = lookAt - position;
+	//float4x4 aux = float4x4::LookAt(position, lookAt, forward, up, up);
+	//aux.SetTranslatePart(position.x, position.y, position.z);
+	//aux.Transpose();
 
-	//glFrustrum(position.x, position.y,position.z, lookAt.x,lookAt.y, lookAt.z, up.x, up.y, up.z);
+	//glLoadMatrixf((const GLfloat*)&aux);
+	
 	
 	return UPDATE_CONTINUE;
 }
@@ -74,5 +82,8 @@ update_status ModuleCameraEditor::PostUpdate() {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glFrustum(position.x - 1, position.x + 1, position.y - 1, position.y + 1, zNear, zFar);
+	
+	//glRotatef(20, 1, 0, 0);
+	//glLoadMatrixf((const GLfloat*)&float4x4::LookAt(forward, (lookAt - position), up, up));
 	return UPDATE_CONTINUE;
 }

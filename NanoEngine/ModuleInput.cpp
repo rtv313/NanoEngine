@@ -54,6 +54,20 @@ update_status ModuleInput::PreUpdate()
 
 	for(int i = 0; i < MAX_KEYS; ++i)
 	{
+		if (keys[SDL_SCANCODE_Q]) {
+			App->cameraEditor->position.y += 0.1*App->dt;
+		}
+		if (keys[SDL_SCANCODE_E]) {
+			App->cameraEditor->position.y -= 0.1*App->dt;
+		}
+		if (keys[SDL_SCANCODE_W]) {
+			App->cameraEditor->position +=App->cameraEditor->forward.Normalized()*0.1*App->dt;
+			App->cameraEditor->lookAt += App->cameraEditor->forward.Normalized()*0.1*App->dt;
+		}
+		if (keys[SDL_SCANCODE_S]) {
+			App->cameraEditor->position -= App->cameraEditor->forward.Normalized()*0.1*App->dt;
+			App->cameraEditor->lookAt -= App->cameraEditor->forward.Normalized()*0.1*App->dt;
+		}
 		if(keys[i] == 1)
 		{
 			if(keyboard[i] == KEY_IDLE)
@@ -129,6 +143,7 @@ update_status ModuleInput::PreUpdate()
 				mouse.x = event.motion.x / SCREEN_SIZE;
 				mouse.y = event.motion.y / SCREEN_SIZE;
 			break;
+
 		}
 	}
 

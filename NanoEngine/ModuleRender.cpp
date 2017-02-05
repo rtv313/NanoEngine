@@ -55,7 +55,7 @@ update_status ModuleRender::PreUpdate()
 
   glClearColor(0.0, 0.0, 0.0, 1.0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+  
 	return UPDATE_CONTINUE;
 }
 
@@ -86,10 +86,10 @@ update_status ModuleRender::PostUpdate()
 	//glTranslatef(0.0f, 0.0f, -10.0f);
 	/*glRotatef(40.0f, 1.0f, 1.0f, 0.0f);*/
 	//cube.draw();
-
 	grid.size = 100.0f;
 	grid.draw();
 	gizmo.draw();
+	
 	
 
 	SDL_GL_SwapWindow(App->window->window); // stay here not inside any class
