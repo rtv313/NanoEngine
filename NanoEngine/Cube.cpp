@@ -16,7 +16,7 @@
 	 if (buffersInitFlag == false) { // init buffers once
 		 glGenBuffers(1, (GLuint*) &(my_id));
 		 glBindBuffer(GL_ARRAY_BUFFER, my_id);
-		 glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 36 * 3, vertices, GL_STATIC_DRAW);
+		 glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 8 * 3, vertices, GL_STATIC_DRAW); //was 36 instead of 8
 
 		 glGenBuffers(1, (GLuint*) &(my_indices));
 		 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices);

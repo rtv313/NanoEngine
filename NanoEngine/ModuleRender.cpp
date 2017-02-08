@@ -86,7 +86,7 @@ update_status ModuleRender::PostUpdate()
 	//glTranslatef(0.0f, 0.0f, -10.0f);
 	/*glRotatef(40.0f, 1.0f, 1.0f, 0.0f);*/
 	//cube.draw();
-	grid.size = 100.0f;
+	//.size = 100.0f;
 	grid.draw();
 	gizmo.draw();
 	
