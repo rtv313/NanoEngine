@@ -14,7 +14,6 @@ public:
 	void setPosition(GLfloat posX, GLfloat posY, GLfloat posZ);
 	void draw();
 private:
-	
 	GLfloat red, green, blue;
 	bool buffersInitFlag = false;
 	uint my_id = 0;

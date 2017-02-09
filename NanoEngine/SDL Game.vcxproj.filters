@@ -280,6 +280,9 @@
     <ClInclude Include="ModuleCameraEditor.h">
       <Filter>Core Modules</Filter>
     </ClInclude>
+    <ClInclude Include="SolidSphere.h">
+      <Filter>Core Modules\Primitivies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -440,6 +443,9 @@
     </ClCompile>
     <ClCompile Include="ModuleCameraEditor.cpp">
       <Filter>Core Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="SolidSphere.cpp">
+      <Filter>Core Modules\Primitivies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

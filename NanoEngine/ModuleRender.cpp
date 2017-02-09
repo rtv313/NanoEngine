@@ -8,7 +8,7 @@
 #include "SDL/include/SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
-
+#include "SolidSphere.h"
 #pragma comment( lib, "opengl32.lib")
 #pragma comment( lib, "glu32.lib")
 #pragma comment( lib, "Glew/lib/Release/Win32/glew32.lib" )
@@ -19,7 +19,7 @@ ModuleRender::ModuleRender()
 	camera.w = SCREEN_WIDTH * SCREEN_SIZE;
 	camera.h = SCREEN_HEIGHT* SCREEN_SIZE;
 
-
+	
 
 }
 
@@ -90,7 +90,8 @@ update_status ModuleRender::PostUpdate()
 	grid.draw();
 	gizmo.draw();
 	
-	
+	SolidSphere sphere(1, 12, 24);
+	sphere.draw(0.0f,0.0f,0.0f);
 
 	SDL_GL_SwapWindow(App->window->window); // stay here not inside any class
 	return UPDATE_CONTINUE;
