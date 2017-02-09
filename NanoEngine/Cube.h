@@ -6,6 +6,7 @@ class Cube
 {
 public:
 	GLfloat posX, posY, posZ;
+	GLuint tex;
 	Cube();
 	~Cube();
 	void setColor(GLfloat red, GLfloat green , GLfloat blue);
@@ -17,6 +18,7 @@ private:
 	bool buffersInitFlag = false;
 	uint my_id = 0;
 	uint my_indices = 0;
+	uint my_textIndex = 0;
 	GLfloat vertices[24] = {
 		-0.5f, -0.5f, 0.5f, // A
 		0.5f, -0.5f, 0.5f, // B
@@ -27,7 +29,16 @@ private:
 		-0.5f, 0.5f, -0.5f,//G
 		0.5f, 0.5f, -0.5f, // H
 	};
-
+	GLfloat UV[16] = {
+		0.0f,0.0f,//A
+		1.0f,0.0f,//B
+		0.0f,1.0f,//C
+		1.0f,1.0f,//D
+		1.0f,0.0f,//E
+		0.0f,0.0f,//F
+		1.0f,1.0f,//G
+		0.0f,1.0f//H
+	};
 	uint indices[36] = { 
 		0,1,2,
 		1,3,2,
