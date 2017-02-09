@@ -6,12 +6,18 @@
 #include "SDL/include/SDL.h"
 #include "Glew/include/GL/glew.h"
 #include "SDL/include/SDL_opengl.h"
+#include "DevIL/include/IL/il.h"
+#include "DevIL/include/IL/ilu.h"
+#include "DevIL/include/IL/ilut.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
 #include "SolidSphere.h"
-#pragma comment( lib, "opengl32.lib")
-#pragma comment( lib, "glu32.lib")
-#pragma comment( lib, "Glew/lib/Release/Win32/glew32.lib" )
+#pragma comment(lib, "opengl32.lib")
+#pragma comment(lib, "glu32.lib")
+#pragma comment(lib, "Glew/lib/Release/Win32/glew32.lib" )
+#pragma comment(lib,"DevIL/lib/x86/Release/DevIL.lib")
+#pragma comment(lib,"DevIL/lib/x86/Release/ILU.lib")
+#pragma comment(lib,"DevIL/lib/x86/Release/ILUT.lib")
 
 ModuleRender::ModuleRender()
 {
@@ -93,6 +99,7 @@ update_status ModuleRender::PostUpdate()
 	SolidSphere sphere(1, 12, 24);
 	sphere.draw(0.0f,0.0f,0.0f);
 
+	
 	SDL_GL_SwapWindow(App->window->window); // stay here not inside any class
 	return UPDATE_CONTINUE;
 }
