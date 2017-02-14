@@ -46,15 +46,11 @@ void Model::Load(const char* file)
 		
 		glGenBuffers(1, (GLuint*) &(my_indices[i]));
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices[i]);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * indices.size(), &indices, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * indices.size(), &indices[0], GL_STATIC_DRAW);
 
 		indices.clear();
 	}
 
-
-
-
-	
 }
 
 void Model::Clear() 
