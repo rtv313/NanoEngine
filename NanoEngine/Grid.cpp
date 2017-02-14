@@ -37,6 +37,14 @@ Grid::Grid()
 
 	indicesSize = id--;
 
+	glGenBuffers(1, (GLuint*) &(my_id));
+	glBindBuffer(GL_ARRAY_BUFFER, my_id);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * size*size * 3, vertices, GL_STATIC_DRAW);
+
+	glGenBuffers(1, (GLuint*) &(my_indices));
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * indicesSize, indices, GL_STATIC_DRAW);
+	
 }
 
 Grid::~Grid()
@@ -62,18 +70,18 @@ void Grid::setPosition(GLfloat posX, GLfloat posY, GLfloat posZ)
 void Grid::draw()
 {
   glPushMatrix();
-	
-	if (buffersInitFlag == false) { // init buffers once
-		
-		glGenBuffers(1, (GLuint*) &(my_id));
-		glBindBuffer(GL_ARRAY_BUFFER, my_id);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * size*size * 3, vertices, GL_STATIC_DRAW);
+	//
+	//if (buffersInitFlag == false) { // init buffers once
+	//	
+	//	glGenBuffers(1, (GLuint*) &(my_id));
+	//	glBindBuffer(GL_ARRAY_BUFFER, my_id);
+	//	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * size*size * 3, vertices, GL_STATIC_DRAW);
 
-		glGenBuffers(1, (GLuint*) &(my_indices));
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * indicesSize, indices, GL_STATIC_DRAW);
-		buffersInitFlag = true;
-	}
+	//	glGenBuffers(1, (GLuint*) &(my_indices));
+	//	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices);
+	//	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * indicesSize, indices, GL_STATIC_DRAW);
+	//	buffersInitFlag = true;
+	//}
 
 	
 

@@ -15,7 +15,6 @@ public:
 
 private:
 	GLfloat red, green, blue;
-	bool buffersInitFlag = false;
 	uint my_id = 0;
 	uint my_indices = 0;
 	uint my_textIndex = 0;

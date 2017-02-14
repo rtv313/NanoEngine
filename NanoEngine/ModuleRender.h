@@ -36,8 +36,8 @@ public:
 public:
 	SDL_Renderer* renderer = nullptr;
 	SDL_Rect camera;
-	Cube cube;
-	Grid grid;
+	Cube *cube;
+	Grid *grid;
 	Gizmo gizmo;
 	Model batman;
 

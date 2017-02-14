@@ -31,7 +31,10 @@ ModuleRender::ModuleRender()
 
 // Destructor
 ModuleRender::~ModuleRender()
-{}
+{
+	delete grid;
+	delete cube;
+}
 
 // Called before render is available
 bool ModuleRender::Init()
@@ -54,7 +57,8 @@ bool ModuleRender::Init()
 	}
 
 	batman.Load("3DModels/Batman/Batman.obj");
-
+	grid = new Grid();
+	cube = new Cube();
 	return ret;
 }
 
@@ -93,9 +97,9 @@ update_status ModuleRender::PostUpdate()
 
 	//glTranslatef(0.0f, 0.0f, -10.0f);
 	/*glRotatef(40.0f, 1.0f, 1.0f, 0.0f);*/
-	cube.draw();
+	cube->draw();
 	//.size = 100.0f;
-	grid.draw();
+	grid->draw();
 	gizmo.draw();
 	batman.Draw();
 	SolidSphere sphere(1, 12, 24);
