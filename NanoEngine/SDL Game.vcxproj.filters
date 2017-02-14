@@ -23,7 +23,7 @@
     <Filter Include="Glew">
       <UniqueIdentifier>{c4b9d594-f03a-4688-b394-ebc82f4d8176}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core Modules\Primitivies">
+    <Filter Include="Core Modules\Geometries">
       <UniqueIdentifier>{c1bfa829-3b35-48b0-a0aa-6c4761b61af9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -269,19 +269,22 @@
       <Filter>Glew</Filter>
     </ClInclude>
     <ClInclude Include="Cube.h">
-      <Filter>Core Modules\Primitivies</Filter>
+      <Filter>Core Modules\Geometries</Filter>
     </ClInclude>
     <ClInclude Include="Grid.h">
-      <Filter>Core Modules\Primitivies</Filter>
+      <Filter>Core Modules\Geometries</Filter>
     </ClInclude>
     <ClInclude Include="Gizmo.h">
-      <Filter>Core Modules\Primitivies</Filter>
+      <Filter>Core Modules\Geometries</Filter>
     </ClInclude>
     <ClInclude Include="ModuleCameraEditor.h">
       <Filter>Core Modules</Filter>
     </ClInclude>
     <ClInclude Include="SolidSphere.h">
-      <Filter>Core Modules\Primitivies</Filter>
+      <Filter>Core Modules\Geometries</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Core Modules\Geometries</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -433,19 +436,22 @@
       <Filter>Game Modules</Filter>
     </ClCompile>
     <ClCompile Include="Cube.cpp">
-      <Filter>Core Modules\Primitivies</Filter>
+      <Filter>Core Modules\Geometries</Filter>
     </ClCompile>
     <ClCompile Include="Grid.cpp">
-      <Filter>Core Modules\Primitivies</Filter>
+      <Filter>Core Modules\Geometries</Filter>
     </ClCompile>
     <ClCompile Include="Gizmo.cpp">
-      <Filter>Core Modules\Primitivies</Filter>
+      <Filter>Core Modules\Geometries</Filter>
     </ClCompile>
     <ClCompile Include="ModuleCameraEditor.cpp">
       <Filter>Core Modules</Filter>
     </ClCompile>
     <ClCompile Include="SolidSphere.cpp">
-      <Filter>Core Modules\Primitivies</Filter>
+      <Filter>Core Modules\Geometries</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Core Modules\Geometries</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

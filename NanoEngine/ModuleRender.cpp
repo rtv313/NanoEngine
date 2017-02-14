@@ -53,6 +53,8 @@ bool ModuleRender::Init()
 		ret = false;
 	}
 
+	batman.Load("3DModels/Batman/Batman.obj");
+
 	return ret;
 }
 
@@ -95,7 +97,7 @@ update_status ModuleRender::PostUpdate()
 	//.size = 100.0f;
 	grid.draw();
 	gizmo.draw();
-	
+	batman.Draw();
 	SolidSphere sphere(1, 12, 24);
 	sphere.draw(0.0f,0.0f,0.0f);
 

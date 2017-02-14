@@ -1,15 +1,17 @@
 #ifndef __MODULERENDER_H__
 #define __MODULERENDER_H__
 
+#include "Cube.h"
+#include "Grid.h"
+#include "Gizmo.h"
+#include "Model.h"
+
 #include "Module.h"
 #include "Globals.h"
 #include "Glew/include/GL/glew.h"
 #include "SDL/include/SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
-#include "Cube.h"
-#include "Grid.h"
-#include "Gizmo.h"
 
 
 struct SDL_Texture;
@@ -37,6 +39,7 @@ public:
 	Cube cube;
 	Grid grid;
 	Gizmo gizmo;
+	Model batman;
 
 };
 
