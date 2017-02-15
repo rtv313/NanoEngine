@@ -1,5 +1,10 @@
 #include "Cube.h"
 
+#include "DevIL/include/IL/ilu.h"
+#include "DevIL/include/IL/ilut.h"
+#include <iostream>
+using namespace std;
+# include <cstdlib>
  Cube::Cube() 
  {
 	 posX = 0.0f;
@@ -43,14 +48,7 @@
 	 glGenBuffers(1, (GLuint*) &(my_textIndex));
 	 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_textIndex);
 	 glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLfloat) * 32, UV2, GL_STATIC_DRAW);
- }
- Cube::~Cube() {}
 
- void Cube::draw() 
- {
-	
-	 
-	 GLubyte checkImage[128][128][4];
 	 for (int i = 0; i < 128; i++) {
 		 for (int j = 0; j < 128; j++) {
 			 int c = ((((i & 0x8) == 0) ^ (((j & 0x8)) == 0))) * 255;
@@ -60,42 +58,95 @@
 			 checkImage[i][j][3] = (GLubyte)255;
 		 }
 	 }
+	 
+	 //  ----- Initialise DevIL -----
+	 ilutRenderer(ILUT_OPENGL);
+	 ilInit();
+	 iluInit();
+	 ilutInit();
+	 ilutRenderer(ILUT_OPENGL);
+
+				// Create an image ID as a ULuint
 
 
 
-	 // start draw 
-	 //Generate Texture
-	GLuint ImageName;
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	glGenTextures(1, &ImageName);
-	glBindTexture(GL_TEXTURE_2D, ImageName);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 128, 128,0, GL_RGBA, GL_UNSIGNED_BYTE, checkImage);
+	 ILboolean success;			// Create a flag to keep track of success/failure
+
+	 ILenum error;				// Create a flag to keep track of the IL error state
+
+	 ilGenImages(1, &imageID); 		// Generate the image ID
+
+	 ilBindImage(imageID); 			// Bind the image
+
+	 success = ilLoad(IL_PNG,"Lenna.png");
+
+	 if (!success)
+	 {
+		 error = ilGetError();
+		 std::cout << "Image conversion failed - IL reports error: " << error << " - " << iluErrorString(error) << std::endl;
+		 exit(-1);
+	 }
+
+	 success = ilConvertImage(IL_RGB, IL_UNSIGNED_BYTE);
 
 	
+	
+	 pixmap =  ilGetData();
 
-	glPushMatrix();
-	glColor3f(255, 255, 255);
-	glTranslatef(posX,posY,posZ);
-	//glRotatef(45.0f, 1.0f, 1.0f, 0.0f);
-	//UV array binding
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glBindBuffer(GL_ARRAY_BUFFER, my_textIndex);
-		glTexCoordPointer(2, GL_FLOAT, 0, NULL);
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glBindBuffer(GL_ARRAY_BUFFER, my_id);
-		glVertexPointer(3, GL_FLOAT, 0, NULL);
-	// ... draw other buffers
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
-	glDisableClientState(GL_VERTEX_ARRAY); //end draw
-	glPopMatrix();	
-	//glDisableClientState(GL_TEXTURE_COORD_ARRAY_EXT);
-	glBindTexture(GL_TEXTURE_2D, 0);
+
+}
+ Cube::~Cube() {
+	 ilDeleteImages(1, &imageID);
  }
+
+ void Cube::draw() 
+ {
+	 glPushMatrix();
+	 glColor3f(255, 255, 255);
+	 glTranslatef(posX, posY, posZ);
+
+	 glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	 glGenTextures(1, &ImageName);
+	 glBindTexture(GL_TEXTURE_2D, ImageName);
+	 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	 glGenerateMipmap(GL_TEXTURE_2D);
+
+	 
+	 glTexImage2D(GL_TEXTURE_2D, 				// Type of texture
+		 0,				// Pyramid level (for mip-mapping) - 0 is the top level
+		 ilGetInteger(IL_IMAGE_FORMAT),	// Internal pixel format to use. Can be a generic type like GL_RGB or GL_RGBA, or a sized type
+		 ilGetInteger(IL_IMAGE_WIDTH),	// Image width
+		 ilGetInteger(IL_IMAGE_HEIGHT),	// Image height
+		 0,				// Border width in pixels (can either be 1 or 0)
+		 ilGetInteger(IL_IMAGE_FORMAT),	// Format of image pixel data
+		 GL_UNSIGNED_BYTE,		// Image data type
+		 pixmap);
+	// glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 128, 128, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixmap);
+		
+	//UV array binding
+	 glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	 glBindBuffer(GL_ARRAY_BUFFER, my_textIndex);
+	 glTexCoordPointer(2, GL_FLOAT, 0, NULL);
+
+	 
+
+	 glEnableClientState(GL_VERTEX_ARRAY);
+	 glBindBuffer(GL_ARRAY_BUFFER, my_id);
+	 glVertexPointer(3, GL_FLOAT, 0, NULL);
+	 // ... draw other buffers
+	 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices);
+	 glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
+	 glBindTexture(GL_TEXTURE_2D, 0); // clean texture
+	 glDisableClientState(GL_VERTEX_ARRAY); //end draw
+	// glDisableClientState(GL_TEXTURE_COORD_ARRAY_EXT);
+	 glPopMatrix();
+
+
+}
+
  void Cube::setColor(GLfloat red, GLfloat green, GLfloat blue) 
  {
 	 this->red = red;

@@ -1,7 +1,8 @@
-#ifndef __CUBE_H__
+﻿#ifndef __CUBE_H__
 #define __CUBE_H__
 #include "Globals.h"
 #include "Glew/include/GL/glew.h"
+#include "DevIL/include/IL/il.h"
 class Cube
 {
 public:
@@ -14,6 +15,13 @@ public:
 	void draw();
 
 private:
+
+
+
+	ILubyte  *pixmap;
+	ILuint imageID;
+	GLuint ImageName;
+	GLubyte checkImage[128][128][4];
 	GLfloat red, green, blue;
 	uint my_id = 0;
 	uint my_indices = 0;
