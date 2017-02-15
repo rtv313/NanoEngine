@@ -101,9 +101,10 @@ update_status ModuleRender::PostUpdate()
 	//.size = 100.0f;
 	grid->draw();
 	gizmo.draw();
-	batman.Draw();
-	SolidSphere sphere(1, 12, 24);
-	sphere.draw(0.0f,0.0f,0.0f);
+	//batman.Draw();
+	
+
+
 
 	
 	SDL_GL_SwapWindow(App->window->window); // stay here not inside any class

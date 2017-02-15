@@ -11,14 +11,14 @@
 
 	 glGenBuffers(1, (GLuint*) &(my_id));
 	 glBindBuffer(GL_ARRAY_BUFFER, my_id);
-	 glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 8 * 3, vertices, GL_STATIC_DRAW); //was 36 instead of 8
+	 glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 16 * 3, vertices, GL_STATIC_DRAW); 
 
 	 glGenBuffers(1, (GLuint*) &(my_indices));
 	 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices);
-	 glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * 36, indices, GL_STATIC_DRAW);
+	 glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * 48, indices, GL_STATIC_DRAW);
 	 
 
-	 GLfloat UV2[16] = {
+	 GLfloat UV2[32] = {
 		 0.0f,0.0f,//A
 		 0.0f,1.0f,//B
 		 1.0f,0.0f,//C
@@ -26,12 +26,23 @@
 		 0.0f,1.0f,//E
 		 0.0f,0.0f,//F
 		 1.0f,1.0f,//G
-		 1.0f,0.0f//H
+		 1.0f,0.0f,//H
+
+		 1.0f,1.0f, //H2
+		 0.0f,1.0f,// G2
+		 1.0f,0.0f,// D2
+		 0.0f,0.0f, // C2
+
+		 0.0f,0.0f, //A2
+		 0.0f,1.0f,// E2
+		 1.0f,0.0f,// B2
+		 1.0f,1.0f // F2
+
 	 };
 
 	 glGenBuffers(1, (GLuint*) &(my_textIndex));
 	 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_textIndex);
-	 glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLfloat) * 16, UV2, GL_STATIC_DRAW);
+	 glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLfloat) * 32, UV2, GL_STATIC_DRAW);
  }
  Cube::~Cube() {}
 
@@ -49,6 +60,9 @@
 			 checkImage[i][j][3] = (GLubyte)255;
 		 }
 	 }
+
+
+
 	 // start draw 
 	 //Generate Texture
 	GLuint ImageName;
@@ -63,7 +77,7 @@
 
 	
 
-		glPushMatrix();
+	glPushMatrix();
 	glColor3f(255, 255, 255);
 	glTranslatef(posX,posY,posZ);
 	//glRotatef(45.0f, 1.0f, 1.0f, 0.0f);
@@ -71,14 +85,14 @@
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 		glBindBuffer(GL_ARRAY_BUFFER, my_textIndex);
 		glTexCoordPointer(2, GL_FLOAT, 0, NULL);
-			glEnableClientState(GL_VERTEX_ARRAY);
-			glBindBuffer(GL_ARRAY_BUFFER, my_id);
-			glVertexPointer(3, GL_FLOAT, 0, NULL);
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glBindBuffer(GL_ARRAY_BUFFER, my_id);
+		glVertexPointer(3, GL_FLOAT, 0, NULL);
 	// ... draw other buffers
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices);
-			glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
-		glDisableClientState(GL_VERTEX_ARRAY); //end draw
-		glPopMatrix();	
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
+	glDisableClientState(GL_VERTEX_ARRAY); //end draw
+	glPopMatrix();	
 	//glDisableClientState(GL_TEXTURE_COORD_ARRAY_EXT);
 	glBindTexture(GL_TEXTURE_2D, 0);
  }
