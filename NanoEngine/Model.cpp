@@ -33,7 +33,7 @@ void Model::Load(const char* file)
 	my_id=  new uint[scene->mNumMeshes]();
 	my_indices = new uint[scene->mNumMeshes]();
 	my_normals = new uint[scene->mNumMeshes]();
-
+	my_textIndex = new uint[scene->mNumMeshes]();
 	ILboolean success;			// Create a flag to keep track of success/failure
 	ILenum error;
 	ilGenImages(1, &imageID); 		// Generate the image ID
