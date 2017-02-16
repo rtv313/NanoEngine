@@ -20,8 +20,9 @@ public:
 	float3 rotation;
 
 private:
-	uint* my_id=nullptr;
-	uint* my_indices = nullptr;
+	uint* my_id=nullptr; // vertices 
+	uint* my_indices = nullptr; // indices 
+	uint* my_normals = nullptr;
 	uint my_textIndex = 0;
 	std::vector <uint> indices;
 

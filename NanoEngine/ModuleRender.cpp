@@ -101,7 +101,7 @@ update_status ModuleRender::PostUpdate()
 	//.size = 100.0f;
 	grid->draw();
 	gizmo.draw();
-	//batman.Draw();
+	batman.Draw();
 	
 
 
