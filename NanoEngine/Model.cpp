@@ -38,7 +38,7 @@ void Model::Load(const char* file)
 	ILenum error;
 	ilGenImages(1, &imageID); 		// Generate the image ID
 	ilBindImage(imageID); 			// Bind the image
-	success = ilLoad(IL_PNG, "TestImages/Lenna.png");
+	success = ilLoad(IL_TGA, "3DModels/Batman/Batman_Torso_D.tga");
 
 	if (!success)
 	{
@@ -82,23 +82,36 @@ void Model::Load(const char* file)
 		glBufferData(GL_NORMAL_ARRAY, sizeof(aiVector3D) * scene->mMeshes[i]->mNormals->Length(),scene->mMeshes[i]->mNormals, GL_STATIC_DRAW);
 
 		//UVs
+	
+		float *texCoords = (float *)malloc(sizeof(float) * 2 * scene->mMeshes[i]->mNumVertices);
+	
+		for (unsigned int k = 0; k < scene->mMeshes[i]->mNumVertices; ++k) {
+
+			texCoords[k * 2] = scene->mMeshes[i]->mTextureCoords[0][k].x;
+			texCoords[k * 2 + 1] = scene->mMeshes[i]->mTextureCoords[0][k].y;
+
+		}
+	
+
 		glGenBuffers(1, (GLuint*) &(my_textIndex[i]));
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_textIndex[i]);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(aiVector3D) * scene->mMeshes[i]->mTextureCoords[0]->Length(), scene->mMeshes[i]->mTextureCoords[0], GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, my_textIndex[i]);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 2 * scene->mMeshes[i]->mNumVertices, texCoords, GL_STATIC_DRAW);
 		
+		delete texCoords;
+
 		for (int x = 0; x < scene->mMeshes[i]->mNumFaces; x++) 
 		{
 			indices.push_back(scene->mMeshes[i]->mFaces[x].mIndices[0]);
 			indices.push_back(scene->mMeshes[i]->mFaces[x].mIndices[1]);
 			indices.push_back(scene->mMeshes[i]->mFaces[x].mIndices[2]);
 		}
-		
+		//Indices
 		glGenBuffers(1, (GLuint*) &(my_indices[i]));
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices[i]);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * indices.size(), &indices[0], GL_STATIC_DRAW);
 
 		
-
+		
 		indices.clear();
 	}
 
@@ -112,13 +125,17 @@ void Model::Clear()
 void Model::Draw()
 {	
 
-	glFrontFace(GL_CCW);	glCullFace(GL_BACK);
-
+	glFrontFace(GL_CCW);
+	glCullFace(GL_BACK);
+	glColor3f(1, 1, 1);
 	GLfloat light_difusse[4] = { 1.0f,1.0f,1.0f,1.0f };
 	GLfloat light_position[4] = { 0.0f,5.0f,0.0f,0.0f };
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_difusse);
 	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-	glEnable(GL_LIGHT0);	glEnable(GL_LIGHTING);	
+	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHTING);
+	
+
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -129,9 +146,12 @@ void Model::Draw()
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices[i]);
 
 		glBindBuffer(GL_NORMAL_ARRAY, my_normals[i]);
-		glNormalPointer(GL_FLOAT,0, NULL);		glBindBuffer(GL_ARRAY_BUFFER, my_textIndex[i]);
+		glNormalPointer(GL_FLOAT,0, NULL);
+
+		glBindBuffer(GL_ARRAY_BUFFER, my_textIndex[i]);
 		glTexCoordPointer(2, GL_FLOAT, 0, NULL);
-		glBindTexture(GL_TEXTURE_2D, ImageName);		
+		glBindTexture(GL_TEXTURE_2D, ImageName);
+		
 		glDrawElements(GL_TRIANGLES, scene->mMeshes[i]->mNumFaces * 3, GL_UNSIGNED_INT, NULL);
 		
 
