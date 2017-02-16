@@ -4,6 +4,8 @@
 #include <assimp/scene.h>
 #include "MathGeoLib/include/MathGeoLib.h"
 #include <vector>
+#include "Glew/include/GL/glew.h"
+#include "DevIL/include/IL/il.h"
 #include "Globals.h"
 class Model
 {
@@ -23,10 +25,11 @@ private:
 	uint* my_id=nullptr; // vertices 
 	uint* my_indices = nullptr; // indices 
 	uint* my_normals = nullptr;
-	uint my_textIndex = 0;
+	uint* my_textIndex = nullptr;
+	ILubyte  *pixmap;
+	ILuint imageID;
+	GLuint ImageName;
 	std::vector <uint> indices;
-
-
 };
 
 
