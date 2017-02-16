@@ -61,12 +61,7 @@ using namespace std;
 
 	
 	 
-	 //  ----- Initialise DevIL -----
-	 ilutRenderer(ILUT_OPENGL);
-	 ilInit();
-	 iluInit();
-	 ilutInit();
-	 ilutRenderer(ILUT_OPENGL);
+	
 
 				// Create an image ID as a ULuint
 
@@ -130,7 +125,7 @@ using namespace std;
 	 
 	// glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 128, 128, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixmap);
 		
-	//UV array binding
+	//UV-texturea arrays binding
 	 glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	 glBindBuffer(GL_ARRAY_BUFFER, my_textIndex);
 	 glTexCoordPointer(2, GL_FLOAT, 0, NULL);
@@ -140,8 +135,8 @@ using namespace std;
 	 glEnableClientState(GL_VERTEX_ARRAY);
 	 glBindBuffer(GL_ARRAY_BUFFER, my_id);
 	 glVertexPointer(3, GL_FLOAT, 0, NULL);
-	 // ... draw other buffers
 	 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices);
+
 	 glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
 
 	 

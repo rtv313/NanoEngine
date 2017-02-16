@@ -56,6 +56,13 @@ bool ModuleRender::Init()
 		ret = false;
 	}
 
+	//  ----- Initialise DevIL -----
+	ilutRenderer(ILUT_OPENGL);
+	ilInit();
+	iluInit();
+	ilutInit();
+	ilutRenderer(ILUT_OPENGL);
+
 	batman.Load("3DModels/Batman/Batman.obj");
 	grid = new Grid();
 	cube = new Cube();

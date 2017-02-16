@@ -47,16 +47,7 @@ private:
 	    0.5f, -0.5f, -0.5f, // F 15-2
 
 	};
-	GLfloat UV[16] = {
-		0.0f,0.0f,//A
-		1.0f,0.0f,//B
-		0.0f,1.0f,//C
-		1.0f,1.0f,//D
-		1.0f,0.0f,//E
-		0.0f,0.0f,//F
-		1.0f,1.0f,//G
-		0.0f,1.0f//H
-	};
+	
 	uint indices[36] = { 
 		0,1,2,//ABC  //cada uno de estos es un vertice del triangulo y los tres un triangulo
 		1,3,2,//BDC
