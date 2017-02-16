@@ -58,6 +58,8 @@ using namespace std;
 			 checkImage[i][j][3] = (GLubyte)255;
 		 }
 	 }
+
+	
 	 
 	 //  ----- Initialise DevIL -----
 	 ilutRenderer(ILUT_OPENGL);
@@ -78,7 +80,7 @@ using namespace std;
 
 	 ilBindImage(imageID); 			// Bind the image
 
-	 success = ilLoad(IL_PNG,"Lenna.png");
+	 success = ilLoad(IL_PNG,"TestImages/Lenna.png");
 
 	 if (!success)
 	 {
@@ -93,6 +95,26 @@ using namespace std;
 	
 	 pixmap =  ilGetData();
 
+	 glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	 glGenTextures(1, &ImageName);
+	 glBindTexture(GL_TEXTURE_2D, ImageName);
+	 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	 glGenerateMipmap(GL_TEXTURE_2D);
+
+
+	 glTexImage2D(GL_TEXTURE_2D, 				// Type of texture
+		 0,				// Pyramid level (for mip-mapping) - 0 is the top level
+		 ilGetInteger(IL_IMAGE_FORMAT),	// Internal pixel format to use. Can be a generic type like GL_RGB or GL_RGBA, or a sized type
+		 ilGetInteger(IL_IMAGE_WIDTH),	// Image width
+		 ilGetInteger(IL_IMAGE_HEIGHT),	// Image height
+		 0,				// Border width in pixels (can either be 1 or 0)
+		 ilGetInteger(IL_IMAGE_FORMAT),	// Format of image pixel data
+		 GL_UNSIGNED_BYTE,		// Image data type
+		 pixmap);
+
 
 }
  Cube::~Cube() {
@@ -105,32 +127,14 @@ using namespace std;
 	 glColor3f(255, 255, 255);
 	 glTranslatef(posX, posY, posZ);
 
-	 glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	 glGenTextures(1, &ImageName);
-	 glBindTexture(GL_TEXTURE_2D, ImageName);
-	 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	 glGenerateMipmap(GL_TEXTURE_2D);
-
 	 
-	 glTexImage2D(GL_TEXTURE_2D, 				// Type of texture
-		 0,				// Pyramid level (for mip-mapping) - 0 is the top level
-		 ilGetInteger(IL_IMAGE_FORMAT),	// Internal pixel format to use. Can be a generic type like GL_RGB or GL_RGBA, or a sized type
-		 ilGetInteger(IL_IMAGE_WIDTH),	// Image width
-		 ilGetInteger(IL_IMAGE_HEIGHT),	// Image height
-		 0,				// Border width in pixels (can either be 1 or 0)
-		 ilGetInteger(IL_IMAGE_FORMAT),	// Format of image pixel data
-		 GL_UNSIGNED_BYTE,		// Image data type
-		 pixmap);
 	// glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 128, 128, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixmap);
 		
 	//UV array binding
 	 glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	 glBindBuffer(GL_ARRAY_BUFFER, my_textIndex);
 	 glTexCoordPointer(2, GL_FLOAT, 0, NULL);
-
+	 glBindTexture(GL_TEXTURE_2D, ImageName);
 	 
 
 	 glEnableClientState(GL_VERTEX_ARRAY);
@@ -139,9 +143,10 @@ using namespace std;
 	 // ... draw other buffers
 	 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices);
 	 glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
-	 glBindTexture(GL_TEXTURE_2D, 0); // clean texture
+
+	 
 	 glDisableClientState(GL_VERTEX_ARRAY); //end draw
-	// glDisableClientState(GL_TEXTURE_COORD_ARRAY_EXT);
+	 glDisableClientState(GL_TEXTURE_COORD_ARRAY_EXT);
 	 glPopMatrix();
 
 
