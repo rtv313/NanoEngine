@@ -111,14 +111,18 @@ void Model::Clear()
 
 void Model::Draw()
 {	
-
-	glFrontFace(GL_CCW);	glCullFace(GL_BACK);
+	glColor3f(255, 255, 255);
+	glFrontFace(GL_CCW);
+	glCullFace(GL_BACK);
 
 	GLfloat light_difusse[4] = { 1.0f,1.0f,1.0f,1.0f };
 	GLfloat light_position[4] = { 0.0f,5.0f,0.0f,0.0f };
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_difusse);
 	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-	glEnable(GL_LIGHT0);	glEnable(GL_LIGHTING);	
+	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHTING);
+	
+
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -129,9 +133,12 @@ void Model::Draw()
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices[i]);
 
 		glBindBuffer(GL_NORMAL_ARRAY, my_normals[i]);
-		glNormalPointer(GL_FLOAT,0, NULL);		glBindBuffer(GL_ARRAY_BUFFER, my_textIndex[i]);
+		glNormalPointer(GL_FLOAT,0, NULL);
+
+		glBindBuffer(GL_ARRAY_BUFFER, my_textIndex[i]);
 		glTexCoordPointer(2, GL_FLOAT, 0, NULL);
-		glBindTexture(GL_TEXTURE_2D, ImageName);		
+		glBindTexture(GL_TEXTURE_2D, 2);
+		
 		glDrawElements(GL_TRIANGLES, scene->mMeshes[i]->mNumFaces * 3, GL_UNSIGNED_INT, NULL);
 		
 
