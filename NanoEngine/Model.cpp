@@ -124,17 +124,12 @@ void Model::Clear()
 
 void Model::Draw()
 {	
-<<<<<<< HEAD
+
 	glColor3f(255, 255, 255);
 	glFrontFace(GL_CCW);
 	glCullFace(GL_BACK);
 
-=======
 
-	glFrontFace(GL_CCW);
-	glCullFace(GL_BACK);
-	glColor3f(1, 1, 1);
->>>>>>> 3be8c874177bb8b71203f3e7b3357802f296fa57
 	GLfloat light_difusse[4] = { 1.0f,1.0f,1.0f,1.0f };
 	GLfloat light_position[4] = { 0.0f,5.0f,0.0f,0.0f };
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_difusse);
@@ -157,11 +152,9 @@ void Model::Draw()
 
 		glBindBuffer(GL_ARRAY_BUFFER, my_textIndex[i]);
 		glTexCoordPointer(2, GL_FLOAT, 0, NULL);
-<<<<<<< HEAD
-		glBindTexture(GL_TEXTURE_2D, 2);
-=======
+
 		glBindTexture(GL_TEXTURE_2D, ImageName);
->>>>>>> 3be8c874177bb8b71203f3e7b3357802f296fa57
+
 		
 		glDrawElements(GL_TRIANGLES, scene->mMeshes[i]->mNumFaces * 3, GL_UNSIGNED_INT, NULL);
 		

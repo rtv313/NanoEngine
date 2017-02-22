@@ -3,14 +3,9 @@
 
 #include<list>
 #include "Module.h"
-#include <assimp/cimport.h>
-#include <assimp/postprocess.h>
-#include "DevIL/include/IL/il.h"
-#include "DevIL/include/IL/ilu.h"
-#include "DevIL/include/IL/ilut.h"
 #include "Globals.h"
 
-
+struct SDL_Texture;
 
 class ModuleTextures : public Module
 {
@@ -20,8 +15,7 @@ public:
 
 	bool Init();
 	bool CleanUp();
-	unsigned Load(const aiString& file);
-	unsigned ForceLoad(const aiString& file);
+
 
 	SDL_Texture* const Load(const char* path);
 	void Unload(SDL_Texture* texture);
