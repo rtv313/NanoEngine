@@ -63,7 +63,7 @@ bool ModuleRender::Init()
 	ilutInit();
 	ilutRenderer(ILUT_OPENGL);
 
-	batman.Load("3DModels/Batman/Batman.obj");
+	batman = Model("3DModels/Batman/Batman.obj");
 	grid = new Grid();
 	cube = new Cube();
 	return ret;
@@ -108,7 +108,7 @@ update_status ModuleRender::PostUpdate()
 	//.size = 100.0f;
 	grid->draw();
 	gizmo.draw();
-	batman.Draw();
+	batman.draw();
 	
 
 

@@ -7,29 +7,52 @@
 #include "Glew/include/GL/glew.h"
 #include "DevIL/include/IL/il.h"
 #include "Globals.h"
+
+
+class Mesh {
+private:
+	GLuint verticesId;
+	GLuint indicesId;
+	GLuint normalsId;
+	GLuint textureCoordinatesId;
+	GLuint textureId;
+	GLuint numFaces;
+	GLuint materialIndex;
+	std::string directory;
+	std::vector<uint> indices;
+	std::vector<uint> texturesIds;
+	std::vector<GLfloat> uvs;
+	GLuint TextureFromFile(const char* path, std::string directory);
+
+public:
+	Mesh(const aiScene* scene,GLuint meshIndex,GLuint textureId,std::string directory);
+	Mesh();
+	~Mesh();
+	
+	void draw();
+
+};
+
 class Model
 {
-	const aiScene* scene = 0;
+	
 public:
+	Model( std::string file);
 	Model();
 	~Model();
 	void Load(const char* file);
-	void Clear();
-	void Draw();
+	void clear();
+	void draw();
 
 	float3 position;
 	float3 scale;
 	float3 rotation;
 
 private:
-	uint* my_id=nullptr; // vertices 
-	uint* my_indices = nullptr; // indices 
-	uint* my_normals = nullptr;
-	uint* my_textIndex = nullptr;
-	ILubyte  *pixmap;
-	ILuint imageID;
-	GLuint ImageName;
-	std::vector <uint> indices;
+	std::vector<Mesh> meshes;
+	const aiScene* scene;
+	std::string directory;
+	
 };
 
 

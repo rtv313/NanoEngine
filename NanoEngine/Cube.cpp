@@ -76,6 +76,7 @@ using namespace std;
 	 ilBindImage(imageID); 			// Bind the image
 
 	 success = ilLoad(IL_PNG,"TestImages/Lenna.png");
+	// success = ilLoad(IL_TGA,"3DModels/Batman/Batman_Torso_D.tga");
 
 	 if (!success)
 	 {
@@ -109,6 +110,8 @@ using namespace std;
 		 ilGetInteger(IL_IMAGE_FORMAT),	// Format of image pixel data
 		 GL_UNSIGNED_BYTE,		// Image data type
 		 pixmap);
+
+
 
 
 }
