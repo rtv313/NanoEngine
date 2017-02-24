@@ -28,7 +28,7 @@ ModuleCameraEditor::ModuleCameraEditor()
 
 	zNear = 10;
 	zFar = 1000;
-	moveSpeed = 3.0;
+	moveSpeed = 6.0;
 	rotationSpeed = 3.0;
 	right = forward.Cross(up);
 }
@@ -59,7 +59,7 @@ void ModuleCameraEditor::getViewMatrix() {
 }
 
 update_status ModuleCameraEditor::PreUpdate() {
-	dt = 0.8;
+	dt = 0.01;
 	// Camera Inputs
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
 	 moveSpeed;
@@ -151,17 +151,6 @@ update_status ModuleCameraEditor::Update() {
 	forward = forward.Normalized();
 	right = right.Normalized();
 	up = up.Normalized();
-	const Uint8* keys = SDL_GetKeyboardState(NULL);
-	if (keys[SDL_SCANCODE_LSHIFT]|| keys[SDL_SCANCODE_RSHIFT]) {
-		moveSpeed = 0.2;
-		rotationSpeed = 0.004;
-	}
-	else {
-		moveSpeed = 0.1;
-		rotationSpeed = 0.002;
-	}
-
-
 	return UPDATE_CONTINUE;
 }
 
