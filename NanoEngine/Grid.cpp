@@ -70,7 +70,8 @@ void Grid::setPosition(GLfloat posX, GLfloat posY, GLfloat posZ)
 void Grid::draw()
 {
   glPushMatrix();
-  glColor3f(0,255,0);
+
+	glColor3f(red,green,blue);
 	glTranslatef(posX, posY, posZ);
 	//glRotatef(30.0f, 1.0f, 0.0f, 0.0f);
 

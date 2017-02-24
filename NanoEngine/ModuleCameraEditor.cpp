@@ -1,6 +1,7 @@
+#include "Application.h"
 #include "Globals.h"
 #include "ModuleCameraEditor.h"
-
+#include "ModuleWindow.h"
 
 
 
@@ -58,23 +59,17 @@ void ModuleCameraEditor::getViewMatrix() {
 }
 
 update_status ModuleCameraEditor::PreUpdate() {
-
+	
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(50, 1, 1, 100);
-	//glFrustum(position.x - 5, position.x + 5, position.y - 5, position.y + 5, zNear, zFar);
+	int width,height;
+	SDL_GetWindowSize(App->window->window,&width,&height);
+	gluPerspective(60 ,(GLfloat)width/ height, 1, 100);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	gluLookAt(position.x, position.y, position.z, lookAt.x, lookAt.y, lookAt.z, up.x, up.y, up.z);
 	forward = lookAt - position;
 	right = forward.Cross(up);
-	//float4x4 aux = float4x4::LookAt(position, lookAt, forward, up, up);
-	//aux.SetTranslatePart(position.x, position.y, position.z);
-	//aux.Transpose();
-
-	//glLoadMatrixf((const GLfloat*)&aux);
-	
-	
 	return UPDATE_CONTINUE;
 }
 

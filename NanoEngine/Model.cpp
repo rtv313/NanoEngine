@@ -61,25 +61,26 @@ Mesh::Mesh(const aiScene* scene,GLuint meshIndex, GLuint textureId,std::string d
 	aiMaterial* mat = scene->mMaterials[materialIndex];
 	aiString str;
 
+	
 	// Load diffuse textures
 	for (int i = 0; i < mat->GetTextureCount(aiTextureType_DIFFUSE); i++)
 	{
 		mat->GetTexture(aiTextureType_DIFFUSE, i, &str);
 		texturesIds.push_back(TextureFromFile(str.C_Str(), directory));
 	}
-	////Load specular textures
-	//for (int i = 0; i < mat->GetTextureCount(aiTextureType_SPECULAR); i++)
-	//{
-	//	mat->GetTexture(aiTextureType_SPECULAR, i, &str);
-	//	texturesIds.push_back(TextureFromFile(str.C_Str(), directory));
-	//}
-	////Load normals textures
-	//for (int i = 0; i < mat->GetTextureCount(aiTextureType_NORMALS); i++)
-	//{
-	//	mat->GetTexture(aiTextureType_NORMALS, i, &str);
-	//	texturesIds.push_back(TextureFromFile(str.C_Str(), directory));
-	//}
-
+	//Load specular textures
+	for (int i = 0; i < mat->GetTextureCount(aiTextureType_SPECULAR); i++)
+	{
+		mat->GetTexture(aiTextureType_SPECULAR, i, &str);
+		texturesIds.push_back(TextureFromFile(str.C_Str(), directory));
+	}
+	//Load normals textures
+	for (int i = 0; i < mat->GetTextureCount(aiTextureType_NORMALS); i++)
+	{
+		mat->GetTexture(aiTextureType_NORMALS, i, &str);
+		texturesIds.push_back(TextureFromFile(str.C_Str(), directory));
+	}
+	
 
 	indices.clear();
 	uvs.clear();
@@ -198,6 +199,8 @@ Model::Model(std::string file)
 	{
 		meshes.push_back(Mesh(scene,i,1,directory));
 	}
+
+
 }
 
 
@@ -216,6 +219,7 @@ void Model::draw()
 {	
 
 	glColor3f(255, 255, 255);
+	glEnable(GL_CULL_FACE);
 	glFrontFace(GL_CCW);
 	glCullFace(GL_BACK);
 
@@ -233,6 +237,6 @@ void Model::draw()
 		meshes[i].draw();
 	}
 
-
+	glDisable(GL_CULL_FACE);
 }
 
