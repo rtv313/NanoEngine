@@ -141,7 +141,7 @@ using namespace std;
 	 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices);
 
 	 glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
-
+	 glBindTexture(GL_TEXTURE_2D, 0);
 	 
 	 glDisableClientState(GL_VERTEX_ARRAY); //end draw
 	 glDisableClientState(GL_TEXTURE_COORD_ARRAY_EXT);

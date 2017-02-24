@@ -97,7 +97,7 @@ void Mesh::draw()
 {
 	glPushMatrix();
 
-	glColor3f(255, 255, 255);
+
 	glFrontFace(GL_CCW);
 	glCullFace(GL_BACK);
 
@@ -123,7 +123,7 @@ void Mesh::draw()
 		
 
 		glDrawElements(GL_TRIANGLES, numFaces * 3, GL_UNSIGNED_INT, NULL);
-
+		glBindTexture(GL_TEXTURE_2D, 0); // Reset clear
 	glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -167,7 +167,7 @@ GLuint Mesh::TextureFromFile(const char* path, std::string directory)
 	glGenerateMipmap(GL_TEXTURE_2D);
 	// Parameters
 	
-
+	glBindTexture(GL_TEXTURE_2D, 0); // clear texture
 	ilBindImage(0);
 	ilDeleteImage(imageId);
 

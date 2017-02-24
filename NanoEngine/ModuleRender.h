@@ -33,10 +33,10 @@ public:
 public:
 	SDL_Renderer* renderer = nullptr;
 	
-	//Cube *cube;
+	Cube *cube;
 	Grid *grid;
 	Gizmo gizmo;
-	//Model batman;
+	Model batman;
 
 };
 

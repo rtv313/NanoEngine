@@ -27,8 +27,8 @@ ModuleRender::ModuleRender()
 // Destructor
 ModuleRender::~ModuleRender()
 {
-	/*delete grid;
-	delete cube;*/
+	delete grid;
+	delete cube;
 }
 
 // Called before render is available
@@ -58,9 +58,9 @@ bool ModuleRender::Init()
 	ilutInit();
 	ilutRenderer(ILUT_OPENGL);
 
-	//batman = Model("3DModels/Batman/Batman.obj");
+	batman = Model("3DModels/Batman/Batman.obj");
 	grid = new Grid();
-	//cube = new Cube();
+	cube = new Cube();
 	return ret;
 }
 
@@ -82,13 +82,11 @@ update_status ModuleRender::Update()
 update_status ModuleRender::PostUpdate()
 {	
 
-	//glTranslatef(0.0f, 0.0f, -10.0f);
-	/*glRotatef(40.0f, 1.0f, 1.0f, 0.0f);*/
-	//cube->draw();
-	//.size = 100.0f;
-	grid->draw();
+	cube->draw();
 	gizmo.draw();
-	//batman.draw();
+	grid->draw();
+
+	batman.draw();
 	SDL_GL_SwapWindow(App->window->window); // stay here not inside any class
 	return UPDATE_CONTINUE;
 }
