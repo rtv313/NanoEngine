@@ -11,6 +11,7 @@ class ModuleCameraEditor :
 	public Module
 {
 public:
+	
 	float3 position,up,lookAt,forward,right;
 	GLfloat fieldOfView, screenWidth, screenHeight;
 	GLfloat zNear, zFar;

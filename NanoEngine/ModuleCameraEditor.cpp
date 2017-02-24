@@ -59,6 +59,81 @@ void ModuleCameraEditor::getViewMatrix() {
 }
 
 update_status ModuleCameraEditor::PreUpdate() {
+	dt = 5;
+	// Camera Inputs
+	float cameraSpeed, cameraRotSpeed;
+	const Uint8* keys = SDL_GetKeyboardState(NULL);
+	cameraSpeed = App->cameraEditor->moveSpeed;
+	// Elevate
+	if (keys[SDL_SCANCODE_Q]) {
+		position.y += cameraSpeed*dt;
+		lookAt.y += cameraSpeed*dt;
+	}
+	//Descend
+	if (keys[SDL_SCANCODE_E]) {
+		position.y -= cameraSpeed*dt;
+		lookAt.y -= cameraSpeed*dt;
+	}
+	//Forward
+	if (keys[SDL_SCANCODE_W]) {
+		position += forward.Normalized()*cameraSpeed*dt;
+		lookAt += forward.Normalized()*cameraSpeed*dt;
+	}
+	//Backwards
+	if (keys[SDL_SCANCODE_S]) {
+		position -= forward.Normalized()*cameraSpeed*dt;
+		lookAt -= forward.Normalized()*cameraSpeed*dt;
+	}
+	//Strafe Left
+	if (keys[SDL_SCANCODE_A]) {
+		position -= right.Normalized()*cameraSpeed*dt;
+		lookAt -= right.Normalized()*cameraSpeed*dt;
+	}
+	//Strafe Right
+	if (keys[SDL_SCANCODE_D]) {
+		position += right.Normalized()*cameraSpeed*dt;
+		lookAt += right.Normalized()*cameraSpeed*dt;
+	}
+	cameraRotSpeed = rotationSpeed;
+	//Rotate Left
+	if (keys[SDL_SCANCODE_Z]) {
+
+		lookAt = position + forward;
+		forward = forward.Lerp(right*-1, cameraRotSpeed*dt);
+		right = forward.Cross(up);
+		lookAt = position + forward;
+
+	}
+	//Rotate Right
+	if (keys[SDL_SCANCODE_X]) {
+
+		lookAt = position + forward;
+		forward = forward.Lerp(right, cameraRotSpeed*dt);
+		right = forward.Cross(up);
+		lookAt = position + forward;
+
+	}
+	//Rotate Up
+	if (keys[SDL_SCANCODE_C]) {
+		lookAt = position + forward;
+		float3 aux = forward.Lerp(up, 0.002*dt) - forward;
+		forward = forward.Lerp(up*-1, cameraRotSpeed*dt);
+		up -= aux;
+		lookAt = position + forward;
+
+
+	}
+	//Rotate Down
+	if (keys[SDL_SCANCODE_V]) {
+
+		lookAt = position + forward;
+		float3 aux = forward.Lerp(up, 0.002*dt) - forward;
+		forward = forward.Lerp(up, cameraRotSpeed*dt);
+		up += aux;
+	    lookAt = position + forward;
+
+	}
+	// End Camera inputs
 	
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -86,6 +161,8 @@ update_status ModuleCameraEditor::Update() {
 		moveSpeed = 0.1;
 		rotationSpeed = 0.002;
 	}
+
+
 	return UPDATE_CONTINUE;
 }
 

@@ -25,7 +25,6 @@ bool ModuleStageOne::Start() {
 
 update_status ModuleStageOne::Update()
 {
-	App->renderer->Blit(levelOne, 0, 0, &(background.GetCurrentFrame()), 1.0f);
 	return UPDATE_CONTINUE;
 }
 
