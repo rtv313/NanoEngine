@@ -28,8 +28,8 @@ ModuleCameraEditor::ModuleCameraEditor()
 
 	zNear = 10;
 	zFar = 1000;
-	moveSpeed = 0.1;
-	rotationSpeed = 0.002;
+	moveSpeed = 3.0;
+	rotationSpeed = 3.0;
 	right = forward.Cross(up);
 }
 
@@ -59,47 +59,46 @@ void ModuleCameraEditor::getViewMatrix() {
 }
 
 update_status ModuleCameraEditor::PreUpdate() {
-	dt = 5;
+	dt = 0.8;
 	// Camera Inputs
-	float cameraSpeed, cameraRotSpeed;
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
-	cameraSpeed = App->cameraEditor->moveSpeed;
+	 moveSpeed;
 	// Elevate
 	if (keys[SDL_SCANCODE_Q]) {
-		position.y += cameraSpeed*dt;
-		lookAt.y += cameraSpeed*dt;
+		position.y += moveSpeed*dt;
+		lookAt.y += moveSpeed*dt;
 	}
 	//Descend
 	if (keys[SDL_SCANCODE_E]) {
-		position.y -= cameraSpeed*dt;
-		lookAt.y -= cameraSpeed*dt;
+		position.y -= moveSpeed*dt;
+		lookAt.y -= moveSpeed*dt;
 	}
 	//Forward
 	if (keys[SDL_SCANCODE_W]) {
-		position += forward.Normalized()*cameraSpeed*dt;
-		lookAt += forward.Normalized()*cameraSpeed*dt;
+		position += forward.Normalized()*moveSpeed*dt;
+		lookAt += forward.Normalized()*moveSpeed*dt;
 	}
 	//Backwards
 	if (keys[SDL_SCANCODE_S]) {
-		position -= forward.Normalized()*cameraSpeed*dt;
-		lookAt -= forward.Normalized()*cameraSpeed*dt;
+		position -= forward.Normalized()*moveSpeed*dt;
+		lookAt -= forward.Normalized()*moveSpeed*dt;
 	}
 	//Strafe Left
 	if (keys[SDL_SCANCODE_A]) {
-		position -= right.Normalized()*cameraSpeed*dt;
-		lookAt -= right.Normalized()*cameraSpeed*dt;
+		position -= right.Normalized()*moveSpeed*dt;
+		lookAt -= right.Normalized()*moveSpeed*dt;
 	}
 	//Strafe Right
 	if (keys[SDL_SCANCODE_D]) {
-		position += right.Normalized()*cameraSpeed*dt;
-		lookAt += right.Normalized()*cameraSpeed*dt;
+		position += right.Normalized()*moveSpeed*dt;
+		lookAt += right.Normalized()*moveSpeed*dt;
 	}
-	cameraRotSpeed = rotationSpeed;
+	
 	//Rotate Left
 	if (keys[SDL_SCANCODE_Z]) {
 
 		lookAt = position + forward;
-		forward = forward.Lerp(right*-1, cameraRotSpeed*dt);
+		forward = forward.Lerp(right*-1, rotationSpeed*dt);
 		right = forward.Cross(up);
 		lookAt = position + forward;
 
@@ -108,7 +107,7 @@ update_status ModuleCameraEditor::PreUpdate() {
 	if (keys[SDL_SCANCODE_X]) {
 
 		lookAt = position + forward;
-		forward = forward.Lerp(right, cameraRotSpeed*dt);
+		forward = forward.Lerp(right, rotationSpeed*dt);
 		right = forward.Cross(up);
 		lookAt = position + forward;
 
@@ -117,7 +116,7 @@ update_status ModuleCameraEditor::PreUpdate() {
 	if (keys[SDL_SCANCODE_C]) {
 		lookAt = position + forward;
 		float3 aux = forward.Lerp(up, 0.002*dt) - forward;
-		forward = forward.Lerp(up*-1, cameraRotSpeed*dt);
+		forward = forward.Lerp(up*-1, rotationSpeed*dt);
 		up -= aux;
 		lookAt = position + forward;
 
@@ -128,7 +127,7 @@ update_status ModuleCameraEditor::PreUpdate() {
 
 		lookAt = position + forward;
 		float3 aux = forward.Lerp(up, 0.002*dt) - forward;
-		forward = forward.Lerp(up, cameraRotSpeed*dt);
+		forward = forward.Lerp(up, rotationSpeed*dt);
 		up += aux;
 	    lookAt = position + forward;
 
