@@ -6,7 +6,7 @@
 #include "Glew/include/GL/glew.h"
 #include <gl/GL.h>
 #include "SDL/include/SDL.h"
-
+#include "ModuleInput.h"
 class ModuleCameraEditor :
 	public Module
 {
@@ -16,6 +16,9 @@ public:
 	GLfloat fieldOfView, screenWidth, screenHeight;
 	GLfloat zNear, zFar;
 	float moveSpeed, rotationSpeed;
+	iPoint mouseMotion;
+	iPoint mousePosition;
+
 	
 ModuleCameraEditor();
 	~ModuleCameraEditor();

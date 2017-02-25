@@ -2,7 +2,7 @@
 #include "Globals.h"
 #include "ModuleCameraEditor.h"
 #include "ModuleWindow.h"
-#include "ModuleInput.h"
+
 
 
 
@@ -61,79 +61,81 @@ void ModuleCameraEditor::getViewMatrix() {
 
 update_status ModuleCameraEditor::PreUpdate() {
 	dt = 0.01;
-	// Camera Inputs
-	const Uint8* keys = SDL_GetKeyboardState(NULL);
-	 moveSpeed;
-	// Elevate
-	if (App->input->GetKey(SDL_SCANCODE_Q)==KEY_REPEAT) {
-		position.y += moveSpeed*dt;
-		lookAt.y += moveSpeed*dt;
+	 
+	iPoint mouseNewPosition = App->input->GetMousePosition();
+	if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT)
+	{
+		if (mouseNewPosition.y < mousePosition.y)  //Rotate down
+		{
+			lookAt = position + forward;
+			float3 aux = forward.Lerp(up, 0.002*dt) - forward;
+			forward = forward.Lerp(up*-1, rotationSpeed*dt);
+			up -= aux;
+			lookAt = position + forward;
+		}
+
+		if (mouseNewPosition.y > mousePosition.y)  // Rotate up
+		{
+			lookAt = position + forward;
+			float3 aux = forward.Lerp(up, 0.002*dt) - forward;
+			forward = forward.Lerp(up, rotationSpeed*dt);
+			up += aux;
+			lookAt = position + forward;
+		}
+
+		if (mouseNewPosition.x < mousePosition.x)  //Rotate right
+		{
+			lookAt = position + forward;
+			forward = forward.Lerp(right, rotationSpeed*dt);
+			right = forward.Cross(up);
+			lookAt = position + forward;
+		}
+
+		if (mouseNewPosition.x > mousePosition.x)  //Rotate left
+		{
+			lookAt = position + forward;
+			forward = forward.Lerp(right*-1, rotationSpeed*dt);
+			right = forward.Cross(up);
+			lookAt = position + forward;
+		}
 	}
-	//Descend
-	if (App->input->GetKey(SDL_SCANCODE_E)==KEY_REPEAT) {
-		position.y -= moveSpeed*dt;
-		lookAt.y -= moveSpeed*dt;
-	}
-	//Forward
-	if (App->input->GetKey(SDL_SCANCODE_W)==KEY_REPEAT) {
-		position += forward.Normalized()*moveSpeed*dt;
-		lookAt += forward.Normalized()*moveSpeed*dt;
-	}
-	//Backwards
-	if (App->input->GetKey(SDL_SCANCODE_S)==KEY_REPEAT) {
-		position -= forward.Normalized()*moveSpeed*dt;
-		lookAt -= forward.Normalized()*moveSpeed*dt;
-	}
-	//Strafe Left
-	if (App->input->GetKey(SDL_SCANCODE_A)==KEY_REPEAT) {
-		position -= right.Normalized()*moveSpeed*dt;
-		lookAt -= right.Normalized()*moveSpeed*dt;
-	}
-	//Strafe Right
-	if (App->input->GetKey(SDL_SCANCODE_D)==KEY_REPEAT) {
-		position += right.Normalized()*moveSpeed*dt;
-		lookAt += right.Normalized()*moveSpeed*dt;
-	}
+		// Camera Inputs
+		const Uint8* keys = SDL_GetKeyboardState(NULL);
+		moveSpeed;
+		// Elevate
+		if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT) {
+			position.y += moveSpeed*dt;
+			lookAt.y += moveSpeed*dt;
+		}
+		//Descend
+		if (App->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT) {
+			position.y -= moveSpeed*dt;
+			lookAt.y -= moveSpeed*dt;
+		}
+		//Forward
+		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+			position += forward.Normalized()*moveSpeed*dt;
+			lookAt += forward.Normalized()*moveSpeed*dt;
+		}
+		//Backwards
+		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+			position -= forward.Normalized()*moveSpeed*dt;
+			lookAt -= forward.Normalized()*moveSpeed*dt;
+		}
+		//Strafe Left
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+			position -= right.Normalized()*moveSpeed*dt;
+			lookAt -= right.Normalized()*moveSpeed*dt;
+		}
+		//Strafe Right
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+			position += right.Normalized()*moveSpeed*dt;
+			lookAt += right.Normalized()*moveSpeed*dt;
+		}
+
+		// End Camera inputs
+		mousePosition = mouseNewPosition;
 	
-	//Rotate Left
-	if (App->input->GetKey(SDL_SCANCODE_Z)==KEY_REPEAT) {
-
-		lookAt = position + forward;
-		forward = forward.Lerp(right*-1, rotationSpeed*dt);
-		right = forward.Cross(up);
-		lookAt = position + forward;
-
-	}
-	//Rotate Right
-	if (App->input->GetKey(SDL_SCANCODE_X) == KEY_REPEAT) {
-
-		lookAt = position + forward;
-		forward = forward.Lerp(right, rotationSpeed*dt);
-		right = forward.Cross(up);
-		lookAt = position + forward;
-
-	}
-	//Rotate Up
-	if (App->input->GetKey(SDL_SCANCODE_C) == KEY_REPEAT) {
-		lookAt = position + forward;
-		float3 aux = forward.Lerp(up, 0.002*dt) - forward;
-		forward = forward.Lerp(up*-1, rotationSpeed*dt);
-		up -= aux;
-		lookAt = position + forward;
-
-
-	}
-	//Rotate Down
-	if (App->input->GetKey(SDL_SCANCODE_V) == KEY_REPEAT) {
-
-		lookAt = position + forward;
-		float3 aux = forward.Lerp(up, 0.002*dt) - forward;
-		forward = forward.Lerp(up, rotationSpeed*dt);
-		up += aux;
-	    lookAt = position + forward;
-
-	}
-	// End Camera inputs
 	
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
