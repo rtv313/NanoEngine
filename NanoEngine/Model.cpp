@@ -48,39 +48,46 @@ Mesh::Mesh(const aiScene* scene,GLuint meshIndex, GLuint textureId,std::string d
 
 	//UV Buffer, capture only uvs from mtexture 
 
-	for (int i = 0; i < scene->mMeshes[meshIndex]->mNumVertices;i++) {
-		uvs.push_back(scene->mMeshes[meshIndex]->mTextureCoords[0][i].x);
-		uvs.push_back(scene->mMeshes[meshIndex]->mTextureCoords[0][i].y);
+	if (scene->mMeshes[meshIndex]->mTextureCoords[0]) {
+
+		for (int i = 0; i < scene->mMeshes[meshIndex]->mNumVertices; i++) {
+
+			uvs.push_back(scene->mMeshes[meshIndex]->mTextureCoords[0][i].x);
+			uvs.push_back(scene->mMeshes[meshIndex]->mTextureCoords[0][i].y);
+		}
+
+		glGenBuffers(1, (GLuint*) &(textureCoordinatesId));
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, textureCoordinatesId);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLfloat) * uvs.size(), &uvs[0], GL_STATIC_DRAW);
 	}
-
-	glGenBuffers(1, (GLuint*) &(textureCoordinatesId));
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, textureCoordinatesId);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLfloat) * uvs.size(), &uvs[0], GL_STATIC_DRAW);
-
-	GLuint  materialIndex = scene->mMeshes[meshIndex]->mMaterialIndex;
-	aiMaterial* mat = scene->mMaterials[materialIndex];
-	aiString str;
 
 	
-	// Load diffuse textures
-	for (int i = 0; i < mat->GetTextureCount(aiTextureType_DIFFUSE); i++)
-	{
-		mat->GetTexture(aiTextureType_DIFFUSE, i, &str);
-		texturesIds.push_back(TextureFromFile(str.C_Str(), directory));
+	if (scene->mMeshes[meshIndex]->mMaterialIndex >= 0) {
+		GLuint  materialIndex = scene->mMeshes[meshIndex]->mMaterialIndex;
+		aiMaterial* mat = scene->mMaterials[materialIndex];
+		aiString str;
+		// Load materials
+
+
+		// Load diffuse textures
+		for (int i = 0; i < mat->GetTextureCount(aiTextureType_DIFFUSE); i++)
+		{
+			mat->GetTexture(aiTextureType_DIFFUSE, i, &str);
+			texturesIds.push_back(TextureFromFile(str.C_Str(), directory));
+		}
+		//Load specular textures
+		for (int i = 0; i < mat->GetTextureCount(aiTextureType_SPECULAR); i++)
+		{
+			mat->GetTexture(aiTextureType_SPECULAR, i, &str);
+			texturesIds.push_back(TextureFromFile(str.C_Str(), directory));
+		}
+		//Load normals textures
+		for (int i = 0; i < mat->GetTextureCount(aiTextureType_NORMALS); i++)
+		{
+			mat->GetTexture(aiTextureType_NORMALS, i, &str);
+			texturesIds.push_back(TextureFromFile(str.C_Str(), directory));
+		}
 	}
-	//Load specular textures
-	for (int i = 0; i < mat->GetTextureCount(aiTextureType_SPECULAR); i++)
-	{
-		mat->GetTexture(aiTextureType_SPECULAR, i, &str);
-		texturesIds.push_back(TextureFromFile(str.C_Str(), directory));
-	}
-	//Load normals textures
-	for (int i = 0; i < mat->GetTextureCount(aiTextureType_NORMALS); i++)
-	{
-		mat->GetTexture(aiTextureType_NORMALS, i, &str);
-		texturesIds.push_back(TextureFromFile(str.C_Str(), directory));
-	}
-	
 
 	indices.clear();
 	uvs.clear();
@@ -191,6 +198,7 @@ Model::Model(std::string file)
 	directory = file.substr(0, file.find_last_of('/'));
 	Uint32 flags = aiProcess_PreTransformVertices;
 	flags |= aiProcess_FlipUVs;
+	flags |= aiProcess_Triangulate;
 	const char * c = file.c_str();
 	scene = aiImportFile(c, flags);
 
@@ -228,9 +236,62 @@ void Model::draw()
 	GLfloat light_position[4] = { 0.0f,5.0f,0.0f,0.0f };
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_difusse);
 	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-	glEnable(GL_LIGHT0);
-	glEnable(GL_LIGHTING);
+
 	
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+
+	GLfloat light_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
+
+	GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
+
+	GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+
+	/*glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);*/
+
+	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+
+	//Point light
+	/*GLfloat light_position[] = { -1.0, 0.5, 2.0, 1.0 };
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+*/
+	//Directional light
+	//GLfloat light_position[] = { 0.0, 0.0, 1.0, 0.0 };
+	//glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+
+	////Spotlight
+	//GLfloat spot_pos[] = { 0.0, 5.0, 0.0, 1.0 };
+
+	//GLfloat spot_dir[] = { 0.0, -1.0, 0.0 };
+
+	//glLightfv(GL_LIGHT0, GL_POSITION, spot_pos);  GLfloat x = 45.0;
+
+	//glLightfv(GL_LIGHT0, GL_SPOT_CUTOFF, &x);
+
+	//glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, spot_dir);
+
+	////Ambient light
+	//GLfloat amb[] = { 0.2, 0.2, 0.2, 1.0 };
+
+	//glLightModelfv(GL_LIGHT_MODEL_AMBIENT, amb);
+	
+	//GLfloat ambient[] = { 0.3, 0.0, 0.0, 1.0 };
+
+	//GLfloat diffuse[] = { 0.6, 0.0, 0.0, 1.0 };
+
+	//GLfloat specular[] = { 0.8, 0.6, 0.6, 1.0 };
+
+	//GLfloat shininess = 32.0; /* [0..128] */
+
+	//glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
+
+	//glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
+
+	//glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+
+	//glMaterialf(GL_FRONT, GL_SHININESS, shininess);
 
 	for (int i = 0; i < scene->mNumMeshes; i++)
 	{

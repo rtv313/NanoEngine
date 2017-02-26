@@ -59,6 +59,7 @@ bool ModuleRender::Init()
 	ilutRenderer(ILUT_OPENGL);
 
 	batman = Model("3DModels/Batman/Batman.obj");
+	magneto = Model("3DModels/Magneto/magnetto2.fbx");
 	grid = new Grid();
 	cube = new Cube();
 	return ret;
@@ -87,6 +88,8 @@ update_status ModuleRender::PostUpdate()
 	grid->draw();
 
 	batman.draw();
+	magneto.draw();
+
 	SDL_GL_SwapWindow(App->window->window); // stay here not inside any class
 	return UPDATE_CONTINUE;
 }

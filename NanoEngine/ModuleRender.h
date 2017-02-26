@@ -34,6 +34,7 @@ public:
 	Grid *grid;
 	Gizmo gizmo;
 	Model batman;
+	Model magneto;
 
 };
 
