@@ -74,12 +74,17 @@ bool ModuleWindow::Init()
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
     glClearDepth(1.0f);
     glClearColor(0.f, 0.f, 0.f, 1.f);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
-    glEnable(GL_LIGHTING);
-    glEnable(GL_COLOR_MATERIAL);
+    //glEnable(GL_CULL_FACE);
+
     glEnable(GL_TEXTURE_2D);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	GLfloat light_difusse[4] = { 1.0f,1.0f,1.0f,1.0f };
+	GLfloat light_position[4] = { -4.0f,5.0f,4.0f,1.0f };
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_difusse);
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 
 		if(window == nullptr)
 		{

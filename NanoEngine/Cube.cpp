@@ -122,7 +122,7 @@ using namespace std;
  void Cube::draw() 
  {
 	 glPushMatrix();
-	 glColor3f(255, 255, 255);
+	 //glColor3f(255, 255, 255);
 	 glTranslatef(posX, posY, posZ);
 
 	 

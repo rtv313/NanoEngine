@@ -46,13 +46,14 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>C:\Users\hellr\Documents\GitHub\NanoEngine\NanoEngine\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\andresgb4\Desktop\Repos\NanoEngine\NanoEngine\DevIL\include;C:\Users\andresgb4\Desktop\Repos\NanoEngine\NanoEngine\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>C:\Users\andresgb4\Desktop\Repos\NanoEngine\NanoEngine;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\hellr\Documents\GitHub\NanoEngine\NanoEngine\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\andresgb4\Desktop\Repos\NanoEngine\NanoEngine\;C:\Users\andresgb4\Desktop\Repos\NanoEngine\NanoEngine\assimp\lib;C:\Users\hellr\Documents\GitHub\NanoEngine\NanoEngine\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

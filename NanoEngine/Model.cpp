@@ -106,7 +106,7 @@ void Mesh::draw()
 
 
 	glFrontFace(GL_CCW);
-	glCullFace(GL_BACK);
+	//glCullFace(GL_BACK);
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
@@ -119,17 +119,22 @@ void Mesh::draw()
 		glBindBuffer(GL_NORMAL_ARRAY,normalsId);
 		glNormalPointer(GL_FLOAT, 0, NULL);
 
-		glBindBuffer(GL_ARRAY_BUFFER, textureCoordinatesId);
-		//glTexCoordPointer(2, GL_FLOAT, 0, NULL);
+		glBindTexture(GL_TEXTURE_2D, 0);
 
-		for (int i = 0; i < texturesIds.size(); i++) 
-		{
+		if (texturesIds.size() > 0) {
+			glBindBuffer(GL_ARRAY_BUFFER, textureCoordinatesId);
 			glTexCoordPointer(2, GL_FLOAT, 0, NULL);
-			glBindTexture(GL_TEXTURE_2D,texturesIds[i]);
-		}
-		
 
-		glDrawElements(GL_TRIANGLES, numFaces * 3, GL_UNSIGNED_INT, NULL);
+			for (int i = 0; i < texturesIds.size(); i++)
+			{
+				glTexCoordPointer(2, GL_FLOAT, 0, NULL);
+				glBindTexture(GL_TEXTURE_2D, texturesIds[i]);
+			}
+		}
+
+	
+
+		glDrawElements(GL_TRIANGLES, numFaces*3, GL_UNSIGNED_INT, NULL);
 		glBindTexture(GL_TEXTURE_2D, 0); // Reset clear
 	glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
@@ -226,76 +231,58 @@ void Model::clear()
 void Model::draw()
 {	
 
-	glColor3f(255, 255, 255);
-	glEnable(GL_CULL_FACE);
-	glFrontFace(GL_CCW);
-	glCullFace(GL_BACK);
+	//glColor3f(1, 1, 1);
+	
 
 
-	GLfloat light_difusse[4] = { 1.0f,1.0f,1.0f,1.0f };
-	GLfloat light_position[4] = { 0.0f,5.0f,0.0f,0.0f };
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_difusse);
-	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 
 	
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
+	
 
-	GLfloat light_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
-
+	/*GLfloat light_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
 	GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
-
 	GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
 
-	/*glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);*/
 
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);*/
 
-	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+	GLfloat ambient[] = { 0.3, 0.0, 0.0, 1.0 };
 
-	//Point light
-	/*GLfloat light_position[] = { -1.0, 0.5, 2.0, 1.0 };
-	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-*/
-	//Directional light
-	//GLfloat light_position[] = { 0.0, 0.0, 1.0, 0.0 };
-	//glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+	GLfloat diffuse[] = { 0.6, 0.60, 0.6, 1.0 };
 
-	////Spotlight
-	//GLfloat spot_pos[] = { 0.0, 5.0, 0.0, 1.0 };
+	GLfloat specular[] = { 0.8, 0.6, 0.6, 1.0 };
 
-	//GLfloat spot_dir[] = { 0.0, -1.0, 0.0 };
-
-	//glLightfv(GL_LIGHT0, GL_POSITION, spot_pos);  GLfloat x = 45.0;
-
-	//glLightfv(GL_LIGHT0, GL_SPOT_CUTOFF, &x);
-
-	//glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, spot_dir);
-
-	////Ambient light
-	//GLfloat amb[] = { 0.2, 0.2, 0.2, 1.0 };
-
-	//glLightModelfv(GL_LIGHT_MODEL_AMBIENT, amb);
-	
-	//GLfloat ambient[] = { 0.3, 0.0, 0.0, 1.0 };
-
-	//GLfloat diffuse[] = { 0.6, 0.0, 0.0, 1.0 };
-
-	//GLfloat specular[] = { 0.8, 0.6, 0.6, 1.0 };
-
-	//GLfloat shininess = 32.0; /* [0..128] */
+	GLfloat shininess = 32.0; /* [0..128] */
 
 	//glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
 
-	//glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
 
-	//glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
 
 	//glMaterialf(GL_FRONT, GL_SHININESS, shininess);
 
+
+	//scene->mMeshes[i]->mFaces[x].mIndices[0]
 	for (int i = 0; i < scene->mNumMeshes; i++)
 	{
+
 		meshes[i].draw();
+		//glColor3f(1, 0, 0);
+		/*glBegin(GL_LINES);
+			for (int x = 0; x < scene->mMeshes[i]->mNumFaces; x++){
+				glVertex3f(scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].x,
+						scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].y, 
+						scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].z);
+
+				glVertex3f(scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].x + scene->mMeshes[i]->mNormals[scene->mMeshes[i]->mFaces[x].mIndices[0]].x,
+						scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].y + scene->mMeshes[i]->mNormals[scene->mMeshes[i]->mFaces[x].mIndices[0]].y,
+						scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].z + scene->mMeshes[i]->mNormals[scene->mMeshes[i]->mFaces[x].mIndices[0]].z);
+			}
+		glEnd();*/
+		//glColor3f(1, 1, 1);
 	}
 
 	glDisable(GL_CULL_FACE);

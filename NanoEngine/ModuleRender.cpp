@@ -82,13 +82,14 @@ update_status ModuleRender::Update()
 
 update_status ModuleRender::PostUpdate()
 {	
-
-	cube->draw();
+	
+	//cube->draw();
+	gizmo.setPosition(-4,15,4);
 	gizmo.draw();
 	grid->draw();
 
 	batman.draw();
-	magneto.draw();
+	//magneto.draw();
 
 	SDL_GL_SwapWindow(App->window->window); // stay here not inside any class
 	return UPDATE_CONTINUE;

@@ -69,6 +69,7 @@ void Grid::setPosition(GLfloat posX, GLfloat posY, GLfloat posZ)
 
 void Grid::draw()
 {
+	glDisable(GL_LIGHTING);
   glPushMatrix();
 
 	glColor3f(red,green,blue);
@@ -84,4 +85,5 @@ void Grid::draw()
 	glDisableClientState(GL_VERTEX_ARRAY); //end draw
 
   glPopMatrix();
+  glEnable(GL_LIGHTING);
 }
