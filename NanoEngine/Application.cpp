@@ -92,6 +92,7 @@ update_status Application::Update()
 	oldTime = newTime;
 
 	LOG_GLOBALS("Delta Time:%f", dt);
+  App->editor->sendFPS(dt);
 
 	update_status ret = UPDATE_CONTINUE;
 	

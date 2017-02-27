@@ -43,6 +43,8 @@ bool ModuleEditor::Init()
   consoleIsActive = false;
   console.AddLog("Sample Text");
 
+  fps_log = std::vector<float>(60, -1.0);
+
   return ret;
 }
 
@@ -109,6 +111,11 @@ update_status ModuleEditor::Update()
     ImGui::EndMainMenuBar();
   }
 
+  char title[25];
+  ImGui::PlotHistogram("##framerate", &fps_log[0], fps_log.size(), 0, title, 0.0f, 1.0f, ImVec2(310, 100));
+  ImGui::PlotHistogram("##milliseconds", &fps_log[0], fps_log.size(), 0, title, 0.0f, 1.0f, ImVec2(310, 100));
+
+
   if (consoleIsActive) console.Draw("Console", &consoleIsActive);
   if (showcase) ImGui::ShowTestWindow();
 
@@ -133,4 +140,10 @@ bool ModuleEditor::CleanUp()
   return true;
 }
 
-
+void ModuleEditor::sendFPS(float delta)
+{
+  if (fps_log[0] != -1.0) {
+    std::rotate(fps_log.begin(), fps_log.begin() + 1, fps_log.end());
+  }
+  fps_log[fps_log.size() - 1] = delta;
+}

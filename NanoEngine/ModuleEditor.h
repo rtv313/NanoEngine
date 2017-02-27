@@ -9,6 +9,7 @@
 #include "SDL/include/SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
+#include <vector>
 
 struct ConsoleLog
 {
@@ -50,11 +51,14 @@ public:
   void Draw();
   bool CleanUp();
 
+  void sendFPS(float delta);
+
 public:
   ImGuiTextBuffer Buf;
   ConsoleLog console;
   bool showcase;
   bool consoleIsActive;
+  std::vector<float> fps_log;
 };
 
 #endif // __MODULEEDITOR_H__
