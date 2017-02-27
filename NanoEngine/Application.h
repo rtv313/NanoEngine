@@ -12,6 +12,7 @@ class ModuleInput;
 class ModuleAudio;
 class ModuleFadeToBlack;
 class ModuleCameraEditor;
+class ModuleEditor;
 // Game modules ---
 class ModulePlayer;
 class ModuleSceneIntro;
@@ -36,6 +37,7 @@ public:
 	ModuleAudio* audio;
 	ModuleFadeToBlack* fade;
 	ModuleCameraEditor* cameraEditor;
+  ModuleEditor* editor;
 
 	// Game modules ---
 	ModulePlayer* player;

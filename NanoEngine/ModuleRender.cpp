@@ -3,6 +3,7 @@
 #include "ModuleRender.h"
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
+#include "ModuleEditor.h"
 #include "SDL/include/SDL.h"
 #include "Glew/include/GL/glew.h"
 #include "SDL/include/SDL_opengl.h"
@@ -84,9 +85,11 @@ update_status ModuleRender::PostUpdate()
 
 	cube->draw();
 	gizmo.draw();
-	grid->draw();
+  grid->draw();
 
 	batman.draw();
+
+  App->editor->Draw();
 	SDL_GL_SwapWindow(App->window->window); // stay here not inside any class
 	return UPDATE_CONTINUE;
 }
