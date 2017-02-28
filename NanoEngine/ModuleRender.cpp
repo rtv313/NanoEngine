@@ -59,7 +59,7 @@ bool ModuleRender::Init()
 	ilutInit();
 	ilutRenderer(ILUT_OPENGL);
 
-	batman = Model("3DModels/Batman/Batman.obj");
+	//batman = Model("3DModels/Batman/Batman.obj");
 	magneto = Model("3DModels/Magneto/magnetto2.fbx");
 	grid = new Grid();
 	cube = new Cube();
@@ -71,6 +71,9 @@ update_status ModuleRender::PreUpdate()
 
   glClearColor(0.0, 0.0, 0.0, 1.0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+ 
+  GLfloat light_position[4] = { 0.0f,8.0f,3.0f,1.0f };
+  glLightfv(GL_LIGHT0, GL_POSITION, light_position);
   
 	return UPDATE_CONTINUE;
 }
@@ -85,11 +88,11 @@ update_status ModuleRender::PostUpdate()
 {	
 	
 	//cube->draw();
-	gizmo.setPosition(-4,15,4);
+	gizmo.setPosition(0,8,3);
 	gizmo.draw();
 	grid->draw();
 
-	batman.draw();
+	//batman.draw();
 	magneto.draw();
 
 

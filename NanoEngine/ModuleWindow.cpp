@@ -71,7 +71,7 @@ bool ModuleWindow::Init()
     glLoadIdentity();*/
    
 
-    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+    //glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
     glClearDepth(1.0f);
     glClearColor(0.f, 0.f, 0.f, 1.f);
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -82,9 +82,16 @@ bool ModuleWindow::Init()
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	GLfloat light_difusse[4] = { 1.0f,1.0f,1.0f,1.0f };
-	GLfloat light_position[4] = { -4.0f,5.0f,4.0f,1.0f };
+	//GLfloat light_position[4] = { 0.0f,0.0f,0.0f,1.0f };
+	//glFrontFace(GL_CW);
+	//GLfloat shininess = 100.0; /* [0..128] */
+	GLfloat light_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
+	GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_difusse);
-	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+	/*glLightfv(GL_LIGHT0, GL_SPOT_EXPONENT, &shininess);*/
+	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+
 
 		if(window == nullptr)
 		{
