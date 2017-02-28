@@ -22,7 +22,7 @@ private:
 	std::vector<uint> indices;
 	std::vector<uint> texturesIds;
 	std::vector<GLfloat> uvs;
-	GLuint TextureFromFile(const char* path, std::string directory);
+	
 
 public:
 	Mesh(const aiScene* scene,GLuint meshIndex,GLuint textureId,std::string directory);

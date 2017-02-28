@@ -1,7 +1,8 @@
 #ifndef __MODULETEXTURES_H__
 #define __MODULETEXTURES_H__
 
-#include<list>
+
+#include<map>
 #include "Module.h"
 #include "Globals.h"
 
@@ -16,12 +17,12 @@ public:
 	bool Init();
 	bool CleanUp();
 
-
-	SDL_Texture* const Load(const char* path);
-	void Unload(SDL_Texture* texture);
+	std::map <std::string, uint> textures;
+	uint const Load(const char* path, std::string directory);
+	void Unload();
 
 private:
-	std::list<SDL_Texture*> textures;
+	
 };
 
 #endif // __MODULETEXTURES_H__
