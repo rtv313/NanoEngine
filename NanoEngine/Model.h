@@ -9,6 +9,15 @@
 #include "Globals.h"
 
 
+struct Materials
+{
+	GLfloat light_ambient[4];
+	GLfloat light_diffuse[4];
+	GLfloat light_specular[4];
+};
+
+
+
 class Mesh {
 private:
 	GLuint verticesId;
@@ -22,7 +31,8 @@ private:
 	std::vector<uint> indices;
 	std::vector<uint> texturesIds;
 	std::vector<GLfloat> uvs;
-	
+	Materials materials;
+	const aiScene* scene;
 
 public:
 	Mesh(const aiScene* scene,GLuint meshIndex,GLuint textureId,std::string directory);
