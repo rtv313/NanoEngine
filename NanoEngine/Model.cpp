@@ -1,15 +1,11 @@
 #include "Model.h"
 #include "SDL/include/SDL.h"
-#include <assimp/cimport.h>
-#include <assimp/postprocess.h>
+#include "assimp/include/assimp/cimport.h"
+#include "assimp/include/assimp/postprocess.h"
 #include "DevIL/include/IL/ilu.h"
 #include "DevIL/include/IL/ilut.h"
 
-
-
-
 #pragma comment(lib, "assimp/lib/assimp.lib")
-
 
 Mesh::Mesh() 
 {

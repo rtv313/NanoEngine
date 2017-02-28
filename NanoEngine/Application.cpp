@@ -5,6 +5,7 @@
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
 #include "ModuleCameraEditor.h"
+#include "ModuleEditor.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleStageOne.h"
 #include "ModulePlayer.h"
@@ -23,6 +24,7 @@ Application::Application()
 	// Order matters: they will init/start/pre/update/post in this order
 	modules.push_back(input = new ModuleInput());
 	modules.push_back(window = new ModuleWindow());
+  modules.push_back(editor = new ModuleEditor());
 	modules.push_back(renderer = new ModuleRender());
 	modules.push_back(textures = new ModuleTextures());
 	modules.push_back(audio = new ModuleAudio());
@@ -90,6 +92,7 @@ update_status Application::Update()
 	oldTime = newTime;
 
 	LOG_GLOBALS("Delta Time:%f", dt);
+  App->editor->sendFPS(dt);
 
 	update_status ret = UPDATE_CONTINUE;
 	

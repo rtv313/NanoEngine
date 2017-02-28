@@ -1,7 +1,7 @@
 #ifndef __MODEL_H__
 #define __MODEL_H__
 
-#include <assimp/scene.h>
+#include "assimp/include/assimp/scene.h"
 #include "MathGeoLib/include/MathGeoLib.h"
 #include <vector>
 #include "Glew/include/GL/glew.h"
