@@ -87,7 +87,7 @@ update_status ModuleRender::PostUpdate()
 	//cube->draw();
 	gizmo.setPosition(-4,15,4);
 	gizmo.draw();
-  grid->draw();
+	grid->draw();
 
 	batman.draw();
 	magneto.draw();

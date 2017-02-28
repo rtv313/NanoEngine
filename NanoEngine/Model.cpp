@@ -66,6 +66,11 @@ Mesh::Mesh(const aiScene* scene,GLuint meshIndex, GLuint textureId,std::string d
 		aiString str;
 		// Load materials
 
+		mat->Get(AI_MATKEY_COLOR_AMBIENT, material.ambient);
+		mat->Get(AI_MATKEY_COLOR_DIFFUSE, material.diffuse);
+		mat->Get(AI_MATKEY_COLOR_SPECULAR, material.specular);
+		mat->Get(AI_MATKEY_SHININESS, material.shiness);
+
 
 		// Load diffuse textures
 		for (int i = 0; i < mat->GetTextureCount(aiTextureType_DIFFUSE); i++)
@@ -118,6 +123,16 @@ void Mesh::draw()
 		glNormalPointer(GL_FLOAT, 0, NULL);
 
 		glBindTexture(GL_TEXTURE_2D, 0);
+
+		//Materials
+		GLfloat ambient[] = { material.ambient.r,material.ambient.g,material.ambient.b,material.ambient.a };
+		GLfloat diffuse[] = { material.diffuse.r,material.diffuse.g,material.diffuse.b,material.diffuse.a };
+		GLfloat specular[] = { material.specular.r,material.specular.g,material.specular.b,material.specular.a };
+
+		glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+		glMaterialf(GL_FRONT, GL_SHININESS, material.shiness);
 
 		if (texturesIds.size() > 0) {
 			glBindBuffer(GL_ARRAY_BUFFER, textureCoordinatesId);

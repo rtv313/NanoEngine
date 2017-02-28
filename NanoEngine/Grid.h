@@ -14,7 +14,7 @@ public:
 	void setPosition(GLfloat posX, GLfloat posY, GLfloat posZ);
 	void draw();
 private:
-	GLfloat red =0, green=1, blue=0;
+	GLfloat red =1.0f, green=1.0f, blue=1.0f;
 	uint my_id = 0;
 	uint my_indices = 0;
 	GLfloat * vertices;

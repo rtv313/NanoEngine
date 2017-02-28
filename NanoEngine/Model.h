@@ -9,6 +9,14 @@
 #include "Globals.h"
 
 
+struct Material 
+{
+	aiColor4D ambient = aiColor4D(1.0f, 1.0f, 1.0f, 1.0f);
+	aiColor4D diffuse = aiColor4D(1.0f, 1.0f, 1.0f, 1.0f);
+	aiColor4D specular = aiColor4D(0.0f, 0.0f, 0.0f, 0.0f);
+	float shiness = 0.0f;
+};
+
 class Mesh {
 private:
 	GLuint verticesId;
@@ -22,7 +30,7 @@ private:
 	std::vector<uint> indices;
 	std::vector<uint> texturesIds;
 	std::vector<GLfloat> uvs;
-	
+	Material material;
 
 public:
 	Mesh(const aiScene* scene,GLuint meshIndex,GLuint textureId,std::string directory);
