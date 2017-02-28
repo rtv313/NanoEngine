@@ -89,7 +89,7 @@ update_status ModuleRender::PostUpdate()
 	grid->draw();
 
 	batman.draw();
-	//magneto.draw();
+	magneto.draw();
 
 	SDL_GL_SwapWindow(App->window->window); // stay here not inside any class
 	return UPDATE_CONTINUE;

@@ -147,7 +147,10 @@ update_status ModuleCameraEditor::PreUpdate() {
 	gluLookAt(position.x, position.y, position.z, lookAt.x, lookAt.y, lookAt.z, up.x, up.y, up.z);
 	forward = lookAt - position;
 	right = forward.Cross(up);
-
+	GLfloat light_difusse[4] = { 1.0f,1.0f,1.0f,1.0f };
+	GLfloat light_position[4] = { 14.0f,5.0f,4.0f,1.0f };
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_difusse);
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 
 	return UPDATE_CONTINUE;
 }

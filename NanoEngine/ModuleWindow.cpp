@@ -67,8 +67,8 @@ bool ModuleWindow::Init()
 		LOG_GLOBALS("OpenGL version supported %s", glGetString(GL_VERSION));
 		LOG_GLOBALS("GLSL: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
+  /*  glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();*/
    
 
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);

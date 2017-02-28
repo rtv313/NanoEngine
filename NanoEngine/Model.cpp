@@ -246,7 +246,7 @@ void Model::draw()
 	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);*/
-
+	glEnable(GL_COLOR_MATERIAL);
 
 	GLfloat ambient[] = { 0.3, 0.0, 0.0, 1.0 };
 
@@ -254,15 +254,15 @@ void Model::draw()
 
 	GLfloat specular[] = { 0.8, 0.6, 0.6, 1.0 };
 
-	GLfloat shininess = 32.0; /* [0..128] */
+	GLfloat shininess = 1.0; /* [0..128] */
 
-	//glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
 
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
 
 	glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
 
-	//glMaterialf(GL_FRONT, GL_SHININESS, shininess);
+	glMaterialf(GL_FRONT, GL_SHININESS, shininess);
 
 
 	//scene->mMeshes[i]->mFaces[x].mIndices[0]
@@ -270,7 +270,7 @@ void Model::draw()
 	{
 
 		meshes[i].draw();
-		//glColor3f(1, 0, 0);
+		glColor3f(1, 0, 0);
 		/*glBegin(GL_LINES);
 			for (int x = 0; x < scene->mMeshes[i]->mNumFaces; x++){
 				glVertex3f(scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].x,
@@ -282,9 +282,9 @@ void Model::draw()
 						scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].z + scene->mMeshes[i]->mNormals[scene->mMeshes[i]->mFaces[x].mIndices[0]].z);
 			}
 		glEnd();*/
-		//glColor3f(1, 1, 1);
+		glColor3f(1, 1, 1);
 	}
-
+	glDisable(GL_COLOR_MATERIAL);
 	glDisable(GL_CULL_FACE);
 }
 
