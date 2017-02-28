@@ -92,7 +92,7 @@ bool ModuleWindow::Init()
 	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
 
-
+	//fixing github
 		if(window == nullptr)
 		{
 			LOG_GLOBALS("Window could not be created! SDL_Error: %s\n", SDL_GetError());
