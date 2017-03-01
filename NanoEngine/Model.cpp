@@ -9,18 +9,13 @@
 
 #pragma comment(lib, "assimp/lib/assimp.lib")
 
-
-
-Mesh::Mesh() 
+Mesh::Mesh()
 {
 
 }
 
-Mesh::Mesh(const aiScene* scene,GLuint meshIndex, GLuint textureId,std::string directory):textureId(textureId),directory(directory)
+Mesh::Mesh(const aiScene* scene, GLuint meshIndex, GLuint textureId, std::string directory) :textureId(textureId), directory(directory)
 {
-	//Assign scene
-	this->scene = scene;
-
 	//Material Index
 	materialIndex = scene->mMeshes[meshIndex]->mMaterialIndex;
 
@@ -38,7 +33,7 @@ Mesh::Mesh(const aiScene* scene,GLuint meshIndex, GLuint textureId,std::string d
 		indices.push_back(scene->mMeshes[meshIndex]->mFaces[x].mIndices[1]);
 		indices.push_back(scene->mMeshes[meshIndex]->mFaces[x].mIndices[2]);
 	}
-	
+
 	glGenBuffers(1, (GLuint*) &(indicesId));
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indicesId);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * indices.size(), &indices[0], GL_STATIC_DRAW);
@@ -46,8 +41,8 @@ Mesh::Mesh(const aiScene* scene,GLuint meshIndex, GLuint textureId,std::string d
 	//Normals Buffer
 	glGenBuffers(1, (GLuint*) &(normalsId));
 	glBindBuffer(GL_NORMAL_ARRAY, normalsId);
-	
-	
+
+
 	glBufferData(GL_NORMAL_ARRAY, sizeof(aiVector3D) * scene->mMeshes[meshIndex]->mNormals->Length(), scene->mMeshes[meshIndex]->mNormals, GL_STATIC_DRAW);
 
 
@@ -66,12 +61,13 @@ Mesh::Mesh(const aiScene* scene,GLuint meshIndex, GLuint textureId,std::string d
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLfloat) * uvs.size(), &uvs[0], GL_STATIC_DRAW);
 	}
 
-	
+
 	if (scene->mMeshes[meshIndex]->mMaterialIndex >= 0) {
 		GLuint  materialIndex = scene->mMeshes[meshIndex]->mMaterialIndex;
 		aiMaterial* mat = scene->mMaterials[materialIndex];
 		aiString str;
-		
+		// Load materials
+
 		mat->Get(AI_MATKEY_COLOR_AMBIENT, material.ambient);
 		mat->Get(AI_MATKEY_COLOR_DIFFUSE, material.diffuse);
 		mat->Get(AI_MATKEY_COLOR_SPECULAR, material.specular);
@@ -98,10 +94,6 @@ Mesh::Mesh(const aiScene* scene,GLuint meshIndex, GLuint textureId,std::string d
 		}
 	}
 
-
-
-	
-
 	indices.clear();
 	uvs.clear();
 
@@ -113,7 +105,7 @@ Mesh::~Mesh()
 }
 
 
-void Mesh::draw() 
+void Mesh::draw()
 {
 	glPushMatrix();
 	glFrontFace(GL_CW);
@@ -121,47 +113,40 @@ void Mesh::draw()
 	glEnableClientState(GL_NORMAL_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-		glBindBuffer(GL_ARRAY_BUFFER, verticesId);
-		glVertexPointer(3, GL_FLOAT, 0, NULL);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indicesId);
+	glBindBuffer(GL_ARRAY_BUFFER, verticesId);
+	glVertexPointer(3, GL_FLOAT, 0, NULL);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indicesId);
 
-		glBindBuffer(GL_NORMAL_ARRAY,normalsId);
-		glNormalPointer(GL_FLOAT, 0, NULL);
+	glBindBuffer(GL_NORMAL_ARRAY, normalsId);
+	glNormalPointer(GL_FLOAT, 0, NULL);
 
-		glBindTexture(GL_TEXTURE_2D, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 
-		//Materials
-		GLfloat ambient[] = { material.ambient.r,material.ambient.g,material.ambient.b,material.ambient.a };
-		GLfloat diffuse[] = { material.diffuse.r,material.diffuse.g,material.diffuse.b,material.diffuse.a };
-		GLfloat specular[] = { material.specular.r,material.specular.g,material.specular.b,material.specular.a };
+	//Materials
+	GLfloat ambient[] = { material.ambient.r,material.ambient.g,material.ambient.b,material.ambient.a };
+	GLfloat diffuse[] = { material.diffuse.r,material.diffuse.g,material.diffuse.b,material.diffuse.a };
+	GLfloat specular[] = { material.specular.r,material.specular.g,material.specular.b,material.specular.a };
 
-		//glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
-		//glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
-		//glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
-		//glMaterialf(GL_FRONT, GL_SHININESS, material.shiness);
+	//glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
+	//glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
+	//glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+	//glMaterialf(GL_FRONT, GL_SHININESS, material.shiness);
 
-			glMaterialfv(GL_FRONT, GL_DIFFUSE, materials.light_diffuse);
-		}
-		if (mat->Get(AI_MATKEY_COLOR_SPECULAR, materials.light_specular) == AI_SUCCESS)
+	if (texturesIds.size() > 0) {
+		glBindBuffer(GL_ARRAY_BUFFER, textureCoordinatesId);
+		glTexCoordPointer(2, GL_FLOAT, 0, NULL);
+
+		for (int i = 0; i < texturesIds.size(); i++)
 		{
-			glMaterialfv(GL_FRONT, GL_SPECULAR, materials.light_specular);
-		}
-
-		if (texturesIds.size() > 0) {
-			glBindBuffer(GL_ARRAY_BUFFER, textureCoordinatesId);
 			glTexCoordPointer(2, GL_FLOAT, 0, NULL);
-
-			for (int i = 0; i < texturesIds.size(); i++)
-			{
-				glTexCoordPointer(2, GL_FLOAT, 0, NULL);
-				glBindTexture(GL_TEXTURE_2D, texturesIds[i]);
-			}
+			glBindTexture(GL_TEXTURE_2D, texturesIds[i]);
 		}
+	}
 
-	
 
-		glDrawElements(GL_TRIANGLES, numFaces*3, GL_UNSIGNED_INT, NULL);
-		glBindTexture(GL_TEXTURE_2D, 0); // Reset clear
+
+	glDrawElements(GL_TRIANGLES, numFaces * 3, GL_UNSIGNED_INT, NULL);
+	glBindTexture(GL_TEXTURE_2D, 0); // Reset clear
 	glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -172,7 +157,7 @@ void Mesh::draw()
 
 
 
-Model::Model() 
+Model::Model()
 {
 }
 
@@ -180,10 +165,10 @@ Model::Model()
 
 Model::Model(std::string file)
 {
-	position = {0,0,0};
+	position = { 0,0,0 };
 	scale = { 1,1,1 };
 	rotation = { 0,0,0 };
-	
+
 	directory = file.substr(0, file.find_last_of('/'));
 	Uint32 flags = aiProcess_PreTransformVertices;
 	flags |= aiProcess_FlipUVs;
@@ -192,9 +177,9 @@ Model::Model(std::string file)
 	scene = aiImportFile(c, flags);
 
 	// set meshes
-	for (int i = 0; i < scene->mNumMeshes; i++) 
+	for (int i = 0; i < scene->mNumMeshes; i++)
 	{
-		meshes.push_back(Mesh(scene,i,1,directory));
+		meshes.push_back(Mesh(scene, i, 1, directory));
 	}
 
 
@@ -207,14 +192,14 @@ Model::~Model()
 
 
 
-void Model::clear() 
+void Model::clear()
 {
 	meshes.clear();
 }
 
 void Model::draw()
-{	
-	
+{
+
 	GLfloat ambient[] = { 0.3, 0.0, 1.0, 1.0 };
 
 	GLfloat diffuse[] = { 1.0, 0.0, 0.0, 1.0 };
@@ -223,13 +208,13 @@ void Model::draw()
 
 	GLfloat shininess = 0.3; /* [0..128] */
 
-	//glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
 
-	//glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
 
-	//glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
 
-	//glMaterialf(GL_FRONT, GL_SHININESS, shininess);
+	glMaterialf(GL_FRONT, GL_SHININESS, shininess);
 
 
 	//scene->mMeshes[i]->mFaces[x].mIndices[0]
@@ -239,21 +224,19 @@ void Model::draw()
 		meshes[i].draw();
 		//glColor3f(1, 0, 0);
 		/*glBegin(GL_LINES);
-			for (int x = 0; x < scene->mMeshes[i]->mNumFaces; x++){
-				glVertex3f(scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].x,
-						scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].y, 
-						scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].z);
-
-				glVertex3f(scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].x + scene->mMeshes[i]->mNormals[scene->mMeshes[i]->mFaces[x].mIndices[0]].x,
-						scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].y + scene->mMeshes[i]->mNormals[scene->mMeshes[i]->mFaces[x].mIndices[0]].y,
-						scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].z + scene->mMeshes[i]->mNormals[scene->mMeshes[i]->mFaces[x].mIndices[0]].z);
-			}
+		for (int x = 0; x < scene->mMeshes[i]->mNumFaces; x++){
+		glVertex3f(scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].x,
+		scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].y,
+		scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].z);
+		glVertex3f(scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].x + scene->mMeshes[i]->mNormals[scene->mMeshes[i]->mFaces[x].mIndices[0]].x,
+		scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].y + scene->mMeshes[i]->mNormals[scene->mMeshes[i]->mFaces[x].mIndices[0]].y,
+		scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].z + scene->mMeshes[i]->mNormals[scene->mMeshes[i]->mFaces[x].mIndices[0]].z);
+		}
 		glEnd();*/
 		//glColor3f(1, 1, 1);
 	}
 
 
 
-	
-}
 
+}

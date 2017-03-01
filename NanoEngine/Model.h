@@ -9,8 +9,7 @@
 #include "Globals.h"
 
 
-<<<<<<< HEAD
-struct Material 
+struct Material
 {
 	aiColor4D ambient = aiColor4D(1.0f, 1.0f, 1.0f, 1.0f);
 	aiColor4D diffuse = aiColor4D(1.0f, 1.0f, 1.0f, 1.0f);
@@ -18,17 +17,6 @@ struct Material
 	float shiness = 0.0f;
 };
 
-=======
-struct Materials
-{
-	GLfloat light_ambient[4];
-	GLfloat light_diffuse[4];
-	GLfloat light_specular[4];
-};
-
-
-
->>>>>>> master
 class Mesh {
 private:
 	GLuint verticesId;
@@ -42,27 +30,22 @@ private:
 	std::vector<uint> indices;
 	std::vector<uint> texturesIds;
 	std::vector<GLfloat> uvs;
-<<<<<<< HEAD
 	Material material;
-=======
-	Materials materials;
-	const aiScene* scene;
->>>>>>> master
 
 public:
-	Mesh(const aiScene* scene,GLuint meshIndex,GLuint textureId,std::string directory);
+	Mesh(const aiScene* scene, GLuint meshIndex, GLuint textureId, std::string directory);
 	Mesh();
 	~Mesh();
-	
+
 	void draw();
 
 };
 
 class Model
 {
-	
+
 public:
-	Model( std::string file);
+	Model(std::string file);
 	Model();
 	~Model();
 	void Load(const char* file);
@@ -77,7 +60,7 @@ private:
 	std::vector<Mesh> meshes;
 	const aiScene* scene;
 	std::string directory;
-	
+
 };
 
 
