@@ -9,6 +9,8 @@
 
 #pragma comment(lib, "assimp/lib/assimp.lib")
 
+
+
 Mesh::Mesh() 
 {
 
@@ -16,6 +18,9 @@ Mesh::Mesh()
 
 Mesh::Mesh(const aiScene* scene,GLuint meshIndex, GLuint textureId,std::string directory):textureId(textureId),directory(directory)
 {
+	//Assign scene
+	this->scene = scene;
+
 	//Material Index
 	materialIndex = scene->mMeshes[meshIndex]->mMaterialIndex;
 
@@ -66,8 +71,7 @@ Mesh::Mesh(const aiScene* scene,GLuint meshIndex, GLuint textureId,std::string d
 		GLuint  materialIndex = scene->mMeshes[meshIndex]->mMaterialIndex;
 		aiMaterial* mat = scene->mMaterials[materialIndex];
 		aiString str;
-		// Load materials
-
+		
 		mat->Get(AI_MATKEY_COLOR_AMBIENT, material.ambient);
 		mat->Get(AI_MATKEY_COLOR_DIFFUSE, material.diffuse);
 		mat->Get(AI_MATKEY_COLOR_SPECULAR, material.specular);
@@ -93,6 +97,10 @@ Mesh::Mesh(const aiScene* scene,GLuint meshIndex, GLuint textureId,std::string d
 			texturesIds.push_back(App->textures->Load(str.C_Str(), directory));
 		}
 	}
+
+
+
+	
 
 	indices.clear();
 	uvs.clear();
@@ -131,6 +139,13 @@ void Mesh::draw()
 		//glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
 		//glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
 		//glMaterialf(GL_FRONT, GL_SHININESS, material.shiness);
+
+			glMaterialfv(GL_FRONT, GL_DIFFUSE, materials.light_diffuse);
+		}
+		if (mat->Get(AI_MATKEY_COLOR_SPECULAR, materials.light_specular) == AI_SUCCESS)
+		{
+			glMaterialfv(GL_FRONT, GL_SPECULAR, materials.light_specular);
+		}
 
 		if (texturesIds.size() > 0) {
 			glBindBuffer(GL_ARRAY_BUFFER, textureCoordinatesId);
@@ -208,13 +223,13 @@ void Model::draw()
 
 	GLfloat shininess = 0.3; /* [0..128] */
 
-	glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
+	//glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
 
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
+	//glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
 
-	glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+	//glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
 
-	glMaterialf(GL_FRONT, GL_SHININESS, shininess);
+	//glMaterialf(GL_FRONT, GL_SHININESS, shininess);
 
 
 	//scene->mMeshes[i]->mFaces[x].mIndices[0]
