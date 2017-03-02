@@ -22,7 +22,6 @@ using namespace std;
 	 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices);
 	 glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * 48, indices, GL_STATIC_DRAW);
 	 
-
 	 GLfloat UV2[32] = {
 		 0.0f,0.0f,//A
 		 0.0f,1.0f,//B
@@ -59,13 +58,7 @@ using namespace std;
 		 }
 	 }
 
-	
-	 
-	
-
-				// Create an image ID as a ULuint
-
-
+		// Create an image ID as a ULuint
 
 	 ILboolean success;			// Create a flag to keep track of success/failure
 
@@ -87,8 +80,6 @@ using namespace std;
 
 	 success = ilConvertImage(IL_RGB, IL_UNSIGNED_BYTE);
 
-	
-	
 	 pixmap =  ilGetData();
 
 	 glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -110,10 +101,6 @@ using namespace std;
 		 ilGetInteger(IL_IMAGE_FORMAT),	// Format of image pixel data
 		 GL_UNSIGNED_BYTE,		// Image data type
 		 pixmap);
-
-
-
-
 }
  Cube::~Cube() {
 	 ilDeleteImages(1, &imageID);
@@ -124,7 +111,6 @@ using namespace std;
 	 glPushMatrix();
 	 //glColor3f(255, 255, 255);
 	 glTranslatef(posX, posY, posZ);
-
 	 
 	// glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 128, 128, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixmap);
 		
@@ -134,7 +120,6 @@ using namespace std;
 	 glTexCoordPointer(2, GL_FLOAT, 0, NULL);
 	 glBindTexture(GL_TEXTURE_2D, ImageName);
 	 
-
 	 glEnableClientState(GL_VERTEX_ARRAY);
 	 glBindBuffer(GL_ARRAY_BUFFER, my_id);
 	 glVertexPointer(3, GL_FLOAT, 0, NULL);
@@ -146,8 +131,6 @@ using namespace std;
 	 glDisableClientState(GL_VERTEX_ARRAY); //end draw
 	 glDisableClientState(GL_TEXTURE_COORD_ARRAY_EXT);
 	 glPopMatrix();
-
-
 }
 
  void Cube::setColor(GLfloat red, GLfloat green, GLfloat blue) 

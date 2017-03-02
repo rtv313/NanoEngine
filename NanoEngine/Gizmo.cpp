@@ -23,7 +23,6 @@ void Gizmo::draw()
   glPushMatrix();
 
   glTranslatef(posX, posY, posZ);
-  glDisable(GL_LIGHTING);
   glBegin(GL_LINES);
     // X Axis
     glColor3f(255.0f, 0.0f, 0.0f);
@@ -76,5 +75,4 @@ void Gizmo::draw()
   glEnd();
 
   glPopMatrix();
-  glEnable(GL_LIGHTING);
 }

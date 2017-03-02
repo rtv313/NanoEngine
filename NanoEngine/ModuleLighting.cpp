@@ -23,6 +23,21 @@ ModuleLighting::~ModuleLighting()
 
 bool ModuleLighting::Init()
 {
+  glEnable(GL_LIGHT0);
+  glShadeModel(GL_SMOOTH);
+
+  GLfloat light_difusse[4] = { 1.0f,1.0f,1.0f,1.0f };
+  GLfloat light_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
+  GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+
+  glLightfv(GL_LIGHT0, GL_DIFFUSE, light_difusse);
+  glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+  glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+
+  GLfloat lmodel_ambient[] = { 0.2, 0.2, 0.2, 1.0 };
+  glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
+
+  //glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.5);
 
   return true;
 }
@@ -41,6 +56,8 @@ update_status ModuleLighting::Update()
 
 update_status ModuleLighting::PostUpdate()
 {
+  GLfloat light_position[4] = { 0.0f,1.0f,0.0f,0.0f };
+  glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 
   return UPDATE_CONTINUE;
 }

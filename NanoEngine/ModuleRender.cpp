@@ -69,12 +69,8 @@ bool ModuleRender::Init()
 
 update_status ModuleRender::PreUpdate()
 {
-
   glClearColor(0.0, 0.0, 0.0, 1.0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
- 
-  GLfloat light_position[4] = { 0.0f,8.0f,3.0f,1.0f };
-  glLightfv(GL_LIGHT0, GL_POSITION, light_position);
   
 	return UPDATE_CONTINUE;
 }
@@ -94,8 +90,8 @@ update_status ModuleRender::PostUpdate()
 	grid->draw();
 
 	batman.draw();
-	//magneto.draw();
-	//city.Draw();
+	magneto.draw();
+	city.Draw();
 
   App->editor->Draw();
 	SDL_GL_SwapWindow(App->window->window); // stay here not inside any class

@@ -141,6 +141,7 @@ void Level::Draw() {
 }
 
 void Level::DrawNodes(Node* node) {
+  glEnable(GL_LIGHTING);
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
@@ -168,4 +169,5 @@ void Level::DrawNodes(Node* node) {
 		DrawNodes(node->childs[x]);
 	}
 
+  glDisable(GL_LIGHTING);
 }

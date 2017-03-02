@@ -67,32 +67,12 @@ bool ModuleWindow::Init()
 		LOG_GLOBALS("OpenGL version supported %s", glGetString(GL_VERSION));
 		LOG_GLOBALS("GLSL: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 
-  /*  glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();*/
-   
-
-    //glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+    // Needed
     glClearDepth(1.0f);
     glClearColor(0.f, 0.f, 0.f, 1.f);
-    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_DEPTH_TEST);
-    //glEnable(GL_CULL_FACE);
 
-    glEnable(GL_TEXTURE_2D);
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
-	GLfloat light_difusse[4] = { 1.0f,1.0f,1.0f,1.0f };
-	//GLfloat light_position[4] = { 0.0f,0.0f,0.0f,1.0f };
-	//glFrontFace(GL_CW);
-	//GLfloat shininess = 100.0; /* [0..128] */
-	GLfloat light_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
-	GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_difusse);
-	/*glLightfv(GL_LIGHT0, GL_SPOT_EXPONENT, &shininess);*/
-	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
-	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
-
-	//fixing github
+	  //fixing github
 		if(window == nullptr)
 		{
 			LOG_GLOBALS("Window could not be created! SDL_Error: %s\n", SDL_GetError());
