@@ -316,6 +316,9 @@
     <ClInclude Include="Level.h">
       <Filter>Core Modules\Geometries</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleLighting.h">
+      <Filter>Core Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -500,6 +503,9 @@
     </ClCompile>
     <ClCompile Include="Level.cpp">
       <Filter>Core Modules\Geometries</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleLighting.cpp">
+      <Filter>Core Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
