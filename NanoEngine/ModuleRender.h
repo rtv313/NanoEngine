@@ -5,6 +5,7 @@
 #include "Grid.h"
 #include "Gizmo.h"
 #include "Model.h"
+#include "Level.h"
 
 #include "Module.h"
 #include "Globals.h"
@@ -33,9 +34,9 @@ public:
 	Cube *cube;
 	Grid *grid;
 	Gizmo gizmo;
-	//Model batman;
+	Model batman;
 	Model magneto;
-
+	Level city;
 };
 
 #endif // __MODULERENDER_H__
