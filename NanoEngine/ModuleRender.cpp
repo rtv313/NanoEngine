@@ -59,7 +59,7 @@ bool ModuleRender::Init()
 	ilutInit();
 	ilutRenderer(ILUT_OPENGL);
 
-	//batman = Model("3DModels/Batman/Batman.obj");
+	batman = Model("3DModels/Batman/Batman.obj");
 	magneto = Model("3DModels/Magneto/magnetto2.fbx");
 	grid = new Grid();
 	cube = new Cube();
@@ -92,7 +92,7 @@ update_status ModuleRender::PostUpdate()
 	gizmo.draw();
 	grid->draw();
 
-	//batman.draw();
+	batman.draw();
 	magneto.draw();
 
 

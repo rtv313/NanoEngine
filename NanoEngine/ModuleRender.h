@@ -33,7 +33,7 @@ public:
 	Cube *cube;
 	Grid *grid;
 	Gizmo gizmo;
-	//Model batman;
+	Model batman;
 	Model magneto;
 
 };
