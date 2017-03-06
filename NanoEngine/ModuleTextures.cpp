@@ -46,6 +46,7 @@ bool ModuleTextures::CleanUp()
 // Load new texture from file path
 uint const ModuleTextures::Load(const char* path, std::string directory)
 {
+  /*
 	std::string filename = std::string(path);
 	filename = directory + '/' + filename;
 
@@ -91,9 +92,49 @@ uint const ModuleTextures::Load(const char* path, std::string directory)
 	ilBindImage(0);
 	ilDeleteImage(imageId);
 
-	textures[filename]=textureID;
+	textures[filename]=textureID; */
+  ILuint imageId;
+  ilGenImages(1, &imageId);
+  ilBindImage(imageId);
 
-	return textureID;
+  std::string filename = std::string(path);
+  filename = directory + '/' + filename;
+
+  if (ilLoadImage(filename.c_str()))
+  {
+    GLuint textureId = 0;
+    glGenTextures(1, &textureId);
+
+    glBindTexture(GL_TEXTURE_2D, textureId);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+    ILinfo ImageInfo;
+    iluGetImageInfo(&ImageInfo);
+    if (ImageInfo.Origin == IL_ORIGIN_UPPER_LEFT)
+    {
+      iluFlipImage();
+    }
+
+    ilConvertImage(IL_RGB, IL_UNSIGNED_BYTE);
+
+    ILubyte* data = ilGetData();
+    int width = ilGetInteger(IL_IMAGE_WIDTH);
+    int height = ilGetInteger(IL_IMAGE_HEIGHT);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, ilGetInteger(IL_IMAGE_FORMAT), width,
+      height, 0, ilGetInteger(IL_IMAGE_FORMAT), GL_UNSIGNED_BYTE, data);
+
+    ilDeleteImages(1, &imageId);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    return textureId;
+  }
+
+  return 0;
+
+	//return textureID;
 
 }
 

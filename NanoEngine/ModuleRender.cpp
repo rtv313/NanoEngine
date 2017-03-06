@@ -61,7 +61,8 @@ bool ModuleRender::Init()
 
 	batman = Model("3DModels/Batman/Batman.obj");
 	magneto = Model("3DModels/Magneto/magnetto2.fbx");
-	city = Level("3DModels/street/Street.obj");
+	//city = Level("3DModels/street/Street.obj");
+  city = Model("3DModels/street/Street.obj");
 	grid = new Grid();
 	cube = new Cube();
 	return ret;
@@ -89,9 +90,10 @@ update_status ModuleRender::PostUpdate()
 	gizmo.draw();
 	grid->draw();
 
-	batman.draw();
-	magneto.draw();
-	city.Draw();
+  city.draw();
+  batman.draw();
+  magneto.draw();
+	//city.Draw();
 
   App->editor->Draw();
 	SDL_GL_SwapWindow(App->window->window); // stay here not inside any class

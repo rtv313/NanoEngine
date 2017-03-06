@@ -108,6 +108,8 @@ Mesh::~Mesh()
 void Mesh::draw()
 {
   glEnable(GL_LIGHTING);
+  glEnable(GL_COLOR_MATERIAL);
+  glShadeModel(GL_SMOOTH);
 
 	glPushMatrix();
 	glFrontFace(GL_CW);
@@ -125,14 +127,14 @@ void Mesh::draw()
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	//Materials
-	GLfloat ambient[] = { material.ambient.r,material.ambient.g,material.ambient.b,material.ambient.a };
-	GLfloat diffuse[] = { material.diffuse.r,material.diffuse.g,material.diffuse.b,material.diffuse.a };
-	GLfloat specular[] = { material.specular.r,material.specular.g,material.specular.b,material.specular.a };
+	GLfloat ambient[] = { material.ambient.r, material.ambient.g, material.ambient.b, material.ambient.a };
+	GLfloat diffuse[] = { material.diffuse.r, material.diffuse.g, material.diffuse.b, material.diffuse.a };
+	GLfloat specular[] = { material.specular.r, material.specular.g, material.specular.b, material.specular.a };
 
-	glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
-	glMaterialf(GL_FRONT, GL_SHININESS, material.shiness);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, &(material.ambient.r));
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, &(material.diffuse.r));
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, &(material.specular.r));
+	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, material.shiness);
 
 	if (texturesIds.size() > 0) {
 		glBindBuffer(GL_ARRAY_BUFFER, textureCoordinatesId);
@@ -144,6 +146,8 @@ void Mesh::draw()
 			glBindTexture(GL_TEXTURE_2D, texturesIds[i]);
 		}
 	}
+
+  //glEnable(GL_NORMALIZE);
 
 	glDrawElements(GL_TRIANGLES, numFaces * 3, GL_UNSIGNED_INT, NULL);
 	glBindTexture(GL_TEXTURE_2D, 0); // Reset clear
@@ -167,7 +171,7 @@ Model::Model(std::string file)
 
 	directory = file.substr(0, file.find_last_of('/'));
 	Uint32 flags = aiProcess_PreTransformVertices;
-	flags |= aiProcess_FlipUVs;
+	//flags |= aiProcess_FlipUVs;
 	flags |= aiProcess_Triangulate;
 	const char * c = file.c_str();
 	scene = aiImportFile(c, flags);
@@ -177,7 +181,6 @@ Model::Model(std::string file)
 	{
 		meshes.push_back(Mesh(scene, i, 1, directory));
 	}
-
 
 }
 

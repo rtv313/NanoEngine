@@ -26,13 +26,24 @@ bool ModuleLighting::Init()
   glEnable(GL_LIGHT0);
   glShadeModel(GL_SMOOTH);
 
-  GLfloat light_difusse[4] = { 1.0f,1.0f,1.0f,1.0f };
+  float  spotExponent = 0.0;
+  float  spotCutoff = 180.0f;
+  float  constantAttenuation = 1.0;
+  float  linearAttenuation = 0.0;
+  float  quadraticAttenuation = 0.0;
+
+  GLfloat light_difusse[] = { 1.0f,1.0f,1.0f,1.0f };
   GLfloat light_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
   GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
 
   glLightfv(GL_LIGHT0, GL_DIFFUSE, light_difusse);
   glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
   glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+  glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, spotExponent);
+  glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, spotCutoff);
+  glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, constantAttenuation);
+  glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, linearAttenuation);
+  glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, quadraticAttenuation);
 
   GLfloat lmodel_ambient[] = { 0.2, 0.2, 0.2, 1.0 };
   glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
@@ -56,7 +67,7 @@ update_status ModuleLighting::Update()
 
 update_status ModuleLighting::PostUpdate()
 {
-  GLfloat light_position[4] = { 0.0f,1.0f,0.0f,0.0f };
+  GLfloat light_position[] = { 0.0f,1.0f,0.0f,0.0f };
   glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 
   return UPDATE_CONTINUE;
