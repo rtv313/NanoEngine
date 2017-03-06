@@ -36,8 +36,9 @@ public:
 	Gizmo gizmo;
 	Model batman;
 	Model magneto;
-	//Level city;
-  Model city;
+	Level city;
+	Level PJ;
+  //Model city;
 };
 
 #endif // __MODULERENDER_H__

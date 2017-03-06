@@ -55,7 +55,8 @@ public:
 	Level(std::string file);
 	~Level();
 
-	void Draw();
+	void draw();
+	void DrawHierarchy(Node* node);
 	void Clear();
 
 	unsigned GetNumMeshes() const { return meshes.size(); }

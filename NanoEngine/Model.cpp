@@ -177,6 +177,7 @@ Model::Model(std::string file)
 	scene = aiImportFile(c, flags);
 
 	// set meshes
+	
 	for (int i = 0; i < scene->mNumMeshes; i++)
 	{
 		meshes.push_back(Mesh(scene, i, 1, directory));
@@ -198,28 +199,29 @@ void Model::clear()
 
 void Model::draw()
 {
-	for (int i = 0; i < scene->mNumMeshes; i++)
-	{
+	
+		for (int i = 0; i < scene->mNumMeshes; i++)
+		{
 
-		meshes[i].draw();
+			meshes[i].draw();
 
-    // TODO: Bind this code to a boolean editable through GUI to show/hide the debug normals
+			// TODO: Bind this code to a boolean editable through GUI to show/hide the debug normals
 
-		//glColor3f(1, 0, 0);
-		/*glBegin(GL_LINES);
-		for (int x = 0; x < scene->mMeshes[i]->mNumFaces; x++){
-		glVertex3f(scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].x,
-		scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].y,
-		scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].z);
-		glVertex3f(scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].x + scene->mMeshes[i]->mNormals[scene->mMeshes[i]->mFaces[x].mIndices[0]].x,
-		scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].y + scene->mMeshes[i]->mNormals[scene->mMeshes[i]->mFaces[x].mIndices[0]].y,
-		scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].z + scene->mMeshes[i]->mNormals[scene->mMeshes[i]->mFaces[x].mIndices[0]].z);
+				//glColor3f(1, 0, 0);
+				/*glBegin(GL_LINES);
+				for (int x = 0; x < scene->mMeshes[i]->mNumFaces; x++){
+				glVertex3f(scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].x,
+				scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].y,
+				scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].z);
+				glVertex3f(scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].x + scene->mMeshes[i]->mNormals[scene->mMeshes[i]->mFaces[x].mIndices[0]].x,
+				scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].y + scene->mMeshes[i]->mNormals[scene->mMeshes[i]->mFaces[x].mIndices[0]].y,
+				scene->mMeshes[i]->mVertices[scene->mMeshes[i]->mFaces[x].mIndices[0]].z + scene->mMeshes[i]->mNormals[scene->mMeshes[i]->mFaces[x].mIndices[0]].z);
+				}
+				glEnd();*/
+				//glColor3f(1, 1, 1);
 		}
-		glEnd();*/
-		//glColor3f(1, 1, 1);
-	}
 
-
+	
 
 
 }

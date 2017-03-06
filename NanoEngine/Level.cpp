@@ -47,11 +47,11 @@ void Level::CreateMesh(aiNode * aiNode,Node* node) {
 		glBufferData(GL_ARRAY_BUFFER, sizeof(aiVector3D) * mesh.num_vertices, mesh.vertices, GL_STATIC_DRAW);
 
 		//Buffer normals
-
-		glGenBuffers(1, (GLuint*) &(mesh.normalsId));
-		glBindBuffer(GL_NORMAL_ARRAY, mesh.normalsId);
-		glBufferData(GL_NORMAL_ARRAY, sizeof(aiVector3D) * mesh.normals->Length(),mesh.normals, GL_STATIC_DRAW);
-
+		if (mesh.normals) {
+			glGenBuffers(1, (GLuint*) &(mesh.normalsId));
+			glBindBuffer(GL_NORMAL_ARRAY, mesh.normalsId);
+			glBufferData(GL_NORMAL_ARRAY, sizeof(aiVector3D) * mesh.normals->Length(), mesh.normals, GL_STATIC_DRAW);
+		}
 
 		//indices
 		for (int x = 0; x < meshScene->mNumFaces; x++)
@@ -133,20 +133,43 @@ void Level::Clear()
 	meshes.clear();
 }
 
-void Level::Draw() {
+void Level::draw() {
 
 	
 	DrawNodes(root);
+
 	
 }
+void Level::DrawHierarchy(Node* node) {
+	if (node == root) {
+		glMatrixMode(GL_MODELVIEW);
+		glPushMatrix();
+		glColor3f(0.0f, 0.0f, 1.0f);
+		glDisable(GL_LIGHTING);
+	}
+	
+	//glMultMatrixf(node->nodeAi->mTransformation);
+	//glMultMatrixf(node->nodeAi->mTransformation);
+	if (node!=root) {
+		glBegin(GL_LINE);
+			glVertex3f(node->parent->position.x, node->parent->position.y, node->parent->position.z);
+			glTranslatef(node->nodeAi->mTransformation.a4, node->nodeAi->mTransformation.b4, node->nodeAi->mTransformation.c4);
+			glVertex3f(node->position.x, node->position.y, node->position.z);
+		glEnd();	
+	}
+	for (int x = 0; x < node->childs.size(); x++)
+	{
+		DrawHierarchy(node->childs[x]);
+	}
 
+}
 void Level::DrawNodes(Node* node) {
   glEnable(GL_LIGHTING);
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
 	
-
+	
 	for (int i = 0; i < node->meshes.size(); i++)
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, meshes[node->meshes[i]].verticesId);

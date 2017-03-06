@@ -59,10 +59,11 @@ bool ModuleRender::Init()
 	ilutInit();
 	ilutRenderer(ILUT_OPENGL);
 
-	batman = Model("3DModels/Batman/Batman.obj");
-	magneto = Model("3DModels/Magneto/magnetto2.fbx");
+	//batman = Model("3DModels/Batman/Batman.obj");
+	//magneto = Model("3DModels/Magneto/magnetto2.fbx");
 	//city = Level("3DModels/street/Street.obj");
-  city = Model("3DModels/street/Street.obj");
+	PJ = Level("3DModels/ArmyPilot/ArmyPilot.dae");
+  //city = Model("3DModels/street/Street.obj");
 	grid = new Grid();
 	cube = new Cube();
 	return ret;
@@ -86,15 +87,18 @@ update_status ModuleRender::PostUpdate()
 {	
 	
 	//cube->draw();
-	gizmo.setPosition(0,8,3);
+	//gizmo.setPosition(0,8,3);
 	gizmo.draw();
 	grid->draw();
 
-  city.draw();
-  batman.draw();
-  magneto.draw();
+  //city.draw();
+  //batman.draw();
+  //magneto.draw();
 	//city.Draw();
-
+	
+	PJ.DrawHierarchy(PJ.root);
+	glPopMatrix();
+	
   App->editor->Draw();
 	SDL_GL_SwapWindow(App->window->window); // stay here not inside any class
 	return UPDATE_CONTINUE;
