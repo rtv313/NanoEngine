@@ -16,6 +16,7 @@ struct Node
 	std::vector<unsigned> meshes;
 	Node* parent = nullptr;
 	std::vector<Node*> childs;
+	aiMatrix4x4 transformMatrix;
 	aiNode* nodeAi;
 };
 
@@ -79,6 +80,7 @@ public:
 	void CreateMaterials();
 	void ClearNodes(Node * node);
 	void DrawNodes(Node* node);
+	GLfloat* Level::aiMatrix4x4toGLfloat(const aiMatrix4x4* from);
 
 private:
 	std::string directory;

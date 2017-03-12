@@ -87,7 +87,7 @@ update_status ModuleRender::PostUpdate()
 {	
 	
 	//cube->draw();
-	//gizmo.setPosition(0,8,3);
+	gizmo.setPosition(0,3,0);
 	gizmo.draw();
 	grid->draw();
 
@@ -97,6 +97,7 @@ update_status ModuleRender::PostUpdate()
 	//city.Draw();
 	
 	PJ.DrawHierarchy(PJ.root);
+	//PJ.draw();
 	glPopMatrix();
 	
   App->editor->Draw();
