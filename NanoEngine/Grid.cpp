@@ -10,6 +10,9 @@ Grid::Grid()
 	indices = new uint[size*size];
 	int componentVertexIndex = 0;
 	int id = 0;
+	red = 1.0f;
+	green = 1.0f;
+	blue = 1.0f;
 
 	for (int i = -size / 2; i <= size / 2; i++) {
 		
@@ -69,11 +72,11 @@ void Grid::setPosition(GLfloat posX, GLfloat posY, GLfloat posZ)
 
 void Grid::draw()
 {
-  glPushMatrix();
-
-	glColor3f(red,green,blue);
+	glDisable(GL_LIGHTING);
+	glColor3f(red, green, blue);
+	glPushMatrix();
 	glTranslatef(posX, posY, posZ);
-
+	glBindTexture(GL_TEXTURE_2D, 0);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glBindBuffer(GL_ARRAY_BUFFER, my_id);
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
@@ -81,6 +84,6 @@ void Grid::draw()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices);
 	glDrawElements(GL_LINES, indicesSize, GL_UNSIGNED_INT, NULL);
 	glDisableClientState(GL_VERTEX_ARRAY); //end draw
-
+	//glEnable(GL_LIGHTING);
   glPopMatrix();
 }
