@@ -15,7 +15,10 @@ class Component
 {
   public:
   Component() 
-  {}
+  {
+    active = true;
+    my_go = nullptr;
+  }
 
   virtual ~Component()
   {}
