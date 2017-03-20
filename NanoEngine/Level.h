@@ -6,11 +6,12 @@
 #include "Glew/include/GL/glew.h"
 #include "DevIL/include/IL/il.h"
 #include "Globals.h"
+#include "ModuleAnim.h"
 
 
 struct Node 
 {
-	std::string name;
+	aiString name;
 	aiVector3D position = aiVector3D(0, 0, 0);
 	aiQuaternion rotation = aiQuaternion(1, 0, 0, 0);
 	std::vector<unsigned> meshes;
@@ -52,6 +53,9 @@ public:
 	std::vector<MaterialLevel> materials;
 	const aiScene* scene;
 
+	ModuleAnim animations;
+
+
 	Level();
 	Level(std::string file);
 	~Level();
@@ -81,7 +85,6 @@ public:
 	void ClearNodes(Node * node);
 	void DrawNodes(Node* node);
 	GLfloat* Level::aiMatrix4x4toGLfloat(const aiMatrix4x4* from);
-
 private:
 	std::string directory;
 };

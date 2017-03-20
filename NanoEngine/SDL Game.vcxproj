@@ -95,6 +95,7 @@
     <ClInclude Include="imgui\stb_truetype.h" />
     <ClInclude Include="imgui_impl_sdl_gl3.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="ModuleAnim.h" />
     <ClInclude Include="ModuleLighting.h" />
     <ClInclude Include="MathGeoLib\include\Algorithm\GJK.h" />
     <ClInclude Include="MathGeoLib\include\Algorithm\Random\LCG.h" />
@@ -186,6 +187,7 @@
     <ClCompile Include="imgui\imgui_draw.cpp" />
     <ClCompile Include="imgui_impl_sdl_gl3.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="ModuleAnim.cpp" />
     <ClCompile Include="ModuleLighting.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="Main.cpp" />

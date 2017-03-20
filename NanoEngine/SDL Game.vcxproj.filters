@@ -319,11 +319,11 @@
     <ClInclude Include="ModuleLighting.h">
       <Filter>Core Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleAnim.h">
+      <Filter>Core Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
     <ClCompile Include="Application.cpp">
       <Filter>Main</Filter>
     </ClCompile>
@@ -505,6 +505,12 @@
       <Filter>Core Modules\Geometries</Filter>
     </ClCompile>
     <ClCompile Include="ModuleLighting.cpp">
+      <Filter>Core Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Core Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleAnim.cpp">
       <Filter>Core Modules</Filter>
     </ClCompile>
   </ItemGroup>

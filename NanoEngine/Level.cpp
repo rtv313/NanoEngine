@@ -81,6 +81,7 @@ Node* Level::CreateNodes(Node*father,aiNode* actualNode)
 		node->nodeAi = actualNode;
 		node->position = root->position;
 		node->transformMatrix = actualNode->mTransformation;
+		node->name = actualNode->mName;
 	}
 	else {
 		node->parent = father;
@@ -91,6 +92,7 @@ Node* Level::CreateNodes(Node*father,aiNode* actualNode)
 		/*node->position.x += actualNode->mTransformation.a4/100;
 		node->position.y += actualNode->mTransformation.b4/100;
 		node->position.z += actualNode->mTransformation.c4/100;*/
+		node->name = actualNode->mName;
 	}
 
 	CreateMesh(node->nodeAi,node); // create Meshes

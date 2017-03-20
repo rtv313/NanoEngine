@@ -63,6 +63,7 @@ bool ModuleRender::Init()
 	//magneto = Model("3DModels/Magneto/magnetto2.fbx");
 	//city = Level("3DModels/street/Street.obj");
 	PJ = Level("3DModels/ArmyPilot/ArmyPilot.dae");
+	PJ.animations.Load("Idle","3DModels/ArmyPilot/Animations/ArmyPilot_Idle.fbx");
   //city = Model("3DModels/street/Street.obj");
 	grid = new Grid();
 	cube = new Cube();
