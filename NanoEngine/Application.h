@@ -14,6 +14,7 @@ class ModuleFadeToBlack;
 class ModuleCameraEditor;
 class ModuleEditor;
 class ModuleLighting;
+class ModuleScene;
 // Game modules ---
 class ModulePlayer;
 class ModuleSceneIntro;
@@ -40,6 +41,7 @@ public:
 	ModuleCameraEditor* cameraEditor;
   ModuleEditor* editor;
   ModuleLighting* lighting;
+  ModuleScene* scene;
 
 	// Game modules ---
 	ModulePlayer* player;

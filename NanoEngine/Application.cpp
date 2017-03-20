@@ -6,6 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModuleCameraEditor.h"
 #include "ModuleLighting.h"
+#include "ModuleScene.h"
 #include "ModuleEditor.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleStageOne.h"
@@ -31,6 +32,7 @@ Application::Application()
 	modules.push_back(audio = new ModuleAudio());
 	modules.push_back(cameraEditor = new ModuleCameraEditor());
   modules.push_back(lighting = new ModuleLighting());
+  modules.push_back(scene = new ModuleScene());
 
 	// Game Modules
 	modules.push_back(stageOne = new ModuleStageOne(true));

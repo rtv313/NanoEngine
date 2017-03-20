@@ -29,6 +29,9 @@
     <Filter Include="Core Modules\imgui">
       <UniqueIdentifier>{811f1544-c8ff-4e2f-ad03-92587e2e8c26}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core Modules\Components">
+      <UniqueIdentifier>{a07e352d-6c01-46cc-8364-f3383bf7664c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModuleRender.h">
@@ -319,6 +322,18 @@
     <ClInclude Include="ModuleLighting.h">
       <Filter>Core Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleScene.h">
+      <Filter>Core Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Core Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Core Modules\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentTransform.h">
+      <Filter>Core Modules\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -506,6 +521,15 @@
     </ClCompile>
     <ClCompile Include="ModuleLighting.cpp">
       <Filter>Core Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleScene.cpp">
+      <Filter>Core Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Core Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentTransform.cpp">
+      <Filter>Core Modules\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
