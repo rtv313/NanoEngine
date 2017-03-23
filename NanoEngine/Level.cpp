@@ -31,6 +31,7 @@ void Level::CreateMesh(aiNode * aiNode,Node* node) {
 	
 		int meshId = aiNode->mMeshes[i];
 		node->meshes.push_back(meshId); // add ids to node 
+
 		aiMesh* meshScene = scene->mMeshes[meshId];
 
 		MeshLevel  mesh = MeshLevel();

@@ -65,7 +65,7 @@ bool ModuleRender::Init()
 	//city = Level("3DModels/street/Street.obj");
 	//PJ = Level("3DModels/ArmyPilot/ArmyPilot.dae");
 
-  //App->scene->LoadModel("3DModels/ArmyPilot/ArmyPilot.dae");
+  App->scene->LoadModel("3DModels/ArmyPilot/ArmyPilot.dae");
   App->scene->LoadModel("3DModels/street/Street.obj");
 
   //city = Model("3DModels/street/Street.obj");
@@ -100,9 +100,10 @@ update_status ModuleRender::PostUpdate()
   //batman.draw();
   //magneto.draw();
 	//city.Draw();
-  App->scene->Draw();
 	//PJ.DrawHierarchy(PJ.root);
 	//PJ.draw();
+
+  App->scene->Draw();
 
 	glPopMatrix();
 	
