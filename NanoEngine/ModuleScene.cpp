@@ -11,7 +11,7 @@
 
 ModuleScene::ModuleScene()
 {
-
+  
 }
 
 ModuleScene::~ModuleScene()
@@ -39,6 +39,7 @@ update_status ModuleScene::Update()
 
 update_status ModuleScene::PostUpdate()
 {
+
   return UPDATE_CONTINUE;
 }
 

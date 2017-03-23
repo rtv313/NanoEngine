@@ -93,7 +93,7 @@ update_status ModuleRender::PostUpdate()
 	
 	//cube->draw();
 	gizmo.setPosition(0,3,0);
-	gizmo.draw();
+	//gizmo.draw();
 	grid->draw();
 
   //city.draw();
