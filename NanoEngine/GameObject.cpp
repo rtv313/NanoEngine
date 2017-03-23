@@ -37,3 +37,13 @@ Component * GameObject::CreateComponent(component_type type)
   ct->my_go = this;
   return ct;
 }
+
+Component * GameObject::FindComponentByType(component_type type)
+{
+  for (int i = 0; i < components.size(); ++i) {
+    if (components[i]->type == type) {
+      return components[i];
+    }
+  }
+  return nullptr;
+}

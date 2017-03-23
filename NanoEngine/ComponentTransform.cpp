@@ -11,3 +11,8 @@ ComponentTransform::~ComponentTransform()
 {
 
 }
+
+ComponentTransform::ComponentTransform(aiMatrix4x4 matrix)
+{
+  transform = matrix;
+}

@@ -4,6 +4,7 @@
 #include "Component.h"
 #include <vector>
 #include <string>
+#include <list>
 
 class GameObject
 {
@@ -17,6 +18,10 @@ public:
   bool active;
   std::string name;
   std::vector<Component*> components;
+  GameObject* parent;
+  std::vector<GameObject*> children;
+
+  Component* FindComponentByType(component_type type);
 };
 
 #endif

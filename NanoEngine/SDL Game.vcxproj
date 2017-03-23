@@ -82,7 +82,12 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationRender.h" />
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Component.h" />
+    <ClInclude Include="ComponentMaterial.h" />
+    <ClInclude Include="ComponentMesh.h" />
+    <ClInclude Include="ComponentTransform.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Gizmo.h" />
     <ClInclude Include="Glew\include\GL\glew.h" />
     <ClInclude Include="Globals.h" />
@@ -166,6 +171,7 @@
     <ClInclude Include="ModuleInput.h" />
     <ClInclude Include="ModulePlayer.h" />
     <ClInclude Include="ModuleRender.h" />
+    <ClInclude Include="ModuleScene.h" />
     <ClInclude Include="ModuleStageOne.h" />
     <ClInclude Include="ModuleTextures.h" />
     <ClInclude Include="ModuleWindow.h" />
@@ -178,7 +184,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="ComponentMaterial.cpp" />
+    <ClCompile Include="ComponentMesh.cpp" />
+    <ClCompile Include="ComponentTransform.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Gizmo.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
@@ -233,6 +243,7 @@
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />
     <ClCompile Include="ModuleRender.cpp" />
+    <ClCompile Include="ModuleScene.cpp" />
     <ClCompile Include="ModuleStageOne.cpp" />
     <ClCompile Include="ModuleTextures.cpp">
       <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ShowIncludes>

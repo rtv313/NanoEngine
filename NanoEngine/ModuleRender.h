@@ -5,7 +5,7 @@
 #include "Grid.h"
 #include "Gizmo.h"
 #include "Model.h"
-#include "Level.h"
+//#include "Level.h"
 
 #include "Module.h"
 #include "Globals.h"
@@ -36,8 +36,8 @@ public:
 	Gizmo gizmo;
 	Model batman;
 	Model magneto;
-	Level city;
-	Level PJ;
+	//Level city;
+	//Level PJ;
   //Model city;
 };
 
