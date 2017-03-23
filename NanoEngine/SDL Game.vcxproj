@@ -173,6 +173,7 @@
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Parson\include\parson.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="QuadTreeMV.h" />
     <ClInclude Include="SolidSphere.h" />
     <ClInclude Include="TempMicro.h" />
     <ClInclude Include="TempMili.h" />
@@ -241,6 +242,7 @@
     </ClCompile>
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="Parson\include\parson.c" />
+    <ClCompile Include="QuadTreeMV.cpp" />
     <ClCompile Include="SolidSphere.cpp" />
     <ClCompile Include="TempMicro.cpp" />
   </ItemGroup>

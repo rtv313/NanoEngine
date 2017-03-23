@@ -11,6 +11,7 @@
 #include "Globals.h"
 #include "Glew/include/GL/glew.h"
 #include "SDL/include/SDL_opengl.h"
+#include "QuadTreeMV.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
@@ -27,7 +28,7 @@ public:
 	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();
-
+	QuadTreeMV testQuad;
 public:
 	SDL_Renderer* renderer = nullptr;
 	

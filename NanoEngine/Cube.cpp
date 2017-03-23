@@ -13,7 +13,9 @@ using namespace std;
 	 red = 255.0f;
 	 green = 0.0f;
 	 blue = 0.0f;
-
+	 scaleX = 1.0;
+	 scaleY = 1.0;
+	 scaleZ = 1.0;
 	 glGenBuffers(1, (GLuint*) &(my_id));
 	 glBindBuffer(GL_ARRAY_BUFFER, my_id);
 	 glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 16 * 3, vertices, GL_STATIC_DRAW); 
@@ -108,6 +110,34 @@ using namespace std;
 
  void Cube::draw() 
  {
+	 GLfloat vertices[48] = {
+		 -0.5f*scaleX, -0.5f*scaleY, 0.5f*scaleZ, // A 0
+		 0.5f*scaleX, -0.5f*scaleY, 0.5f*scaleZ, // B 1
+		 -0.5f*scaleX, 0.5f*scaleY, 0.5f*scaleZ, // C 2
+		 0.5f*scaleX, 0.5f*scaleY, 0.5f*scaleZ, // D 3
+		 -0.5f*scaleX, -0.5f*scaleY, -0.5f*scaleZ,//E 4
+		 0.5f*scaleX, -0.5f*scaleY, -0.5f*scaleZ, // F 5
+		 -0.5f*scaleX, 0.5f*scaleY, -0.5f*scaleZ,//G 6
+		 0.5f*scaleX, 0.5f*scaleY, -0.5f*scaleZ, // H 7
+
+		 0.5f*scaleX, 0.5f*scaleY, -0.5f*scaleZ, // H 8-2  TOP
+		 -0.5f*scaleX, 0.5f*scaleY, -0.5f*scaleZ,//  G 9-2
+		 0.5f*scaleX, 0.5f*scaleY, 0.5f*scaleZ, //  D 10-2
+		 -0.5f*scaleX, 0.5f*scaleY, 0.5f*scaleZ, //  C 11-2
+
+		 -0.5f*scaleX, -0.5f*scaleY, 0.5f*scaleZ, //A 12-2 DOWN
+		 0.5f*scaleX, -0.5f*scaleY, 0.5f*scaleZ, // B 13-2
+		 -0.5f*scaleX, -0.5f*scaleY, -0.5f*scaleZ,//E 14-2
+		 0.5f*scaleX, -0.5f*scaleY, -0.5f*scaleZ // F 15-2
+	 };
+	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	 glGenBuffers(1, (GLuint*) &(my_id));
+	 glBindBuffer(GL_ARRAY_BUFFER, my_id);
+	 glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 16 * 3, vertices, GL_STATIC_DRAW);
+
+	 glGenBuffers(1, (GLuint*) &(my_indices));
+	 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices);
+	 glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * 48, indices, GL_STATIC_DRAW);
 	 glPushMatrix();
 	 //glColor3f(255, 255, 255);
 	 glTranslatef(posX, posY, posZ);

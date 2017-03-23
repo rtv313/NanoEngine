@@ -25,10 +25,11 @@ void ModuleAnim::Load(const char* name, const char* path) {
 		if (scene->HasAnimations())
 		{
 			Anim auxAnim;
+			//auxAnim = malloc(sizeof(Anim));
 			for (int i = 0; i < scene->mNumAnimations; i++) { // recorremos las distintas animaciones del fichero
 				auxAnim.num_channels = scene->mAnimations[i]->mNumChannels;
 				auxAnim.duration = scene->mAnimations[i]->mDuration;
-				auxAnim.channels = malloc(sizeof(NodeAnim)*scene->mAnimations[i]->mNumChannels);
+				//auxAnim.channels = malloc(sizeof(Anim));
 				for (int p = 0; p < scene->mAnimations[i]->mNumChannels; p++) { // Recorremos los distitnos canales de cada animacion
 					auxAnim.channels[p].name = scene->mAnimations[i]->mChannels[p]->mNodeName;
 					auxAnim.channels[p].num_positions = scene->mAnimations[i]->mChannels[p]->mNumPositionKeys;

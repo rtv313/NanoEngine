@@ -322,6 +322,7 @@
     <ClInclude Include="ModuleAnim.h">
       <Filter>Core Modules</Filter>
     </ClInclude>
+    <ClInclude Include="QuadTreeMV.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -512,6 +513,9 @@
     </ClCompile>
     <ClCompile Include="ModuleAnim.cpp">
       <Filter>Core Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadTreeMV.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

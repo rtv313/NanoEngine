@@ -7,6 +7,7 @@ class Cube
 {
 public:
 	GLfloat posX, posY, posZ;
+	GLfloat scaleX, scaleY, scaleZ;
 	GLuint tex;
 	Cube();
 	~Cube();

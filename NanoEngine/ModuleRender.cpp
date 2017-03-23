@@ -63,10 +63,13 @@ bool ModuleRender::Init()
 	//magneto = Model("3DModels/Magneto/magnetto2.fbx");
 	//city = Level("3DModels/street/Street.obj");
 	PJ = Level("3DModels/ArmyPilot/ArmyPilot.dae");
-	PJ.animations.Load("Idle","3DModels/ArmyPilot/Animations/ArmyPilot_Idle.fbx");
-  //city = Model("3DModels/street/Street.obj");
+	//PJ.animations.Load("Idle","3DModels/ArmyPilot/Animations/ArmyPilot_Idle.fbx");
+	//city = Model("3DModels/street/Street.obj");
+	testQuad.Create(-10,10,-10,10);
+	testQuad.TestQuads(testQuad.root);
 	grid = new Grid();
 	cube = new Cube();
+
 	return ret;
 }
 
@@ -95,13 +98,14 @@ update_status ModuleRender::PostUpdate()
   //city.draw();
   //batman.draw();
   //magneto.draw();
-	//city.Draw();
+  //city.Draw();
 	
 	PJ.DrawHierarchy(PJ.root);
 	//PJ.draw();
+	testQuad.DrawQuads(testQuad.root);
 	glPopMatrix();
 	
-  App->editor->Draw();
+	App->editor->Draw();
 	SDL_GL_SwapWindow(App->window->window); // stay here not inside any class
 	return UPDATE_CONTINUE;
 }
