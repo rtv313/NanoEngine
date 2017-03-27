@@ -65,7 +65,7 @@ bool ModuleScene::LoadModel(std::string file)
   const char * c = file.c_str();
   scene = aiImportFile(c, flags);
 
-  GameObject* root = new GameObject();
+  GameObject* root;
   root = CreateGameObjects(nullptr, scene->mRootNode);
 
   game_objects.push_back(root);
@@ -76,6 +76,7 @@ bool ModuleScene::LoadModel(std::string file)
 GameObject * ModuleScene::CreateGameObjects(GameObject * father, aiNode* currentNode)
 {
   GameObject* node = new GameObject();
+  node->active = true;
   // crear nuevo nodo 
   if (father == nullptr) { // si no existe se le accina al root 
     ComponentTransform* ct = (ComponentTransform*) node->CreateComponent(TRANSFORM);
@@ -109,6 +110,7 @@ void ModuleScene::DrawNodes(GameObject* node) {
   glEnableClientState(GL_NORMAL_ARRAY);
 
   ComponentMesh* cm = (ComponentMesh*) node->FindComponentByType(MESH);
+  if (cm == nullptr) return;
   std::vector<MeshLevel> meshes = cm->meshes;
 
   for (int i = 0; i < meshes.size(); i++)

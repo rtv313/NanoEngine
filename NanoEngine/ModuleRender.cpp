@@ -65,10 +65,8 @@ bool ModuleRender::Init()
 	//city = Level("3DModels/street/Street.obj");
 	//PJ = Level("3DModels/ArmyPilot/ArmyPilot.dae");
 
-  //App->scene->LoadModel("3DModels/Batman/Batman.obj");
-  App->scene->LoadModel("3DModels/street/Street.obj");
+  App->scene->LoadModel("3DModels/ArmyPilot/ArmyPilot.dae");
 
-  //city = Model("3DModels/street/Street.obj");
 	grid = new Grid();
 	cube = new Cube();
 	return ret;

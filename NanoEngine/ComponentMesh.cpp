@@ -20,12 +20,10 @@ ComponentMesh::~ComponentMesh()
 }
 
 void ComponentMesh::CreateMesh(aiNode * aiNode, GameObject* node, const aiScene* scene) {
-  ComponentMesh* cm = (ComponentMesh*)node->CreateComponent(MESH);
-  node->components.push_back(cm); // add ids to node 
   for (int i = 0; i < aiNode->mNumMeshes; i++)
   {
     int meshId = aiNode->mMeshes[i];
-    cm->meshesId.push_back(meshId);
+    meshesId.push_back(meshId);
    
     aiMesh* meshScene = scene->mMeshes[meshId];
 
