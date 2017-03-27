@@ -33,7 +33,9 @@ update_status ModuleScene::PreUpdate()
 
 update_status ModuleScene::Update()
 {
-
+  for (int i = 0; i < game_objects.size(); ++i) {
+    game_objects[i]->Update();
+  }
   return UPDATE_CONTINUE;
 }
 
