@@ -53,8 +53,8 @@ public:
 	std::vector<MaterialLevel> materials;
 	const aiScene* scene;
 
+	AnimInstance* animation;
 	ModuleAnim animations;
-
 
 	Level();
 	Level(std::string file);
@@ -84,6 +84,7 @@ public:
 	void CreateMaterials();
 	void ClearNodes(Node * node);
 	void DrawNodes(Node* node);
+	void Level::UpdateNodes(Node* node);
 	GLfloat* Level::aiMatrix4x4toGLfloat(const aiMatrix4x4* from);
 private:
 	std::string directory;

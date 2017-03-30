@@ -7,6 +7,11 @@
 #include "Globals.h"
 #include<map>
 
+struct nodeTransform 
+{
+	aiVector3D positions;
+	aiQuaternion rotations;
+};
 struct NodeAnim
 {
 	aiString name;
@@ -45,7 +50,11 @@ public:
 	ModuleAnim();
 	~ModuleAnim();
 	void ModuleAnim::Load(const char* name, const char* path);
+	void ModuleAnim::UpdateInstances(float dt);
+	AnimInstance* ModuleAnim::GetAnimationInstance(aiString instanceName );
+	nodeTransform* GetTransform(AnimInstance* instance, aiString channel_name, aiVector3D position, aiQuaternion rotation);
 private:
+	std::vector<AnimInstance*> animationInstances;
 	AnimMap animations;
 	
 };

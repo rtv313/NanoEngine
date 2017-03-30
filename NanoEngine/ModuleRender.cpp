@@ -63,10 +63,11 @@ bool ModuleRender::Init()
 	//magneto = Model("3DModels/Magneto/magnetto2.fbx");
 	//city = Level("3DModels/street/Street.obj");
 	PJ = Level("3DModels/ArmyPilot/ArmyPilot.dae");
-	//PJ.animations.Load("Idle","3DModels/ArmyPilot/Animations/ArmyPilot_Idle.fbx");
+	PJ.animations.Load("Idle","3DModels/ArmyPilot/Animations/ArmyPilot_Idle.fbx");
+	PJ.animation = PJ.animations.GetAnimationInstance((aiString)"Idle");
 	//city = Model("3DModels/street/Street.obj");
-	testQuad.Create(-10,10,-10,10);
-	testQuad.TestQuads(testQuad.root);
+	//testQuad.Create(-10,10,-10,10);
+	//testQuad.TestQuads(testQuad.root);
 	grid = new Grid();
 	cube = new Cube();
 
@@ -84,6 +85,8 @@ update_status ModuleRender::PreUpdate()
 // Called every draw update
 update_status ModuleRender::Update()
 {
+	PJ.animations.UpdateInstances(dt);
+	PJ.UpdateNodes(PJ.root);
 	return UPDATE_CONTINUE;
 }
 
@@ -102,7 +105,7 @@ update_status ModuleRender::PostUpdate()
 	
 	PJ.DrawHierarchy(PJ.root);
 	//PJ.draw();
-	testQuad.DrawQuads(testQuad.root);
+	//testQuad.DrawQuads(testQuad.root);
 	glPopMatrix();
 	
 	App->editor->Draw();

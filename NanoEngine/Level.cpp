@@ -18,7 +18,6 @@ Level::Level(std::string file)
 	flags |= aiProcess_Triangulate;
 	const char * c = file.c_str();
 	scene = aiImportFile(c, flags);
-	
 	CreateNodes(nullptr, scene->mRootNode);
 
 
@@ -171,7 +170,7 @@ void Level::DrawHierarchy(Node* node) {
 		glEnd();
 
 		//Drawing red squares on each node to easily see them
-		glBegin(GL_TRIANGLES);
+		/*glBegin(GL_TRIANGLES);
 		glColor3f(1.0f, 0.0f, 0.0f);
 			glVertex3f(node->position.x + 0.025f, node->position.y + 0.025f, node->position.z);
 			glVertex3f(node->position.x - 0.025f, node->position.y + 0.025f, node->position.z);
@@ -180,7 +179,7 @@ void Level::DrawHierarchy(Node* node) {
 			glVertex3f(node->position.x - 0.025f, node->position.y - 0.025f, node->position.z);
 			glVertex3f(node->position.x + 0.025f, node->position.y - 0.025f, node->position.z);
 			glVertex3f(node->position.x + 0.025f, node->position.y + 0.025f, node->position.z);
-		glEnd();
+		glEnd();*/
 
 	}
 	for (int x = 0; x < node->childs.size(); x++)
@@ -229,4 +228,17 @@ GLfloat* Level::aiMatrix4x4toGLfloat(const aiMatrix4x4* from) {
 	result[3][0] = (GLfloat)from->a4; result[3][1] = (GLfloat)from->b4; result[3][2] = (GLfloat)from->c4; result[3][3] = (GLfloat)from->d4;
 	GLfloat* result2 = &result[0][0];
 	return result2;
+}
+void Level::UpdateNodes(Node* node)
+{
+	if (strcmp(node->name.C_Str(),"Root")) {
+		nodeTransform* transform;
+		transform = animations.GetTransform(animation, node->name, node->position, node->rotation);
+		node->position = transform->positions;
+		node->rotation = transform->rotations;
+	}
+	for (int x = 0; x < node->childs.size(); x++)
+	{
+		UpdateNodes(node->childs[x]);
+	}
 }
