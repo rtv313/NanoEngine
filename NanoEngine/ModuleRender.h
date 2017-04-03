@@ -4,7 +4,7 @@
 #include "Cube.h"
 #include "Grid.h"
 #include "Gizmo.h"
-#include "Model.h"
+//#include "Model.h"
 //#include "Level.h"
 
 #include "Module.h"
@@ -34,8 +34,8 @@ public:
 	Cube *cube;
 	Grid *grid;
 	Gizmo gizmo;
-	Model batman;
-	Model magneto;
+	//Model batman;
+	//Model magneto;
 	//Level city;
 	//Level PJ;
   //Model city;
