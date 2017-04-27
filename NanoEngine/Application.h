@@ -15,6 +15,7 @@ class ModuleCameraEditor;
 class ModuleEditor;
 class ModuleLighting;
 class ModuleScene;
+class ModulePhysics;
 // Game modules ---
 class ModulePlayer;
 class ModuleSceneIntro;
@@ -42,6 +43,7 @@ public:
   ModuleEditor* editor;
   ModuleLighting* lighting;
   ModuleScene* scene;
+  ModulePhysics* physics;
 
 	// Game modules ---
 	ModulePlayer* player;
